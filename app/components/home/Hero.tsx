@@ -52,15 +52,16 @@ export function Hero() {
           <TopNavigation />
 
           {/* Hero content — Figma positions (canvas 1920×1134) */}
-          <h1 className="absolute font-bold text-white" style={{ left: 142, top: 474, width: 814, fontSize: 72, lineHeight: 1.05 }}>
-            We Install the Exteriors
+          <h1
+            className="absolute font-bold"
+            style={{ left: 142, top: 474, width: 814, fontSize: 72, lineHeight: 1.05 }}
+          >
+            <span className="text-white">We Install the Exteriors</span>
+            <br />
+            <span className="text-white">That Protect &amp; Define</span>
+            <br />
+            <span className="text-[#ff832a]">Your Property</span>
           </h1>
-          <p className="absolute font-bold text-white" style={{ left: 142, top: 559, fontSize: 72, lineHeight: 1.05 }}>
-            That Protect &amp; Define
-          </p>
-          <p className="absolute font-bold text-[#ff832a]" style={{ left: 142, top: 644, fontSize: 72, lineHeight: 1.05 }}>
-            Your Property
-          </p>
 
           <Image
             src="/figma/imgLinea1.svg"
