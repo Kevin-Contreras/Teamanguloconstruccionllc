@@ -26,7 +26,7 @@ export function QualityBannerSection() {
     <section className="overflow-hidden bg-[#ff832a] text-white">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1944px]"
+        className="relative mx-auto w-full max-w-[1944px] overflow-hidden"
         style={{ height: SECTION_HEIGHT * scale }}
       >
         <div

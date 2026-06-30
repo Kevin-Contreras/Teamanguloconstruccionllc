@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const PAGE_WIDTH = 1920;
@@ -81,10 +82,10 @@ export function ServicesPage() {
   }, []);
 
   return (
-    <div className="w-full overflow-x-hidden bg-white">
+    <div className="w-full overflow-hidden bg-white">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px]"
+        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -118,45 +119,47 @@ export function ServicesPage() {
             className="absolute z-20"
             style={{ left: 141, top: 65, width: 1614, height: 79 }}
           />
-          <Image
-            src="/figma/imgEditableLogo10.png"
-            alt="Team Angulo"
-            width={306}
-            height={112}
-            className="absolute z-20"
-            style={{ left: 117, top: 42, width: 306, height: 112 }}
-            priority
-          />
-          <a
+          <Link href="/" className="absolute z-20" style={{ left: 117, top: 42 }}>
+            <Image
+              src="/figma/imgEditableLogo10.png"
+              alt="Team Angulo"
+              width={306}
+              height={112}
+              className="block"
+              style={{ width: 306, height: 112 }}
+              priority
+            />
+          </Link>
+          <Link
             href="/services"
             className="absolute z-20 font-['Montserrat'] text-[16px] font-normal text-white hover:opacity-80"
             style={{ left: 1014, top: 83 }}
           >
             Services
-          </a>
-          <a
-            href="/#residential"
+          </Link>
+          <Link
+            href="/residential"
             className="absolute z-20 text-[16px] font-normal text-white hover:opacity-80"
             style={{ left: 1141, top: 84 }}
           >
             Residential
-          </a>
-          <a
-            href="/#commercial"
+          </Link>
+          <Link
+            href="/commercial"
             className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
             style={{ left: 1275, top: 81 }}
           >
             Commercial
-          </a>
-          <a
-            href="/#about"
+          </Link>
+          <Link
+            href="/about"
             className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
             style={{ left: 1426, top: 81 }}
           >
             About Us
-          </a>
-          <a
-            href="/#contact"
+          </Link>
+          <Link
+            href="/contact"
             className="absolute z-20 flex items-center justify-center hover:opacity-90"
             style={{ left: 1539, top: 68, width: 154, height: 48 }}
           >
@@ -168,7 +171,7 @@ export function ServicesPage() {
               className="pointer-events-none absolute inset-0 h-full w-full"
             />
             <span className="relative z-10 text-[17px] font-bold text-white">Contact</span>
-          </a>
+          </Link>
           <button
             type="button"
             className="absolute z-20 flex cursor-pointer items-center justify-center hover:opacity-90"
@@ -449,14 +452,14 @@ export function ServicesPage() {
               { title: "PVC Trim", top: 232 },
               { title: "Metal Roofing", top: 272 },
             ].map((item) => (
-              <a
+              <Link
                 key={item.title}
-                href="#"
+                href="/services"
                 className="absolute text-[20px] leading-normal text-white hover:opacity-80"
                 style={{ left: 643, top: item.top }}
               >
                 {item.title}
-              </a>
+              </Link>
             ))}
             <p
               className="absolute m-0 text-[20px] font-bold leading-normal text-white"

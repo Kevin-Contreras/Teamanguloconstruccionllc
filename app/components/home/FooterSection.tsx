@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const SECTION_WIDTH = 1920;
@@ -105,14 +106,14 @@ export function FooterSection() {
             SERVICES
           </p>
           {services.map((service) => (
-            <a
+            <Link
               key={service.title}
-              href="#services"
+              href="/services"
               className="absolute m-0 text-[20px] leading-normal text-white hover:opacity-80"
               style={{ left: 643, top: service.top }}
             >
               {service.title}
-            </a>
+            </Link>
           ))}
 
           {/* Contact — nodes 1:463–1:466 */}

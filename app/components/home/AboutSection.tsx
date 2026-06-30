@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const SECTION_WIDTH = 1627;
@@ -119,8 +120,8 @@ export function AboutSection() {
           </p>
 
           {/* WHO WE ARE — node 1:93 @ 1407,412 */}
-          <a
-            href="#about"
+          <Link
+            href="/about"
             className="absolute flex items-center justify-center gap-2 hover:opacity-90"
             style={{ left: 1407, top: 412, width: 212, height: 60 }}
           >
@@ -141,7 +142,7 @@ export function AboutSection() {
               height={15}
               className="relative z-10"
             />
-          </a>
+          </Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { TopNavigation } from "./TopNavigation";
 
@@ -26,7 +27,7 @@ export function Hero() {
     <section className="relative w-full overflow-hidden bg-[#1a2b3c]">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px]"
+        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
         style={{ height: BANNER_HEIGHT * scale }}
       >
         <div
@@ -80,21 +81,21 @@ export function Hero() {
           </p>
         
 
-          <a
-            href="#about"
+          <Link
+            href="/about"
             className="absolute flex items-center justify-center border rounded-[100px] border-white text-[16px] font-bold text-white hover:bg-white/10"
             style={{ left: 138, top: 859, width: 212, height: 60 }}
           >
             MORE INFO
-          </a>
+          </Link>
 
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="absolute flex items-center justify-center rounded-[100px] bg-[#f07b05] text-[16px] font-bold text-white hover:opacity-90"
             style={{ left: 364, top: 858, width: 212, height: 60 }}
           >
             GET A QUOTE
-          </a>
+          </Link>
         </div>
       </div>
     </section>

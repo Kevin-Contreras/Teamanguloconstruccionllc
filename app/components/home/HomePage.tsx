@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { AboutSection } from "./AboutSection";
 import { Hero } from "./Hero";
 import { OurWorkSection } from "./OurWorkSection";
@@ -139,13 +140,13 @@ function HardieSiding() {
               demolition of existing materials to a flawless, professional finish that
               protects your property for decades.
             </p>
-            <a
-              href="#work"
+            <Link
+              href="/#work"
               className="inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] border-1 border-[#f07b05] px-8 text-[16px] font-bold text-[#f07b05] hover:opacity-90"
             >
               SEE OUR HARDIE PROJECTS
               <ArrowIcon />
-            </a>
+            </Link>
           </div>
           <div className="relative aspect-[4/3] w-full overflow-hidden">
             <Image
