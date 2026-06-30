@@ -23,6 +23,9 @@ function CtaArrow() {
 }
 
 const logoClassName = "h-14 w-auto sm:h-16 lg:h-[66px] lg:w-[180px]";
+const navOpenBg = "bg-[#1a2b3c]/90 backdrop-blur-xl";
+const navScrolledBg = "bg-[#1a2b3c]/75 backdrop-blur-md";
+const navOverlayBg = "bg-[#1a2b3c]/35 backdrop-blur-md";
 
 export function NavBar({
   variant = "overlay",
@@ -84,53 +87,94 @@ export function NavBar({
 
   const closeMenu = () => setOpen(false);
 
+  const headerBg = open
+    ? "border-b border-white/10 bg-transparent"
+    : isOverlay && !isScrolled
+      ? navOverlayBg
+      : navScrolledBg;
+
   return (
     <>
-      {open && (
+      <div
+        className={`fixed inset-0 z-40 lg:hidden motion-reduce:transition-none ${
+          open ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+        aria-hidden={!open}
+      >
+        <button
+          type="button"
+          className={`absolute inset-0 ${navOpenBg} transition-opacity duration-300 motion-reduce:transition-none ${
+            open ? "opacity-100" : "opacity-0"
+          }`}
+          aria-label="Close menu"
+          tabIndex={open ? 0 : -1}
+          onClick={closeMenu}
+        />
+
         <div
-          className="fixed inset-0 z-40 flex flex-col bg-[#1a2b3c] text-white lg:hidden"
+          className={`relative flex h-full flex-col text-white transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+            open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+          }`}
           style={{ paddingTop: headerHeight }}
         >
-          <nav className="flex flex-1 flex-col items-center justify-center gap-8 px-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[28px] font-medium hover:text-[#ff832a] sm:text-[32px] ${
-                  link.font === "montserrat" ? "font-['Montserrat']" : ""
-                } ${activePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="flex flex-1 flex-col justify-center px-6">
+            <ul className="mx-auto w-full max-w-[320px]">
+              {navLinks.map((link, index) => (
+                <li
+                  key={link.href}
+                  className={`border-b border-white/10 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+                    open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                  }`}
+                  style={{ transitionDelay: open ? `${80 + index * 55}ms` : "0ms" }}
+                >
+                  <Link
+                    href={link.href}
+                    className={`flex items-center justify-between py-5 text-[26px] font-medium transition-colors hover:text-[#ff832a] sm:text-[30px] ${
+                      link.font === "montserrat" ? "font-['Montserrat']" : ""
+                    } ${activePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
+                    onClick={closeMenu}
+                    tabIndex={open ? 0 : -1}
+                  >
+                    {link.label}
+                    <span className="text-[#ff832a]" aria-hidden>
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <div className="flex flex-col items-center gap-4 px-6 pb-10">
+          <div
+            className={`flex flex-col items-center gap-4 px-6 pb-10 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+              open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+            style={{ transitionDelay: open ? "320ms" : "0ms" }}
+          >
             <Link
               href="/contact"
-              className="inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold hover:opacity-90"
+              className="inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold shadow-lg shadow-[#f07b05]/25 transition-transform hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
               onClick={closeMenu}
+              tabIndex={open ? 0 : -1}
             >
               Contact
               <CtaArrow />
             </Link>
             <button
               type="button"
-              className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90"
+              className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/25 bg-white/5 text-[16px] font-bold backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10"
               aria-label="Switch to Spanish"
+              tabIndex={open ? 0 : -1}
             >
               ES
             </button>
           </div>
         </div>
-      )}
+      </div>
 
       <header
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 w-full text-white transition-colors duration-200 ${
-          open || !isOverlay || isScrolled ? "bg-[#1a2b3c]" : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full text-white transition-[background-color,backdrop-filter,border-color] duration-300 motion-reduce:transition-none ${headerBg}`}
       >
         <div className="w-full px-4 py-4 lg:px-[138px] lg:py-6">
           <div
@@ -138,7 +182,7 @@ export function NavBar({
               isOverlay && !open
                 ? "bg-transparent lg:bg-transparent"
                 : !isOverlay && !open
-                  ? "rounded-[100px] bg-[#243447]/95 px-3 py-2 sm:px-4 sm:py-2.5 lg:bg-transparent"
+                  ? "rounded-[100px] bg-[#243447]/75 px-3 py-2 backdrop-blur-md sm:px-4 sm:py-2.5 lg:bg-transparent"
                   : ""
             }`}
           >
@@ -191,13 +235,19 @@ export function NavBar({
               onClick={() => setOpen((value) => !value)}
             >
               <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
+                className={`block h-0.5 w-5 bg-white transition-all duration-300 ease-out motion-reduce:transition-none ${
+                  open ? "translate-y-2 rotate-45" : ""
+                }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-white transition-opacity ${open ? "opacity-0" : ""}`}
+                className={`block h-0.5 w-5 bg-white transition-all duration-300 ease-out motion-reduce:transition-none ${
+                  open ? "scale-x-0 opacity-0" : ""
+                }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-white transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`block h-0.5 w-5 bg-white transition-all duration-300 ease-out motion-reduce:transition-none ${
+                  open ? "-translate-y-2 -rotate-45" : ""
+                }`}
               />
             </button>
           </div>
