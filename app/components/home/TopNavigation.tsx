@@ -24,7 +24,7 @@ export function TopNavigation() {
 
       {/* Services — Figma node 1:31 @ 1013,84 Montserrat 16px */}
       <a
-        href="#services"
+        href="/services"
         className="absolute font-['Montserrat'] text-[16px] font-normal leading-none text-white hover:opacity-80"
         style={{ left: 1013, top: 84 }}
       >
