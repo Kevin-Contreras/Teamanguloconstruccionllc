@@ -2,7 +2,9 @@ import Image from "next/image";
 import { AboutSection } from "./AboutSection";
 import { Hero } from "./Hero";
 import { OurWorkSection } from "./OurWorkSection";
+import { CTASection } from "./CTASection";
 import { FAQSection } from "./FAQSection";
+import { FooterSection } from "./FooterSection";
 import { QualityBannerSection } from "./QualityBannerSection";
 import { ResidentialCommercialSection } from "./ResidentialCommercialSection";
 import { ServicesSection } from "./ServicesSection";
@@ -160,102 +162,6 @@ function HardieSiding() {
   );
 }
 
-function CTASection() {
-  return (
-    <section id="contact" className="bg-white py-20 lg:py-28">
-      <Container className="text-center">
-        <h2 className="mb-4 text-[32px] font-bold md:text-[42px] lg:text-[50px]">
-          Ready to <span style={{ color: ORANGE }}>transform</span>
-          <br />
-          your exterior?
-        </h2>
-        <p className="mb-8 text-[18px] text-[#1c1c1c] lg:text-[20px]">
-          Contact us today and let&apos;s talk about your project
-        </p>
-        <a
-          href="mailto:info@teamangulo.com"
-          className="inline-flex items-center gap-2 bg-[#f07b05] px-8 py-4 text-[16px] font-bold text-white"
-        >
-          GET A QUOTE <ArrowIcon />
-        </a>
-      </Container>
-    </section>
-  );
-}
-
-const footerServices = [
-  "Demolition & Removal",
-  "Structural Repair",
-  "Hardie & Vinyl Siding",
-  "PVC Trim",
-  "Metal Roofing",
-];
-
-function Footer() {
-  return (
-    <footer className="bg-black text-white">
-      <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <Image
-              src="/figma/imgEditableLogo01.png"
-              alt="Team Angulo"
-              width={370}
-              height={135}
-              className="mb-6 h-16 w-auto"
-            />
-            <p className="text-[16px] leading-relaxed text-gray-400">
-              Professional exterior solutions for residential and commercial
-              properties in New Jersey.
-            </p>
-          </div>
-          <div>
-            <h3 className="mb-4 text-[20px] font-bold">SERVICES</h3>
-            <ul className="space-y-2 text-[16px] text-gray-400">
-              {footerServices.map((title) => (
-                <li key={title}>
-                  <a href="#services" className="hover:text-white">
-                    {title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="mb-4 text-[20px] font-bold">CONTACT</h3>
-            <ul className="space-y-2 text-[16px] text-gray-400">
-              <li>(XXX) XXX-XXXX</li>
-              <li>
-                <a href="mailto:info@teamangulo.com" className="hover:text-white">
-                  info@teamangulo.com
-                </a>
-              </li>
-              <li>New Jersey, USA</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="mb-4 text-[20px] font-bold">FOLLOW US</h3>
-            <Image
-              src="/figma/imgGrupo786.svg"
-              alt="Social media"
-              width={120}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </div>
-        </div>
-      </Container>
-      <div className="border-t border-white/10 py-6">
-        <Container>
-          <p className="text-center text-[14px] text-gray-500">
-            © 2025 Team Angulo. All rights reserved.
-          </p>
-        </Container>
-      </div>
-    </footer>
-  );
-}
-
 export function HomePage() {
   return (
     <>
@@ -269,7 +175,7 @@ export function HomePage() {
       <QualityBannerSection />
       <FAQSection />
       <CTASection />
-      <Footer />
+      <FooterSection />
     </>
   );
 }
