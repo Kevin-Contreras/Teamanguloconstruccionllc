@@ -9,22 +9,20 @@ export function FigmaCanvas({
   className = "",
   innerClassName = "bg-white",
   children,
-  maxScale = 1,
 }: {
   width: number;
   height: number;
   className?: string;
   innerClassName?: string;
   children: ReactNode;
-  maxScale?: number;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scale = useFigmaScale(containerRef, width, maxScale);
+  const scale = useFigmaScale(containerRef, width);
 
   return (
     <div
       ref={containerRef}
-      className={`relative mx-auto w-full max-w-[1920px] overflow-hidden ${className}`}
+      className={`relative w-full overflow-hidden ${className}`}
       style={{ height: height * scale }}
     >
       <div

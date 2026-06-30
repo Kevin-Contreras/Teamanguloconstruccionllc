@@ -58,7 +58,7 @@ export function OurWorkSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = galleryRef.current?.clientWidth ?? GALLERY_WIDTH;
-      setScale(Math.min(width / GALLERY_WIDTH, 1));
+      setScale(width / GALLERY_WIDTH);
     };
 
     updateScale();
@@ -68,7 +68,7 @@ export function OurWorkSection() {
 
   return (
     <section id="work" className="bg-white py-14 lg:py-24">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="w-full px-6 lg:px-0">
         <div className="lg:ml-[138px] lg:mr-[155px]">
           <div className="mb-10 flex flex-col items-center text-center lg:mb-12">
             <div className="mb-5 h-[5px] w-16 rounded-full bg-[#f07b05] lg:mb-6" aria-hidden />

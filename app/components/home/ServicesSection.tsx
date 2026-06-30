@@ -3,6 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaImage } from "../layout/FigmaImage";
+import {
+  SERVICE_SECTION_SLUGS,
+  serviceSectionHref,
+} from "../../constants/serviceSections";
 
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 1253;
@@ -10,6 +15,7 @@ const SECTION_HEIGHT = 1253;
 const services = [
   {
     title: "Demolition & Removal",
+    slug: SERVICE_SECTION_SLUGS.demolitionRemoval,
     titleTop: 127.041,
     desc: "Safe removal of existing exterior materials",
     descTop: 210.041,
@@ -19,6 +25,7 @@ const services = [
   },
   {
     title: "Structural Repair",
+    slug: SERVICE_SECTION_SLUGS.structuralRepair,
     titleTop: 336.96,
     desc: "Damaged framing fixed before anything goes up",
     descTop: 418.96,
@@ -28,6 +35,7 @@ const services = [
   },
   {
     title: "Hardie & Vinyl Siding",
+    slug: SERVICE_SECTION_SLUGS.hardieVinylSiding,
     titleTop: 550.707,
     desc: "Specialists in fiber cement & vinyl installation",
     descTop: 632.707,
@@ -37,6 +45,7 @@ const services = [
   },
   {
     title: "PVC Trim",
+    slug: SERVICE_SECTION_SLUGS.pvcTrim,
     titleTop: 759.626,
     desc: "Clean, polished finish on every detail",
     descTop: 843.138,
@@ -46,6 +55,7 @@ const services = [
   },
   {
     title: "Metal Roofing",
+    slug: SERVICE_SECTION_SLUGS.metalRoofing,
     titleTop: 984.374,
     desc: "Standing seam installation for any property",
     descTop: 1068.894,
@@ -62,7 +72,7 @@ export function ServicesSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -87,8 +97,14 @@ export function ServicesSection() {
         <ul className="mt-10 space-y-6 border-t border-white/20 pt-8">
           {services.map((service) => (
             <li key={service.title} className="border-b border-white/20 pb-6 last:border-0">
-              <p className="m-0 text-[22px] font-medium sm:text-[28px]">{service.title}</p>
-              <p className="mt-2 text-[15px] text-white/80 sm:text-[16px]">{service.desc}</p>
+              <Link href={serviceSectionHref(service.slug)} className="group block">
+                <p className="m-0 text-[22px] font-medium transition-colors group-hover:text-[#ff832a] sm:text-[28px]">
+                  {service.title}
+                </p>
+                <p className="mt-2 text-[15px] text-white/80 sm:text-[16px]">
+                  {service.desc}
+                </p>
+              </Link>
             </li>
           ))}
         </ul>
@@ -100,7 +116,7 @@ export function ServicesSection() {
         </Link>
       </div>
 
-      <div className="mx-auto hidden w-full max-w-[1920px] lg:block lg:px-0">
+      <div className="hidden w-full lg:block lg:px-0">
         <div
           ref={containerRef}
           className="relative w-full"
@@ -115,14 +131,14 @@ export function ServicesSection() {
             }}
           >
             {/* Decorative logo — node 1:363 @ -27,647 */}
-            <Image
+            <FigmaImage
               src="/figma/logorecuadro.png"
               alt=""
-              width={808}
-              height={737}
-              className="pointer-events-none absolute object-cover opacity-[0.17]"
-              style={{ left: -27, top: 647, width: 750, height: 601 }}
-              aria-hidden
+              left={-27}
+              top={647}
+              width={750}
+              height={601}
+              className="pointer-events-none opacity-[0.17]"
             />
 
             {/* Left heading — nodes 1:216–1:218 */}
@@ -155,41 +171,60 @@ export function ServicesSection() {
             </p>
 
             {/* Service list — nodes 1:225+ */}
-            {services.map((service) => (
-              <div key={service.title}>
-                <p
-                  className="absolute m-0 font-normal leading-none text-white"
-                  style={{ left: 870, top: service.titleTop, fontSize: 55 }}
-                >
-                  {service.title}
-                </p>
-                <p
-                  className="absolute m-0 font-normal leading-normal text-white"
-                  style={{ left: 870, top: service.descTop, fontSize: 20 }}
-                >
-                  {service.desc}
-                </p>
-                <Image
-                  src={service.arrow}
-                  alt=""
-                  width={75}
-                  height={76}
-                  className="absolute"
-                  style={{ left: 1665, top: service.arrowTop, width: 75, height: 76 }}
-                />
-                {"lineTop" in service && service.lineTop !== undefined && (
-                  <Image
-                    src="/figma/imgLine31.svg"
-                    alt=""
-                    width={880}
-                    height={1}
-                    className="absolute h-px"
-                    style={{ left: 870, top: service.lineTop, width: 880 }}
-                    aria-hidden
-                  />
-                )}
-              </div>
-            ))}
+            {services.map((service) => {
+              const rowHeight =
+                (service.lineTop ?? service.descTop + 80) - service.titleTop;
+
+              return (
+                <div key={service.title}>
+                  <Link
+                    href={serviceSectionHref(service.slug)}
+                    className="group absolute z-10 block"
+                    style={{
+                      left: 870,
+                      top: service.titleTop,
+                      width: 870,
+                      height: rowHeight,
+                    }}
+                  >
+                    <p className="absolute left-0 top-0 m-0 text-[55px] font-normal leading-none text-white transition-colors group-hover:text-[#ff832a]">
+                      {service.title}
+                    </p>
+                    <p
+                      className="absolute left-0 m-0 text-[20px] font-normal leading-normal text-white"
+                      style={{ top: service.descTop - service.titleTop }}
+                    >
+                      {service.desc}
+                    </p>
+                    <Image
+                      src={service.arrow}
+                      alt=""
+                      width={75}
+                      height={76}
+                      className="absolute"
+                      style={{
+                        left: 795,
+                        top: service.arrowTop - service.titleTop,
+                        width: 75,
+                        height: 76,
+                      }}
+                      aria-hidden
+                    />
+                  </Link>
+                  {"lineTop" in service && service.lineTop !== undefined && (
+                    <Image
+                      src="/figma/imgLine31.svg"
+                      alt=""
+                      width={880}
+                      height={1}
+                      className="absolute h-px"
+                      style={{ left: 870, top: service.lineTop, width: 880 }}
+                      aria-hidden
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export function CTASection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -45,7 +45,7 @@ export function CTASection() {
         <SiteCta />
       </div>
       <section className="hidden overflow-hidden bg-white py-16 lg:block lg:py-20">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="w-full px-6 lg:px-0">
         <div
           ref={containerRef}
           className="relative lg:ml-[138px] lg:mr-[138px]"

@@ -15,7 +15,7 @@ export function AboutSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -25,7 +25,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className="bg-white py-16 lg:py-24">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="w-full px-6 lg:px-0">
         <div className="lg:hidden">
           <p className="text-[18px] leading-none text-black">
             Welcome to <span className="italic">Team Angulo</span>

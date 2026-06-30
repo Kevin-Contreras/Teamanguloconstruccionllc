@@ -26,8 +26,8 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative min-h-[620px] overflow-hidden bg-[#1a2b3c] lg:hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[620px] bg-[#1a2b3c] lg:hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/figma/hero-banner-export.png"
             alt=""
@@ -37,14 +37,14 @@ export function Hero() {
             sizes="100vw"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-r from-[#1a2b3c]/95 via-[#1a2b3c]/70 to-[#1a2b3c]/30"
+            className="absolute inset-0 z-[1] bg-gradient-to-r from-[#1a2b3c]/95 via-[#1a2b3c]/70 to-[#1a2b3c]/30"
             aria-hidden
           />
         </div>
 
-        <div className="relative z-10">
-          <NavBar variant="overlay" />
-          <div className="px-6 pb-14 pt-6">
+        <NavBar variant="overlay" />
+
+        <div className="relative z-10 px-6 pb-14 pt-28">
             <h1 className="m-0 max-w-[520px] text-[38px] font-bold leading-[1.05] text-white sm:text-[48px]">
               We Install the Exteriors
               <br />
@@ -72,13 +72,12 @@ export function Hero() {
               </Link>
             </div>
           </div>
-        </div>
       </section>
 
       <section className="relative hidden w-full overflow-hidden bg-[#1a2b3c] lg:block">
         <div
           ref={containerRef}
-          className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+          className="relative w-full overflow-hidden"
           style={{ height: BANNER_HEIGHT * scale }}
         >
           <div
@@ -89,7 +88,7 @@ export function Hero() {
               transform: `scale(${scale})`,
             }}
           >
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 overflow-hidden">
               <Image
                 src="/figma/hero-banner-export.png"
                 alt=""

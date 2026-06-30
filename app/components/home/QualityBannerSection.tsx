@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1944;
 const SECTION_HEIGHT = 737;
@@ -14,7 +14,7 @@ export function QualityBannerSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -39,7 +39,7 @@ export function QualityBannerSection() {
 
       <div
         ref={containerRef}
-        className="relative mx-auto hidden w-full max-w-[1944px] overflow-hidden lg:block"
+        className="relative hidden w-full overflow-hidden lg:block"
         style={{ height: SECTION_HEIGHT * scale }}
       >
         <div
@@ -51,14 +51,14 @@ export function QualityBannerSection() {
           }}
         >
           {/* Decorative logo — node 1:352 @ 1117,0 */}
-          <Image
+          <FigmaImage
             src="/figma/logorecuadro.png"
             alt=""
-            width={808}
+            left={1117}
+            top={0}
+            width={827}
             height={737}
-            className="pointer-events-none absolute object-cover opacity-20"
-            style={{ left: 1117, top: 0, width: 827, height: 737 }}
-            aria-hidden
+            className="pointer-events-none opacity-20"
           />
 
           {/* Accent line — node 1:341 @ 174,206 */}

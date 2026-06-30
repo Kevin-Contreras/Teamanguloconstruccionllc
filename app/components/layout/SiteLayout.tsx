@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "./NavBar";
+import { ParallaxBannerImage } from "./ParallaxBannerImage";
 
 function CtaArrow() {
   return (
@@ -143,14 +144,14 @@ export function PageHero({
   activePath?: string;
 }) {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative">
       <div className="relative min-h-[380px] sm:min-h-[460px]">
-        <Image src={imageSrc} alt="" fill className="object-cover" priority sizes="100vw" />
-        {dark && <div className="absolute inset-0 bg-[#1a2b3c]/55" aria-hidden />}
-
-        <div className="absolute inset-x-0 top-0 z-20">
-          <NavBar variant="overlay" activePath={activePath} />
+        <div className="absolute inset-0 overflow-hidden">
+          <ParallaxBannerImage src={imageSrc} priority />
+          {dark && <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/55" aria-hidden />}
         </div>
+
+        <NavBar variant="overlay" activePath={activePath} />
 
         <div className="relative z-10 flex min-h-[380px] flex-col justify-end px-6 pb-10 pt-28 sm:min-h-[460px] sm:px-10 sm:pb-14 lg:px-[138px]">
           <h1 className="m-0 max-w-[800px] text-[40px] font-bold leading-tight text-white sm:text-[56px] lg:text-[72px]">

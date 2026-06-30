@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { CommercialPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
@@ -74,7 +75,7 @@ export function CommercialPage() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? PAGE_WIDTH;
-      setScale(Math.min(width / PAGE_WIDTH, 1));
+      setScale(width / PAGE_WIDTH);
     };
 
     updateScale();
@@ -90,7 +91,7 @@ export function CommercialPage() {
       <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -103,16 +104,8 @@ export function CommercialPage() {
         >
           {/* Hero */}
           <div className="absolute inset-x-0 top-0 z-0 h-[703px] overflow-hidden">
-            <Image
-              src="/figma/commercial/hero-bg.png"
-              alt=""
-              width={1919}
-              height={700}
-              className="absolute object-cover"
-              style={{ left: -4, top: 0, width: 1919, height: 700 }}
-              priority
-            />
-            <div className="absolute inset-0 bg-[#1a2b3c]/45" aria-hidden />
+            <FigmaHeroImage src="/figma/commercial/hero-bg.png" priority />
+            <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/45" aria-hidden />
           </div>
 
           {/* Nav */}
@@ -349,71 +342,78 @@ export function CommercialPage() {
           />
 
           {/* Gallery — Figma positions */}
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-images22.png"
             alt="Commercial project"
+            left={0}
+            top={2043}
             width={1920}
             height={1047}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 2043, width: 1920, height: 1047 }}
+            className="z-0"
           />
           <div
             className="absolute z-0 w-px bg-[#d9d9d9]"
             style={{ left: 1654, top: 1952, height: 78.5 }}
             aria-hidden
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-tall-left.png"
             alt="Commercial project"
+            left={0}
+            top={3121}
             width={1063}
             height={1113}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 3121, width: 1063, height: 1113 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-top-right.png"
             alt="Commercial project"
+            left={1099}
+            top={3122}
             width={835}
             height={557}
-            className="absolute z-0 object-cover"
-            style={{ left: 1099, top: 3122, width: 835, height: 557 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-mid-right.png"
             alt="Commercial project"
+            left={1099}
+            top={3709}
             width={835}
             height={525}
-            className="absolute z-0 object-cover"
-            style={{ left: 1099, top: 3709, width: 835, height: 525 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-fullwidth-2.png"
             alt="Commercial project"
+            left={0}
+            top={4265}
             width={1920}
             height={1047}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 4265, width: 1920, height: 1047 }}
+            className="z-0"
           />
           <div
             className="absolute z-0 w-px bg-[#d9d9d9]"
             style={{ left: 1654, top: 4267, height: 78.5 }}
             aria-hidden
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-chicago.png"
             alt="Commercial project"
+            left={0}
+            top={5378}
             width={966}
             height={752}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 5378, width: 966, height: 752 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/commercial/gallery-factory.png"
             alt="Commercial project"
+            left={1000}
+            top={5378}
             width={932}
             height={752}
-            className="absolute z-0 object-cover"
-            style={{ left: 1000, top: 5378, width: 932, height: 752 }}
+            className="z-0"
           />
 
           {/* CTA — node 1:1117 */}

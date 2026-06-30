@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { ServicesPageMobile } from "../layout/MobilePages";
+import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 
 const PAGE_WIDTH = 1920;
 const PAGE_HEIGHT = 8228;
@@ -66,6 +68,28 @@ function ServiceTextBlock({
   );
 }
 
+function ServiceAnchor({ slug, top }: { slug: string; top: number }) {
+  return (
+    <span
+      data-service-section={slug}
+      className="pointer-events-none absolute block scroll-mt-28"
+      style={{ left: 0, top, width: 1, height: 1 }}
+      aria-hidden
+    />
+  );
+}
+
+function scrollToServiceSection() {
+  const slug = window.location.hash.replace(/^#/, "");
+  if (!slug) return;
+
+  requestAnimationFrame(() => {
+    const anchors = document.querySelectorAll<HTMLElement>(`[data-service-section="${slug}"]`);
+    const target = Array.from(anchors).find((el) => el.offsetParent !== null);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
 /** Figma node 1:503 — Services page */
 export function ServicesPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,12 +98,18 @@ export function ServicesPage() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? PAGE_WIDTH;
-      setScale(Math.min(width / PAGE_WIDTH, 1));
+      setScale(width / PAGE_WIDTH);
     };
 
     updateScale();
     window.addEventListener("resize", updateScale);
     return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
+  useEffect(() => {
+    scrollToServiceSection();
+    window.addEventListener("hashchange", scrollToServiceSection);
+    return () => window.removeEventListener("hashchange", scrollToServiceSection);
   }, []);
 
   return (
@@ -90,7 +120,7 @@ export function ServicesPage() {
       <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -103,16 +133,8 @@ export function ServicesPage() {
         >
           {/* ── Hero ── */}
           <div className="absolute inset-x-0 top-0 z-0 h-[707px] overflow-hidden">
-            <Image
-              src="/figma/services/services-hero-bg.png"
-              alt=""
-              width={1927}
-              height={704}
-              className="absolute object-cover"
-              style={{ left: -8, top: 0, width: 1927, height: 704 }}
-              priority
-            />
-            <div className="absolute inset-0 bg-[#1a2b3c]/55" aria-hidden />
+            <FigmaHeroImage src="/figma/services/services-hero-bg.png" priority />
+            <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/55" aria-hidden />
           </div>
 
           {/* Nav */}
@@ -214,13 +236,15 @@ export function ServicesPage() {
           </p>
 
           {/* ── Service 01 ── */}
-          <Image
+          <ServiceAnchor slug={SERVICE_SECTION_SLUGS.demolitionRemoval} top={965} />
+          <FigmaImage
             src="/figma/services/services-side-house.png"
             alt="Demolition project"
+            left={869}
+            top={808}
             width={1051}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 869, top: 808, width: 1051, height: 800 }}
+            className="z-0"
           />
           <ServiceTextBlock
             left={138}
@@ -237,13 +261,15 @@ export function ServicesPage() {
             tagline="This is where every transformation begins."
           />
 
-          <Image
+          <FigmaImage
             src="/figma/services/services-fullwidth-1.png"
             alt=""
+            left={0}
+            top={1763}
             width={1920}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 1763, width: 1920, height: 800 }}
+            className="z-0"
+            parallax
           />
           <div
             className="absolute z-0 w-px bg-[#d9d9d9]"
@@ -252,13 +278,15 @@ export function ServicesPage() {
           />
 
           {/* ── Service 02 ── */}
-          <Image
+          <ServiceAnchor slug={SERVICE_SECTION_SLUGS.structuralRepair} top={2702} />
+          <FigmaImage
             src="/figma/services/services-trim-house.png"
             alt="Structural repair"
+            left={960}
+            top={2677}
             width={822}
             height={445}
-            className="absolute z-0 object-cover"
-            style={{ left: 960, top: 2677, width: 822, height: 445 }}
+            className="z-0"
           />
           <ServiceTextBlock
             left={138}
@@ -276,13 +304,15 @@ export function ServicesPage() {
           />
 
           {/* ── Service 03 ── */}
-          <Image
+          <ServiceAnchor slug={SERVICE_SECTION_SLUGS.hardieVinylSiding} top={3436} />
+          <FigmaImage
             src="/figma/services/services-neighborhood.png"
             alt="Hardie siding project"
+            left={0}
+            top={3287}
             width={1056}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 3287, width: 1056, height: 800 }}
+            className="z-0"
           />
           <ServiceTextBlock
             left={1172}
@@ -299,13 +329,15 @@ export function ServicesPage() {
             tagline="Installed to last. Finished to impress."
           />
 
-          <Image
+          <FigmaImage
             src="/figma/services/services-images6.png"
             alt=""
+            left={0}
+            top={4142}
             width={1920}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 4142, width: 1920, height: 800 }}
+            className="z-0"
+            parallax
           />
           <div
             className="absolute z-0 w-px bg-[#d9d9d9]"
@@ -314,13 +346,15 @@ export function ServicesPage() {
           />
 
           {/* ── Service 04 ── */}
-          <Image
+          <ServiceAnchor slug={SERVICE_SECTION_SLUGS.pvcTrim} top={5065} />
+          <FigmaImage
             src="/figma/services/services-images7.png"
             alt="PVC trim detail"
+            left={138}
+            top={5038}
             width={822}
             height={445}
-            className="absolute z-0 object-cover"
-            style={{ left: 138, top: 5038, width: 822, height: 445 }}
+            className="z-0"
           />
           <ServiceTextBlock
             left={1056}
@@ -338,13 +372,15 @@ export function ServicesPage() {
           />
 
           {/* ── Service 05 ── */}
-          <Image
+          <ServiceAnchor slug={SERVICE_SECTION_SLUGS.metalRoofing} top={5776} />
+          <FigmaImage
             src="/figma/services/services-demolition.png"
             alt="Metal roofing"
+            left={869}
+            top={5634}
             width={1051}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 869, top: 5634, width: 1051, height: 800 }}
+            className="z-0"
           />
           <ServiceTextBlock
             left={138}
@@ -366,14 +402,14 @@ export function ServicesPage() {
             className="absolute z-0 bg-[#ff832a]"
             style={{ left: -12, top: 6581, width: 1944, height: 737 }}
           >
-            <Image
+            <FigmaImage
               src="/figma/logorecuadro.png"
               alt=""
-              width={808}
+              left={1117}
+              top={0}
+              width={827}
               height={737}
-              className="pointer-events-none absolute object-cover opacity-20"
-              style={{ left: 1117, top: 0, width: 827, height: 737 }}
-              aria-hidden
+              className="pointer-events-none opacity-20"
             />
             <div
               className="absolute rounded-full bg-white"

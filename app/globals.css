@@ -26,6 +26,15 @@ body {
   margin: 0;
 }
 
+img[data-nimg][src*=".svg"],
+img[data-nimg].object-contain {
+  object-fit: contain !important;
+}
+
+img[data-nimg]:not([src*=".svg"]):not(.object-contain) {
+  object-fit: cover !important;
+}
+
 [class*="font-['Montserrat"] {
   font-family: var(--font-montserrat), Montserrat, sans-serif !important;
 }

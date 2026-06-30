@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { ResidentialPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
@@ -72,7 +73,7 @@ export function ResidentialPage() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? PAGE_WIDTH;
-      setScale(Math.min(width / PAGE_WIDTH, 1));
+      setScale(width / PAGE_WIDTH);
     };
 
     updateScale();
@@ -88,7 +89,7 @@ export function ResidentialPage() {
       <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -101,16 +102,8 @@ export function ResidentialPage() {
         >
           {/* Hero */}
           <div className="absolute inset-x-0 top-0 z-0 h-[703px] overflow-hidden">
-            <Image
-              src="/figma/residential/hero-bg.png"
-              alt=""
-              width={1919}
-              height={700}
-              className="absolute object-cover"
-              style={{ left: -4, top: 0, width: 1919, height: 700 }}
-              priority
-            />
-            <div className="absolute inset-0 bg-[#1a2b3c]/45" aria-hidden />
+            <FigmaHeroImage src="/figma/residential/hero-bg.png" priority />
+            <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/45" aria-hidden />
           </div>
 
           {/* Nav */}
@@ -128,7 +121,7 @@ export function ResidentialPage() {
               alt="Team Angulo"
               width={306}
               height={112}
-              className="block"
+              className="block object-contain"
               style={{ width: 306, height: 112 }}
               priority
             />
@@ -332,77 +325,86 @@ export function ResidentialPage() {
           />
 
           {/* Gallery — Figma positions */}
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-tall-left.png"
             alt="Residential project"
+            left={-7}
+            top={1991}
             width={1063}
             height={1113}
-            className="absolute z-0 object-cover"
-            style={{ left: -7, top: 1991, width: 1063, height: 1113 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-whatsapp-1.png"
             alt="Residential project"
+            left={1092}
+            top={1992}
             width={835}
             height={557}
-            className="absolute z-0 object-cover"
-            style={{ left: 1092, top: 1992, width: 835, height: 557 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-rect.png"
             alt="Residential project"
+            left={1092}
+            top={2579}
             width={835}
             height={525}
-            className="absolute z-0 object-cover"
-            style={{ left: 1092, top: 2579, width: 835, height: 525 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-fullwidth.png"
             alt="Residential project"
+            left={0}
+            top={3142}
             width={1920}
             height={1047}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 3142, width: 1920, height: 1047 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-images7.png"
             alt="Residential project"
+            left={0}
+            top={4227}
             width={530}
             height={557}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 4227, width: 530, height: 557 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-images6.png"
             alt="Residential project"
+            left={559}
+            top={4227}
             width={1366}
             height={1113}
-            className="absolute z-0 object-cover"
-            style={{ left: 559, top: 4227, width: 1366, height: 1113 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-whatsapp-4.png"
             alt="Residential project"
+            left={0}
+            top={4815}
             width={530}
             height={525}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 4815, width: 530, height: 525 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-image4.png"
             alt="Residential project"
+            left={0}
+            top={5378}
             width={966}
             height={752}
-            className="absolute z-0 object-cover"
-            style={{ left: 0, top: 5378, width: 966, height: 752 }}
+            className="z-0"
           />
-          <Image
+          <FigmaImage
             src="/figma/residential/gallery-images5.png"
             alt="Residential project"
+            left={1000}
+            top={5378}
             width={932}
             height={752}
-            className="absolute z-0 object-cover"
-            style={{ left: 1000, top: 5378, width: 932, height: 752 }}
+            className="z-0"
           />
 
           {/* CTA — node 1:901 */}

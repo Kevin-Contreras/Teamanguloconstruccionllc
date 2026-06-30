@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const navLinks = [
   { href: "/services", label: "Services", font: "montserrat" as const },
@@ -32,6 +32,9 @@ export function NavBar({
   activePath?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const isOverlay = variant === "overlay";
 
   useEffect(() => {
@@ -53,21 +56,90 @@ export function NavBar({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const updateHeaderHeight = () => {
+      setHeaderHeight(header.offsetHeight);
+    };
+
+    updateHeaderHeight();
+
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(header);
+
+    return () => observer.disconnect();
+  }, []);
+
   const closeMenu = () => setOpen(false);
 
   return (
     <>
+      {open && (
+        <div
+          className="fixed inset-0 z-40 flex flex-col bg-[#1a2b3c] text-white lg:hidden"
+          style={{ paddingTop: headerHeight }}
+        >
+          <nav className="flex flex-1 flex-col items-center justify-center gap-8 px-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-[28px] font-medium hover:text-[#ff832a] sm:text-[32px] ${
+                  link.font === "montserrat" ? "font-['Montserrat']" : ""
+                } ${activePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
+                onClick={closeMenu}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex flex-col items-center gap-4 px-6 pb-10">
+            <Link
+              href="/contact"
+              className="inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold hover:opacity-90"
+              onClick={closeMenu}
+            >
+              Contact
+              <CtaArrow />
+            </Link>
+            <button
+              type="button"
+              className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90"
+              aria-label="Switch to Spanish"
+            >
+              ES
+            </button>
+          </div>
+        </div>
+      )}
+
       <header
-        className={`relative z-40 w-full ${
-          isOverlay ? "text-white" : "bg-[#1a2b3c] text-white"
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 w-full text-white transition-colors duration-200 ${
+          open || !isOverlay || isScrolled ? "bg-[#1a2b3c]" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-[1920px] px-4 py-4 lg:px-[138px] lg:py-6">
+        <div className="w-full px-4 py-4 lg:px-[138px] lg:py-6">
           <div
             className={`flex items-center justify-between gap-3 px-1 py-1 lg:rounded-none lg:bg-transparent lg:p-0 ${
-              isOverlay
+              isOverlay && !open
                 ? "bg-transparent lg:bg-transparent"
-                : "rounded-[100px] bg-[#243447]/95 px-3 py-2 sm:px-4 sm:py-2.5 lg:bg-transparent"
+                : !isOverlay && !open
+                  ? "rounded-[100px] bg-[#243447]/95 px-3 py-2 sm:px-4 sm:py-2.5 lg:bg-transparent"
+                  : ""
             }`}
           >
             <Link href="/" className="relative z-10 shrink-0" onClick={closeMenu}>
@@ -131,63 +203,6 @@ export function NavBar({
           </div>
         </div>
       </header>
-
-      {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-[#1a2b3c] text-white lg:hidden">
-          <div className="flex items-center justify-between px-4 py-4">
-            <Link href="/" onClick={closeMenu}>
-              <Image
-                src="/figma/imgEditableLogo10.png"
-                alt="Team Angulo"
-                width={180}
-                height={66}
-                className={logoClassName}
-              />
-            </Link>
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center text-2xl leading-none"
-              aria-label="Close menu"
-              onClick={closeMenu}
-            >
-              ×
-            </button>
-          </div>
-
-          <nav className="flex flex-1 flex-col items-center justify-center gap-8 px-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[28px] font-medium hover:text-[#ff832a] sm:text-[32px] ${
-                  link.font === "montserrat" ? "font-['Montserrat']" : ""
-                } ${activePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex flex-col items-center gap-4 px-6 pb-10">
-            <Link
-              href="/contact"
-              className="inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold hover:opacity-90"
-              onClick={closeMenu}
-            >
-              Contact
-              <CtaArrow />
-            </Link>
-            <button
-              type="button"
-              className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90"
-              aria-label="Switch to Spanish"
-            >
-              ES
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

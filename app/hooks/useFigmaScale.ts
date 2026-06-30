@@ -5,7 +5,6 @@ import { useEffect, useState, type RefObject } from "react";
 export function useFigmaScale(
   containerRef: RefObject<HTMLElement | null>,
   canvasWidth: number,
-  maxScale = 1,
 ) {
   const [scale, setScale] = useState(1);
 
@@ -15,7 +14,7 @@ export function useFigmaScale(
 
     const updateScale = () => {
       const width = node.clientWidth || canvasWidth;
-      setScale(Math.min(width / canvasWidth, maxScale));
+      setScale(width / canvasWidth);
     };
 
     updateScale();
@@ -28,7 +27,7 @@ export function useFigmaScale(
       observer.disconnect();
       window.removeEventListener("resize", updateScale);
     };
-  }, [canvasWidth, containerRef, maxScale]);
+  }, [canvasWidth, containerRef]);
 
   return scale;
 }

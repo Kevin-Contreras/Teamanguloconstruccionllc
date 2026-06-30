@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { FigmaImage } from "../layout/FigmaImage";
 import { ContactPageMobile } from "../layout/MobilePages";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 
@@ -35,7 +36,7 @@ export function ContactPage() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? PAGE_WIDTH;
-      setScale(Math.min(width / PAGE_WIDTH, 1));
+      setScale(width / PAGE_WIDTH);
     };
 
     updateScale();
@@ -56,7 +57,7 @@ export function ContactPage() {
       <div className="hidden w-full overflow-hidden bg-black lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -69,13 +70,14 @@ export function ContactPage() {
         >
           {/* Full-page background — nodes 1:1513–1:1515 */}
           <div className="absolute inset-0 z-0 overflow-hidden">
-            <Image
+            <FigmaImage
               src="/figma/contact/hero-bg.png"
               alt=""
+              left={-4}
+              top={-178}
               width={2656}
               height={1313}
-              className="absolute object-cover"
-              style={{ left: -4, top: -178, width: 2656, height: 1313 }}
+              className="z-0"
               priority
             />
             <div className="absolute inset-0 bg-[#1a2b3c]/55" aria-hidden />

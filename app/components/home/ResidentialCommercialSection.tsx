@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1975;
 const SECTION_HEIGHT = 1781;
@@ -32,7 +33,7 @@ export function ResidentialCommercialSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -110,7 +111,7 @@ export function ResidentialCommercialSection() {
       <section className="hidden overflow-hidden bg-white lg:block">
         <div
           ref={containerRef}
-          className="relative mx-auto w-full max-w-[1975px] overflow-hidden"
+          className="relative w-full overflow-hidden"
           style={{ height: SECTION_HEIGHT * scale }}
         >
           <div
@@ -122,13 +123,13 @@ export function ResidentialCommercialSection() {
             }}
           >
             {/* Residential image — node 1:300 @ 901,0 1074×800 */}
-            <Image
+            <FigmaImage
               src="/figma/imgContemporaryHouseWithShingleDetailAndBlueSk20260326104821Utc.png"
               alt="Residential siding project"
+              left={901}
+              top={0}
               width={1074}
               height={800}
-              className="absolute object-cover"
-              style={{ left: 901, top: 0, width: 1074, height: 800 }}
             />
 
             {/* Label — node 1:275 @ 205,230 */}
@@ -183,13 +184,13 @@ export function ResidentialCommercialSection() {
             </Link>
 
             {/* Commercial image — node 1:328 @ 0,981 1077×800 */}
-            <Image
+            <FigmaImage
               src="/figma/imgIndustrialFactoryFacadeWithSteelMashes20260325224915Utc.png"
               alt="Commercial building project"
+              left={0}
+              top={981}
               width={1077}
               height={800}
-              className="absolute object-cover"
-              style={{ left: 0, top: 981, width: 1077, height: 800 }}
             />
 
             {/* Commercial label — node 1:302 @ 1176,1219 */}

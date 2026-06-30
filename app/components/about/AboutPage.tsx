@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { AboutPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
@@ -100,7 +101,7 @@ export function AboutPage() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? PAGE_WIDTH;
-      setScale(Math.min(width / PAGE_WIDTH, 1));
+      setScale(width / PAGE_WIDTH);
     };
 
     updateScale();
@@ -116,7 +117,7 @@ export function AboutPage() {
       <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
+        className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >
         <div
@@ -129,16 +130,8 @@ export function AboutPage() {
         >
           {/* Hero — nodes 1:1200–1:1211 */}
           <div className="absolute inset-x-0 top-0 z-0 h-[703px] overflow-hidden">
-            <Image
-              src="/figma/about/hero-bg.png"
-              alt=""
-              width={1919}
-              height={700}
-              className="absolute object-cover"
-              style={{ left: -4, top: 0, width: 1919, height: 700 }}
-              priority
-            />
-            <div className="absolute inset-0 bg-[#1a2b3c]/45" aria-hidden />
+            <FigmaHeroImage src="/figma/about/hero-bg.png" priority />
+            <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/45" aria-hidden />
           </div>
 
           {/* Nav */}
@@ -260,13 +253,14 @@ export function AboutPage() {
             reputation on one simple principle — do the job right, every single time, for every
             single client, residential or commercial.
           </p>
-          <Image
+          <FigmaImage
             src="/figma/about/philosophy-house.png"
             alt="Contemporary house exterior"
+            left={960}
+            top={856}
             width={1051}
             height={800}
-            className="absolute z-0 object-cover"
-            style={{ left: 960, top: 856, width: 1051, height: 800 }}
+            className="z-0"
           />
 
           {/* The Angulo difference — nodes 1:1225–1:1229 */}
@@ -406,29 +400,29 @@ export function AboutPage() {
             className="absolute z-0 overflow-hidden"
             style={{ left: 0, top: 3044, width: 1920, height: 704 }}
           >
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-residential-1.png"
               alt="Residential exterior project"
+              left={-35.5}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: -35.5, top: 0, width: 639, height: 704 }}
             />
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-residential-2.png"
               alt="Residential exterior project"
+              left={623}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: 623, top: 0, width: 639, height: 704 }}
             />
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-residential-3.png"
               alt="Residential exterior project"
+              left={1281}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: 1281, top: 0, width: 639, height: 704 }}
             />
           </div>
 
@@ -453,29 +447,29 @@ export function AboutPage() {
             className="absolute z-0 overflow-hidden"
             style={{ left: 0, top: 4299, width: 1920, height: 704 }}
           >
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-commercial-1.png"
               alt="Commercial exterior project"
+              left={-35.5}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: -35.5, top: 0, width: 639, height: 704 }}
             />
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-commercial-2.png"
               alt="Commercial exterior project"
+              left={623}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: 623, top: 0, width: 639, height: 704 }}
             />
-            <Image
+            <FigmaImage
               src="/figma/about/gallery-commercial-3.png"
               alt="Commercial exterior project"
+              left={1281}
+              top={0}
               width={639}
               height={704}
-              className="absolute object-cover"
-              style={{ left: 1281, top: 0, width: 639, height: 704 }}
             />
           </div>
 

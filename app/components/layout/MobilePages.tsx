@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ContactForm } from "../contact/ContactForm";
 import { ContactSuccessModal } from "../contact/ContactSuccessModal";
+import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
+import { ParallaxBannerImage } from "./ParallaxBannerImage";
 import { PageHero, SiteCta, SiteFooter, SiteHeader } from "./SiteLayout";
 
 export function ContactPageMobile() {
@@ -12,14 +14,14 @@ export function ContactPageMobile() {
 
   return (
     <div className="relative bg-[#1a2b3c]">
-      <div className="absolute inset-0 z-0">
-        <Image src="/figma/contact/hero-bg.png" alt="" fill className="object-cover" sizes="100vw" priority />
-        <div className="absolute inset-0 bg-[#1a2b3c]/55" aria-hidden />
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <ParallaxBannerImage src="/figma/contact/hero-bg.png" priority />
+        <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/55" aria-hidden />
       </div>
 
       <div className="relative z-10">
         <SiteHeader variant="overlay" activePath="/contact" />
-        <section className="px-6 pb-10 pt-4">
+        <section className="px-6 pb-10 pt-32">
           <h1 className="m-0 text-[40px] font-bold leading-tight text-white sm:text-[56px]">
             Ready to
             <br />
@@ -156,6 +158,7 @@ export function AboutPageMobile() {
 const services = [
   {
     number: "01",
+    slug: SERVICE_SECTION_SLUGS.demolitionRemoval,
     title: "Demolition & Removal",
     caption: "It starts with a clean slate",
     body: "Before anything new goes up, everything old comes down. We safely remove all existing exterior materials down to the structure.",
@@ -163,6 +166,7 @@ const services = [
   },
   {
     number: "02",
+    slug: SERVICE_SECTION_SLUGS.structuralRepair,
     title: "Structural Repair",
     caption: "What's underneath matters just as much.",
     body: "We inspect every wall for damaged framing, rotted sheathing, or compromised components. If we find it, we fix it.",
@@ -170,6 +174,7 @@ const services = [
   },
   {
     number: "03",
+    slug: SERVICE_SECTION_SLUGS.hardieVinylSiding,
     title: "Hardie & Vinyl Siding",
     caption: "The exterior your property deserves.",
     body: "Certified James Hardie installers and vinyl siding options that protect your property for decades.",
@@ -177,6 +182,7 @@ const services = [
   },
   {
     number: "04",
+    slug: SERVICE_SECTION_SLUGS.pvcTrim,
     title: "PVC Trim",
     caption: "The details that define the finished look.",
     body: "Sharp, clean PVC trim work for every window, door, and corner of your property.",
@@ -184,6 +190,7 @@ const services = [
   },
   {
     number: "05",
+    slug: SERVICE_SECTION_SLUGS.metalRoofing,
     title: "Metal Roofing",
     caption: "The strongest roof you can put on a property.",
     body: "Standing seam metal roofing installed with the precision the system demands.",
@@ -203,13 +210,23 @@ export function ServicesPageMobile() {
       />
       <div className="px-6 py-10">
         {services.map((service) => (
-          <article key={service.number} className="mb-14 border-b border-[#eee] pb-14 last:mb-0 last:border-0">
+          <article
+            key={service.number}
+            data-service-section={service.slug}
+            className="mb-14 scroll-mt-28 border-b border-[#eee] pb-14 last:mb-0 last:border-0"
+          >
             <span className="text-[40px] font-bold text-[#ff832a]">{service.number}</span>
             <h2 className="mt-2 text-[28px] font-bold sm:text-[36px]">{service.title}</h2>
             <p className="mt-2 text-[18px] font-bold">{service.caption}</p>
             <p className="mt-4 text-[16px] leading-relaxed text-[#1c1c1c]">{service.body}</p>
             <div className="relative mt-6 aspect-[16/10] w-full overflow-hidden">
-              <Image src={service.image} alt="" fill className="object-cover" sizes="100vw" />
+              <ParallaxBannerImage
+                src={service.image}
+                className="absolute inset-0"
+                mode="section"
+                speed={0.25}
+                sizes="100vw"
+              />
             </div>
           </article>
         ))}
@@ -219,6 +236,13 @@ export function ServicesPageMobile() {
     </div>
   );
 }
+
+const residentialGallery = [
+  { img: "gallery-tall-left", aspect: "aspect-[2126/2226]" },
+  { img: "gallery-whatsapp-1", aspect: "aspect-[1670/1114]" },
+  { img: "gallery-fullwidth", aspect: "aspect-[3840/2094] sm:col-span-2" },
+  { img: "gallery-image4", aspect: "aspect-[1932/1504] sm:col-span-2" },
+];
 
 export function ResidentialPageMobile() {
   return (
@@ -242,9 +266,9 @@ export function ResidentialPageMobile() {
       <section className="bg-[#fafafa] px-6 py-14">
         <h2 className="text-center text-[32px] font-bold text-[#ff832a]">Our Residential Work</h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {["gallery-tall-left", "gallery-whatsapp-1", "gallery-fullwidth", "gallery-image4"].map((img) => (
-            <div key={img} className="relative aspect-[4/3] overflow-hidden sm:last:col-span-2">
-              <Image src={`/figma/residential/${img}.png`} alt="" fill className="object-cover" sizes="100vw" />
+          {residentialGallery.map(({ img, aspect }) => (
+            <div key={img} className={`relative w-full overflow-hidden ${aspect}`}>
+              <Image src={`/figma/residential/${img}.png`} alt="" fill className="object-cover object-center" sizes="100vw" />
             </div>
           ))}
         </div>

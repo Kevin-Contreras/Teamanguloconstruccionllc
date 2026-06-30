@@ -20,7 +20,7 @@ function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-[1920px] px-6 md:px-[138px] ${className}`}>
+    <div className={`w-full px-6 md:px-[138px] ${className}`}>
       {children}
     </div>
   );
@@ -76,7 +76,7 @@ const values = [
 function Values() {
   return (
     <section className="bg-white pb-20 lg:pb-28">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="w-full px-6 lg:px-0">
         <div className="lg:ml-[138px] lg:mr-[155px]">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
             {values.map((value, index) => (

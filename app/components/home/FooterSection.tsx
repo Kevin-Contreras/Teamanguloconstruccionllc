@@ -54,7 +54,7 @@ export function FooterSection() {
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -70,7 +70,7 @@ export function FooterSection() {
       <footer className="hidden overflow-hidden bg-black text-white lg:block">
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1920px]"
+        className="relative w-full"
         style={{ height: SECTION_HEIGHT * scale }}
       >
         <div

@@ -116,7 +116,7 @@ export function ContactForm({
           alt=""
           width={206}
           height={56}
-          className="pointer-events-none absolute inset-0 h-full w-full object-fill"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
         <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">Send</span>
       </button>
