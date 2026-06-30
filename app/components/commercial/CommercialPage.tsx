@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { CommercialPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
 const CTA_TOP = 6235;
@@ -82,7 +83,11 @@ export function CommercialPage() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden bg-white">
+    <>
+      <div className="lg:hidden">
+        <CommercialPageMobile />
+      </div>
+      <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
         className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
@@ -569,5 +574,6 @@ export function CommercialPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

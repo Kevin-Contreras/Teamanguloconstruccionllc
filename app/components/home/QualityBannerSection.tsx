@@ -24,9 +24,22 @@ export function QualityBannerSection() {
 
   return (
     <section className="overflow-hidden bg-[#ff832a] text-white">
+      <div className="px-6 py-14 lg:hidden">
+        <div className="h-1 w-[76px] rounded-full bg-white" aria-hidden />
+        <h2 className="m-0 mt-6 text-[32px] font-bold leading-tight sm:text-[40px]">
+          Quality is not a differentiator,
+          <br />
+          it&apos;s the baseline.
+        </h2>
+        <p className="mt-6 max-w-[640px] text-[18px] font-bold leading-relaxed sm:text-[22px]">
+          Every project we deliver is held to the same standard, from the smallest repair to the
+          largest installation.
+        </p>
+      </div>
+
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1944px] overflow-hidden"
+        className="relative mx-auto hidden w-full max-w-[1944px] overflow-hidden lg:block"
         style={{ height: SECTION_HEIGHT * scale }}
       >
         <div

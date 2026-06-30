@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { SiteFooter } from "../layout/SiteLayout";
 
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 463;
@@ -62,7 +63,11 @@ export function FooterSection() {
   }, []);
 
   return (
-    <footer className="overflow-hidden bg-black text-white">
+    <>
+      <div className="lg:hidden">
+        <SiteFooter />
+      </div>
+      <footer className="hidden overflow-hidden bg-black text-white lg:block">
       <div
         ref={containerRef}
         className="relative mx-auto w-full max-w-[1920px]"
@@ -191,5 +196,6 @@ export function FooterSection() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

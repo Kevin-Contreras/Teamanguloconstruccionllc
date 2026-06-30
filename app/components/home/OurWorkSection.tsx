@@ -67,35 +67,38 @@ export function OurWorkSection() {
   }, []);
 
   return (
-    <section id="work" className="bg-white pb-16 lg:pb-24">
+    <section id="work" className="bg-white py-14 lg:py-24">
       <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
         <div className="lg:ml-[138px] lg:mr-[155px]">
-          {/* Header — nodes 1:208–1:212 (responsive, not scaled) */}
           <div className="mb-10 flex flex-col items-center text-center lg:mb-12">
-            <h2 className="m-0 text-[40px] font-bold leading-none text-[#ff832a] sm:text-[56px] lg:text-[72px]">
+            <div className="mb-5 h-[5px] w-16 rounded-full bg-[#f07b05] lg:mb-6" aria-hidden />
+            <h2 className="m-0 text-[36px] font-bold leading-none text-[#ff832a] sm:text-[48px] lg:text-[72px]">
               Our Work
             </h2>
-            <p className="m-0 mt-3 max-w-[1059px] text-[22px] leading-tight text-[#1c1c1c] sm:text-[32px] lg:mt-4 lg:whitespace-nowrap lg:text-[50px]">
+            <p className="m-0 mt-4 max-w-[1059px] text-[20px] leading-snug text-[#1c1c1c] sm:text-[28px] lg:mt-4 lg:text-[50px] lg:leading-tight">
               Every project is a reflection of our{" "}
               <span className="font-bold">standards</span>
             </p>
-            <p className="m-0 mt-3 max-w-[746px] text-[16px] leading-normal text-black sm:text-[18px] lg:mt-4 lg:text-[20px]">
+            <p className="m-0 mt-4 max-w-[746px] text-[16px] leading-relaxed text-black sm:text-[18px] lg:mt-4 lg:text-[20px]">
               A selection of residential and commercial exteriors completed by Team Angulo.
             </p>
-            <Image
-              src="/figma/work-line7.svg"
-              alt=""
-              width={64}
-              height={5}
-              className="mt-5 lg:mt-6"
-              style={{ width: 64, height: 5 }}
-            />
           </div>
 
           {/* Portfolio grid — node 1:193 */}
+          <div className="grid grid-cols-2 gap-3 lg:hidden">
+            {galleryImages.map((image) => (
+              <div
+                key={image.src}
+                className={`relative overflow-hidden ${image.width > 500 ? "col-span-2 aspect-[16/10]" : "aspect-[4/3]"}`}
+              >
+                <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="50vw" />
+              </div>
+            ))}
+          </div>
+
           <div
             ref={galleryRef}
-            className="relative w-full"
+            className="relative hidden w-full lg:block"
             style={{ height: GALLERY_HEIGHT * scale }}
           >
             <div

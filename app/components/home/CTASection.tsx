@@ -1,5 +1,6 @@
 "use client";
 
+import { SiteCta } from "../layout/SiteLayout";
 import { useEffect, useRef, useState } from "react";
 
 const SECTION_WIDTH = 1644;
@@ -39,7 +40,11 @@ export function CTASection() {
   }, []);
 
   return (
-    <section id="contact" className="overflow-hidden bg-white py-16 lg:py-20">
+    <>
+      <div className="lg:hidden" id="contact">
+        <SiteCta />
+      </div>
+      <section className="hidden overflow-hidden bg-white py-16 lg:block lg:py-20">
       <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
         <div
           ref={containerRef}
@@ -87,5 +92,6 @@ export function CTASection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

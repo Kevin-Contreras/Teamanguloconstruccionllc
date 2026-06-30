@@ -8,10 +8,12 @@ export function ContactSuccessModal({
   top,
   height,
   onClose,
+  variant = "desktop",
 }: {
   top?: number;
-  height: number;
+  height?: number;
   onClose: () => void;
+  variant?: "desktop" | "mobile";
 }) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -22,10 +24,51 @@ export function ContactSuccessModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  if (variant === "mobile") {
+    return (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a2b3c]/70 p-4"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="contact-success-title"
+        onClick={onClose}
+      >
+        <div
+          className="relative flex max-h-[90vh] w-full max-w-[520px] flex-col items-center overflow-y-auto rounded-[32px] bg-white p-8 text-center sm:p-10"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-[28px] text-[#1c1c1c] hover:bg-black/5"
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <Image
+            src="/figma/contact/icon-success-check.svg"
+            alt=""
+            width={120}
+            height={120}
+            className="shrink-0"
+            aria-hidden
+          />
+          <h2 id="contact-success-title" className="mt-6 text-[36px] font-bold leading-tight text-black sm:text-[48px]">
+            Thank You for <span className="text-[#ff832a]">Contacting Us!</span>
+          </h2>
+          <p className="mt-6 text-[18px] leading-relaxed text-black sm:text-[22px]">
+            We received your message and will be in touch shortly{" "}
+            <span className="font-bold">to discuss your project.</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="absolute left-0 z-30 flex items-center justify-center bg-[#1a2b3c]/60"
-      style={{ top: top ?? 0, width: 1920, height }}
+      style={{ top: top ?? 0, width: 1920, height: height ?? 1115 }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="contact-success-title"
@@ -44,7 +87,6 @@ export function ContactSuccessModal({
         >
           ×
         </button>
-
         <Image
           src="/figma/contact/icon-success-check.svg"
           alt=""
@@ -53,7 +95,6 @@ export function ContactSuccessModal({
           className="shrink-0"
           aria-hidden
         />
-
         <h2
           id="contact-success-title"
           className="mt-8 m-0 text-[80px] font-bold leading-[90px] text-black"
@@ -62,7 +103,6 @@ export function ContactSuccessModal({
           <br />
           <span className="text-[#ff832a]">Contacting Us!</span>
         </h2>
-
         <p className="mt-10 m-0 max-w-[665px] text-[30px] leading-normal text-black">
           We received your message and will be in touch shortly{" "}
           <span className="font-bold">to discuss your project.</span>

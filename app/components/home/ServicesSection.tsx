@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const SECTION_WIDTH = 1920;
@@ -71,7 +72,35 @@ export function ServicesSection() {
 
   return (
     <section id="services" className="relative overflow-hidden bg-black text-white">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="px-6 py-14 lg:hidden">
+        <p className="m-0 text-[36px] font-bold leading-tight sm:text-[48px]">
+          Discover
+          <br />
+          Our <span className="text-[#ff832a]">Exterior</span>
+          <br />
+          <span className="text-[#ff832a]">Solutions</span>
+        </p>
+        <p className="mt-6 max-w-[520px] text-[16px] leading-relaxed sm:text-[18px]">
+          From residential homes to commercial properties, we deliver premium exterior
+          remodeling tailored to every need.
+        </p>
+        <ul className="mt-10 space-y-6 border-t border-white/20 pt-8">
+          {services.map((service) => (
+            <li key={service.title} className="border-b border-white/20 pb-6 last:border-0">
+              <p className="m-0 text-[22px] font-medium sm:text-[28px]">{service.title}</p>
+              <p className="mt-2 text-[15px] text-white/80 sm:text-[16px]">{service.desc}</p>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href="/services"
+          className="mt-8 inline-flex h-[52px] items-center justify-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+        >
+          VIEW ALL SERVICES
+        </Link>
+      </div>
+
+      <div className="mx-auto hidden w-full max-w-[1920px] lg:block lg:px-0">
         <div
           ref={containerRef}
           className="relative w-full"

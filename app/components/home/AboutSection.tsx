@@ -26,9 +26,59 @@ export function AboutSection() {
   return (
     <section id="about" className="bg-white py-16 lg:py-24">
       <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+        <div className="lg:hidden">
+          <p className="text-[18px] leading-none text-black">
+            Welcome to <span className="italic">Team Angulo</span>
+          </p>
+          <Image
+            src="/figma/about-line2.svg"
+            alt=""
+            width={64}
+            height={5}
+            className="mt-4"
+          />
+          <p className="mt-4 text-[28px] leading-snug text-[#1c1c1c] sm:text-[36px]">
+            We work for property owners who refuse to settle{" "}
+            <span className="font-bold text-[#f07b05]">for anything less than done right.</span>
+          </p>
+          <p className="mt-6 text-[16px] leading-relaxed text-black sm:text-[18px]">
+            Every property deserves an exterior{" "}
+            <span className="font-bold">built to last</span>, and that&apos;s exactly what we
+            deliver. At Team Angulo, quality isn&apos;t a promise we make lightly.
+          </p>
+          <div className="mt-8 flex gap-10">
+            <div>
+              <p className="m-0 leading-none text-black">
+                <span className="text-[40px] font-bold">7</span>
+                <span className="text-[32px]">+</span>
+              </p>
+              <p className="mt-2 text-[16px]">
+                Years in <span className="italic">Business</span>
+              </p>
+            </div>
+            <div className="w-px bg-[#d9d9d9]" aria-hidden />
+            <div>
+              <p className="m-0 leading-none text-black">
+                <span className="text-[40px] font-bold">100</span>
+                <span className="text-[32px]">+</span>
+              </p>
+              <p className="mt-2 text-[16px]">
+                Projects <span className="italic">Completed</span>
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/about"
+            className="mt-8 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-8 text-[16px] font-bold text-[#f07b05] hover:opacity-90"
+          >
+            WHO WE ARE
+            <Image src="/figma/about-arrow.svg" alt="" width={14} height={15} />
+          </Link>
+        </div>
+
         <div
           ref={containerRef}
-          className="relative lg:ml-[138px] lg:mr-[155px]"
+          className="relative hidden lg:ml-[138px] lg:mr-[155px] lg:block"
           style={{ height: SECTION_HEIGHT * scale }}
         >
           <div

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { ServicesPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
 const PAGE_HEIGHT = 8228;
@@ -82,7 +83,11 @@ export function ServicesPage() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden bg-white">
+    <>
+      <div className="lg:hidden">
+        <ServicesPageMobile />
+      </div>
+      <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
         className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
@@ -543,5 +548,6 @@ export function ServicesPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

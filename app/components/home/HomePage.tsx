@@ -116,7 +116,7 @@ function Values() {
 
 function HardieSiding() {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white pb-12 pt-16 lg:py-28">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>

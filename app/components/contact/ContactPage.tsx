@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { ContactPageMobile } from "../layout/MobilePages";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 
 const PAGE_WIDTH = 1920;
@@ -48,7 +49,11 @@ export function ContactPage() {
   };
 
   return (
-    <div className="w-full overflow-hidden bg-black">
+    <>
+      <div className="lg:hidden">
+        <ContactPageMobile />
+      </div>
+      <div className="hidden w-full overflow-hidden bg-black lg:block">
       <div
         ref={containerRef}
         className="relative mx-auto w-full max-w-[1920px] overflow-hidden"
@@ -268,7 +273,11 @@ export function ContactPage() {
           </form>
 
           {submitted && (
-            <ContactSuccessModal height={FOOTER_TOP} onClose={() => setSubmitted(false)} />
+            <ContactSuccessModal
+              height={FOOTER_TOP}
+              onClose={() => setSubmitted(false)}
+              variant="desktop"
+            />
           )}
 
           {/* Footer — node 1:1516 */}
@@ -398,5 +407,6 @@ export function ContactPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

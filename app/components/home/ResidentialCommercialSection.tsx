@@ -42,8 +42,72 @@ export function ResidentialCommercialSection() {
 
   return (
     <div className="bg-white">
+      <section id="residential" className="overflow-hidden bg-white lg:hidden">
+        <div className="relative aspect-[4/3] w-full">
+          <Image
+            src="/figma/imgContemporaryHouseWithShingleDetailAndBlueSk20260326104821Utc.png"
+            alt="Residential siding project"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+        <div className="px-6 py-10">
+          <p className="m-0 text-[18px] text-black">
+            For <span className="font-bold">homeowners</span>
+          </p>
+          <Image src="/figma/imgLinea8.svg" alt="" width={64} height={5} className="mt-3" aria-hidden />
+          <h2 className="m-0 mt-3 text-[40px] font-bold leading-none text-[#ff832a] sm:text-[52px]">
+            Residential
+          </h2>
+          <p className="mt-4 text-[16px] leading-relaxed text-black sm:text-[18px]">
+            Every residential project we take on is treated with the same standard — thorough
+            preparation, precise installation, and a finished result built to last.
+          </p>
+          <Link
+            href="/residential"
+            className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
+          >
+            SEE RESIDENTIAL PROJECTS
+            <PillArrow />
+          </Link>
+        </div>
+      </section>
+
+      <section id="commercial" className="overflow-hidden bg-white pb-14 lg:hidden">
+        <div className="relative aspect-[4/3] w-full">
+          <Image
+            src="/figma/imgIndustrialFactoryFacadeWithSteelMashes20260325224915Utc.png"
+            alt="Commercial building project"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+        <div className="px-6 py-10">
+          <p className="m-0 text-[18px] text-black">
+            For business <span className="font-bold">owners</span>
+          </p>
+          <Image src="/figma/imgLinea8.svg" alt="" width={64} height={5} className="mt-3" aria-hidden />
+          <h2 className="m-0 mt-3 text-[40px] font-bold leading-none text-[#ff832a] sm:text-[52px]">
+            Commercial
+          </h2>
+          <p className="mt-4 text-[16px] leading-relaxed text-black sm:text-[18px]">
+            Commercial projects demand precision, efficiency, and minimal disruption. We deliver
+            results that meet the highest professional standards.
+          </p>
+          <Link
+            href="/commercial"
+            className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
+          >
+            SEE COMMERCIAL PROJECTS
+            <PillArrow />
+          </Link>
+        </div>
+      </section>
+
       {/* Residential — node 1:275+ */}
-      <section id="residential" className="overflow-hidden bg-white">
+      <section className="hidden overflow-hidden bg-white lg:block">
         <div
           ref={containerRef}
           className="relative mx-auto w-full max-w-[1975px] overflow-hidden"
