@@ -1,66 +1,73 @@
 import Image from "next/image";
+import Link from "next/link";
 
 /** Figma node 1:24 — Top Navigation (canvas 1920px) */
 export function TopNavigation() {
   return (
     <header className="absolute left-0 top-0 z-20 h-[155px] w-full">
       {/* Nav bar pill — Figma node 1:25 @ 140,66 1614×79 */}
-      <div
-        className="absolute rounded-full "
+      <Image
+        src="/figma/imgTopNavigation.svg"
+        alt=""
+        width={1614}
+        height={79}
+        className="absolute pointer-events-none"
         style={{ left: 140, top: 66, width: 1614, height: 79 }}
         aria-hidden
       />
 
       {/* Logo — Figma node 1:48 @ 116,43 306×112 */}
-      <Image
-        src="/figma/imgEditableLogo10.png"
-        alt="Team Angulo"
-        width={306}
-        height={112}
-        className="absolute"
-        style={{ left: 116, top: 43, width: 306, height: 112 }}
-        priority
-      />
+      <Link href="/" className="absolute z-10" style={{ left: 116, top: 43 }}>
+        <Image
+          src="/figma/imgEditableLogo10.png"
+          alt="Team Angulo"
+          width={306}
+          height={112}
+          className="block"
+          style={{ width: 306, height: 112 }}
+          priority
+        />
+      </Link>
 
       {/* Services — Figma node 1:31 @ 1013,84 Montserrat 16px */}
-      <a
+      <Link
         href="/services"
         className="absolute font-['Montserrat'] text-[16px] font-normal leading-none text-white hover:opacity-80"
         style={{ left: 1013, top: 84 }}
       >
         Services
-      </a>
+      </Link>
 
       {/* Residential — Figma node 1:29 @ 1140,85 Inter 16px */}
-      <a
-        href="#residential"
+      <Link
+        href="/residential"
         className="absolute text-[16px] font-normal leading-none text-white hover:opacity-80"
         style={{ left: 1140, top: 85 }}
       >
         Residential
-      </a>
+      </Link>
 
       {/* Commercial — Figma node 1:33 @ 1274,82 Inter 17px */}
-      <a
-        href="#commercial"
+      <Link
+        href="/commercial"
         className="absolute text-[17px] font-normal leading-none text-white hover:opacity-80"
         style={{ left: 1274, top: 82 }}
       >
         Commercial
-      </a>
+      </Link>
 
       {/* About Us — Figma node 1:35 @ 1425,82 Inter 17px */}
-      <a
-        href="#about"
+      <Link
+        href="/about"
         className="absolute text-[17px] font-normal leading-none text-white hover:opacity-80"
         style={{ left: 1425, top: 82 }}
       >
         About Us
-      </a>
+      </Link>
 
       {/* Contact button — Figma node 1:39 @ 1538,69 154×48 */}
-      <a
-        href="#contact"
+      <Link
+        href="/contact"
         className="absolute flex items-center justify-center hover:opacity-90"
         style={{ left: 1538, top: 69, width: 154, height: 48 }}
       >
@@ -74,7 +81,7 @@ export function TopNavigation() {
         <span className="relative z-10 text-[17px] font-bold leading-none text-white">
           Contact
         </span>
-      </a>
+      </Link>
 
       {/* ES language — Figma node 1:44 @ 1730,69 50×48 */}
       <button

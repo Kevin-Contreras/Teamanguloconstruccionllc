@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const SECTION_WIDTH = 1975;
@@ -45,7 +46,7 @@ export function ResidentialCommercialSection() {
       <section id="residential" className="overflow-hidden bg-white">
         <div
           ref={containerRef}
-          className="relative mx-auto w-full max-w-[1975px]"
+          className="relative mx-auto w-full max-w-[1975px] overflow-hidden"
           style={{ height: SECTION_HEIGHT * scale }}
         >
           <div
@@ -108,14 +109,14 @@ export function ResidentialCommercialSection() {
             </p>
 
             {/* Button — node 1:285 @ 205,583 317×60 */}
-            <a
-              href="#work"
+            <Link
+              href="/residential"
               className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
               style={{ left: 205, top: 583, width: 317, height: 60 }}
             >
               SEE RESIDENTIAL PROJECTS
               <PillArrow />
-            </a>
+            </Link>
 
             {/* Commercial image — node 1:328 @ 0,981 1077×800 */}
             <Image
@@ -171,14 +172,14 @@ export function ResidentialCommercialSection() {
             </p>
 
             {/* Button — node 1:312 @ 1176,1572 330×60 */}
-            <a
-              href="#work"
+            <Link
+              href="/commercial"
               className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
               style={{ left: 1176, top: 1572, width: 330, height: 60 }}
             >
               SEE COMMERCIAL PROJECTS
               <PillArrow />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
