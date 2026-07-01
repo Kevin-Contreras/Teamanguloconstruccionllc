@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
-import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
+import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ResidentialPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
@@ -103,7 +103,7 @@ export function ResidentialPage() {
           </div>
 
           {/* Nav */}
-          <FigmaDesktopNav activePath="/residential" />
+          <TopNavigation />
 
           {/* Hero copy — node 1:774 Welcome + 1:779 Trazado 2016 */}
           <div

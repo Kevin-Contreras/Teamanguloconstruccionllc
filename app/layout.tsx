@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import { MotionObserver } from "./components/motion/MotionObserver";
 import { LanguageProvider } from "./providers/LanguageProvider";
 import "./globals.css";
 
@@ -34,7 +35,10 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} overflow-x-hidden antialiased`}
     >
       <body className="min-h-screen overflow-x-hidden">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <MotionObserver />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

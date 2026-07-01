@@ -151,7 +151,10 @@ export function PageHero({
 
         <NavBar variant="overlay" activePath={activePath} />
 
-        <div className="relative z-10 flex min-h-[380px] flex-col justify-end px-6 pb-10 pt-28 sm:min-h-[460px] sm:px-10 sm:pb-14 lg:px-[138px]">
+        <div
+          className="relative z-10 flex min-h-[380px] flex-col justify-end px-6 pb-10 pt-28 sm:min-h-[460px] sm:px-10 sm:pb-14 lg:px-[138px]"
+          data-animate-hero
+        >
           <h1 className="m-0 max-w-[800px] text-[40px] font-bold leading-tight text-white sm:text-[56px] lg:text-[72px]">
             {title}
             {titleAccent && (

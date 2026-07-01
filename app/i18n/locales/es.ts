@@ -431,4 +431,9 @@ export const es: Translations = {
     description:
       "Instalamos los exteriores que protegen y definen su propiedad. Soluciones exteriores residenciales y comerciales en New Jersey.",
   },
+  notFound: {
+    title: "Página No Encontrada",
+    description: "La página que busca no existe o fue movida.",
+    backHome: "VOLVER AL INICIO",
+  },
 };

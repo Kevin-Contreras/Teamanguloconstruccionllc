@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
-import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
+import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { AboutPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
@@ -160,7 +160,7 @@ export function AboutPage() {
           </div>
 
           {/* Nav */}
-          <FigmaDesktopNav activePath="/about" />
+          <TopNavigation />
 
           {/* Hero copy — node 1:1205 Welcome */}
           <div

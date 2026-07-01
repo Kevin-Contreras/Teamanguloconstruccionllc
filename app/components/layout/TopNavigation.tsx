@@ -9,7 +9,7 @@ export function TopNavigation() {
   const { t, locale, toggleLocale } = useLanguage();
 
   return (
-    <header className="absolute left-0 top-0 z-20 h-[155px] w-full">
+    <header className="absolute left-0 top-0 z-20 h-[155px] w-full" data-no-animate>
       <Image
         src="/figma/imgTopNavigation.svg"
         alt=""

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
-import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
+import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ServicesPageMobile } from "../layout/MobilePages";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
@@ -151,7 +151,7 @@ export function ServicesPage() {
           </div>
 
           {/* Nav */}
-          <FigmaDesktopNav activePath="/services" />
+          <TopNavigation />
 
           <h1
             className="absolute z-10 m-0 text-[72px] font-bold leading-none text-white"

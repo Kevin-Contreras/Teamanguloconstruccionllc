@@ -430,4 +430,9 @@ export const en: Translations = {
     description:
       "We install the exteriors that protect and define your property. Residential and commercial exterior solutions in New Jersey.",
   },
+  notFound: {
+    title: "Page Not Found",
+    description: "The page you're looking for doesn't exist or may have been moved.",
+    backHome: "BACK TO HOME",
+  },
 };

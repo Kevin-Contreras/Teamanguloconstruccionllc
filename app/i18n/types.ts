@@ -239,4 +239,9 @@ export type Translations = {
     title: string;
     description: string;
   };
+  notFound: {
+    title: string;
+    description: string;
+    backHome: string;
+  };
 };

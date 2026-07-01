@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { FigmaImage } from "../layout/FigmaImage";
-import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
+import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ContactPageMobile } from "../layout/MobilePages";
 import { ContactSuccessModal } from "./ContactSuccessModal";
@@ -87,7 +87,7 @@ export function ContactPage() {
           </div>
 
           {/* Nav */}
-          <FigmaDesktopNav activePath="/contact" />
+          <TopNavigation />
 
           {/* Hero copy — nodes 1:1578–1:1577 */}
           <div className="absolute z-10" style={{ left: 138, top: 402, width: 560 }}>

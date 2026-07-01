@@ -23,7 +23,7 @@ export function ContactPageMobile() {
 
       <div className="relative z-10">
         <SiteHeader variant="overlay" activePath="/contact" />
-        <section className="px-6 pb-10 pt-32">
+        <section className="px-6 pb-10 pt-32" data-animate-hero>
           <h1 className="m-0 text-[40px] font-bold leading-tight text-white sm:text-[56px]">
             {t.contact.heroLine1}
             <br />

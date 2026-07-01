@@ -167,6 +167,7 @@ export function NavBar({
 
       <header
         ref={headerRef}
+        data-no-animate
         className={`fixed top-0 left-0 right-0 z-50 w-full text-white transition-[background-color,backdrop-filter,border-color] duration-300 motion-reduce:transition-none ${headerBg}`}
       >
         <div className="w-full px-4 py-4 lg:px-[138px] lg:py-6">

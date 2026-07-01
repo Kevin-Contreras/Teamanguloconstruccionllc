@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { NavBar } from "../layout/NavBar";
-import { TopNavigation } from "./TopNavigation";
+import { TopNavigation } from "../layout/TopNavigation";
 
 const BANNER_WIDTH = 1920;
 const BANNER_HEIGHT = 1134;
@@ -46,7 +46,7 @@ export function Hero() {
 
         <NavBar variant="overlay" />
 
-        <div className="relative z-10 px-6 pb-14 pt-28">
+        <div className="relative z-10 px-6 pb-14 pt-28" data-animate-hero>
             <h1 className="m-0 max-w-[520px] text-[38px] font-bold leading-[1.05] text-white sm:text-[48px]">
               {t.home.hero.line1}
               <br />
@@ -102,6 +102,7 @@ export function Hero() {
 
             <TopNavigation />
 
+            <div data-animate-hero>
             <h1
               className="absolute font-bold"
               style={{ left: 142, top: 474, width: 814, fontSize: 72, lineHeight: 1.05 }}
@@ -144,6 +145,7 @@ export function Hero() {
             >
               {t.common.getAQuote}
             </Link>
+            </div>
           </div>
         </div>
       </section>
