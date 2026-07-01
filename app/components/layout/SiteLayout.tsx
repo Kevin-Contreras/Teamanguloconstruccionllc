@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { NavBar } from "./NavBar";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
 import { useLanguage, useServiceNames } from "../../providers/LanguageProvider";
 
@@ -18,20 +17,26 @@ function CtaArrow() {
 }
 
 export function SiteHeader({
-  variant = "overlay",
-  activePath,
+  variant: _variant = "overlay",
+  activePath: _activePath,
 }: {
   variant?: "overlay" | "solid";
   activePath?: string;
 }) {
-  return <NavBar variant={variant} activePath={activePath} />;
+  return null;
 }
 
-export function SiteCta({ id }: { id?: string }) {
+export function SiteCta({ id, className }: { id?: string; className?: string }) {
   const { t } = useLanguage();
 
   return (
-    <section id={id} className="bg-white px-6 py-14 lg:px-[138px] lg:py-20">
+    <section
+      id={id}
+      className={
+        className ??
+        "bg-white px-6 pb-14 pt-16 lg:px-[138px]"
+      }
+    >
       <div className="mx-auto flex max-w-[1644px] flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <h2 className="m-0 text-[36px] font-bold text-black sm:text-[48px] lg:text-[38px]">
@@ -47,7 +52,7 @@ export function SiteCta({ id }: { id?: string }) {
         </div>
         <a
           href="mailto:info@teamangulo.com"
-          className="locale-pill-btn inline-flex h-[60px] shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
+          className="locale-pill-btn inline-flex h-[45px] px-15 shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[12px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
         >
           {t.common.getInTouch}
           <CtaArrow />
@@ -72,7 +77,7 @@ export function SiteFooter() {
             height={102}
             className="mb-6 h-auto w-[220px] lg:w-[280px]"
           />
-          <p className="m-0 max-w-[316px] text-[16px] leading-relaxed lg:text-[18px]">
+          <p className="m-0 max-w-[316px] text-[16px] leading-relaxed text-[#a8a8a8] lg:text-[18px]">
             {t.footer.tagline}
           </p>
         </div>
@@ -82,7 +87,7 @@ export function SiteFooter() {
           <ul className="space-y-2">
             {services.map((title) => (
               <li key={title}>
-                <Link href="/services" className="text-[16px] hover:opacity-80 lg:text-[20px]">
+                <Link href="/services" className="text-[16px] text-[#a8a8a8] hover:opacity-80 lg:text-[20px]">
                   {title}
                 </Link>
               </li>
@@ -94,16 +99,16 @@ export function SiteFooter() {
           <p className="mb-4 text-[18px] font-bold lg:text-[20px]">{t.footer.contact}</p>
           <ul className="space-y-3 text-[16px] lg:text-[20px]">
             <li>
-              <a href="tel:+10000000000" className="hover:opacity-80">
+              <a href="tel:+10000000000" className="text-[#a8a8a8] hover:opacity-80">
                 (XXX) XXX-XXXX
               </a>
             </li>
             <li>
-              <a href="mailto:info@teamangulo.com" className="hover:opacity-80">
+              <a href="mailto:info@teamangulo.com" className="text-[#a8a8a8] hover:opacity-80">
                 info@teamangulo.com
               </a>
             </li>
-            <li>{t.footer.location}</li>
+            <li className="text-[#a8a8a8]">{t.footer.location}</li>
           </ul>
         </div>
 
@@ -120,7 +125,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto mt-10 max-w-[1644px] border-t border-white/30 pt-6">
-        <p className="m-0 text-[16px] lg:text-[20px]">{t.footer.copyright}</p>
+        <p className="m-0 text-[16px] text-[#a8a8a8] lg:text-[20px]">{t.footer.copyright}</p>
       </div>
     </footer>
   );
@@ -148,8 +153,6 @@ export function PageHero({
           <ParallaxBannerImage src={imageSrc} priority />
           {dark && <div className="absolute inset-0 z-[1] bg-[#1a2b3c]/55" aria-hidden />}
         </div>
-
-        <NavBar variant="overlay" activePath={activePath} />
 
         <div
           className="relative z-10 flex min-h-[380px] flex-col justify-end px-6 pb-10 pt-28 sm:min-h-[460px] sm:px-10 sm:pb-14 lg:px-[138px]"

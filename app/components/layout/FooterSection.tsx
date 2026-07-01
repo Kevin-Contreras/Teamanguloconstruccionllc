@@ -87,7 +87,7 @@ export function FooterSection() {
             />
 
             <p
-              className="absolute m-0 text-[18px] leading-normal text-white"
+              className="absolute m-0 text-[18px] leading-normal text-[#a8a8a8]"
               style={{ left: 160, top: 205, width: 316 }}
             >
               {t.footer.taglineLine1}
@@ -107,7 +107,7 @@ export function FooterSection() {
               <Link
                 key={title}
                 href="/services"
-                className="absolute m-0 text-[20px] leading-normal text-white hover:opacity-80"
+                className="absolute m-0 text-[20px] leading-normal text-[#a8a8a8] hover:opacity-80"
                 style={{ left: 643, top: serviceTops[index] }}
               >
                 {title}
@@ -141,14 +141,14 @@ export function FooterSection() {
                 {item.href ? (
                   <a
                     href={item.href}
-                    className="absolute m-0 text-[20px] leading-normal text-white hover:opacity-80"
+                    className="absolute m-0 text-[20px] leading-normal text-[#a8a8a8] hover:opacity-80"
                     style={{ left: 1076, top: item.textTop }}
                   >
                     {label}
                   </a>
                 ) : (
                   <p
-                    className="absolute m-0 text-[20px] leading-normal text-white"
+                    className="absolute m-0 text-[20px] leading-normal text-[#a8a8a8]"
                     style={{ left: 1076, top: item.textTop }}
                   >
                     {label}
@@ -180,7 +180,7 @@ export function FooterSection() {
             />
 
             <p
-              className="absolute m-0 text-[20px] leading-normal text-white"
+              className="absolute m-0 text-[20px] leading-normal text-[#a8a8a8]"
               style={{ left: 138, top: 400 }}
             >
               {t.footer.copyright}

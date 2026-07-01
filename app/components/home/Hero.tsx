@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
-import { NavBar } from "../layout/NavBar";
 import { TopNavigation } from "../layout/TopNavigation";
 
 const BANNER_WIDTH = 1920;
@@ -43,8 +42,6 @@ export function Hero() {
             aria-hidden
           />
         </div>
-
-        <NavBar variant="overlay" />
 
         <div className="relative z-10 px-6 pb-14 pt-28" data-animate-hero>
             <h1 className="m-0 max-w-[520px] text-[38px] font-bold leading-[1.05] text-white sm:text-[48px]">

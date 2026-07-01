@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import { MobileSiteNav } from "./components/layout/MobileSiteNav";
 import { MotionObserver } from "./components/motion/MotionObserver";
 import { LanguageProvider } from "./providers/LanguageProvider";
 import "./globals.css";
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className="min-h-screen overflow-x-hidden">
         <LanguageProvider>
           <MotionObserver />
+          <MobileSiteNav />
           {children}
         </LanguageProvider>
       </body>

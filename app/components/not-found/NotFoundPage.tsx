@@ -7,7 +7,6 @@ import { FigmaHeroImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ParallaxBannerImage } from "../layout/ParallaxBannerImage";
-import { SiteHeader } from "../layout/SiteLayout";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
 
@@ -84,7 +83,6 @@ function NotFoundPageMobile() {
       </div>
 
       <div className="relative z-10 flex min-h-screen flex-col">
-        <SiteHeader variant="overlay" />
         <section
           data-animate-hero
           className="flex flex-1 flex-col items-center justify-center px-6 pb-20 pt-32 sm:pt-36"

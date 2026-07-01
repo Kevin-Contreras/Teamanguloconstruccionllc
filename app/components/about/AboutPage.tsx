@@ -5,14 +5,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
-import { PageClosing } from "../layout/PageClosing";
+import { PageClosing, galleryPageCtaClassName } from "../layout/PageClosing";
 import { AboutPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
 
 const PAGE_WIDTH = 1920;
-const CTA_TOP = 5608;
-const PAGE_HEIGHT = CTA_TOP;
+const PAGE_HEIGHT = 5526;
 
 const aboutValueLayout = [
   { left: 138, top: 2075, iconSrc: "/figma/imgGrupo14.svg", iconWidth: 125, iconHeight: 124, textGap: 14, width: 460 },
@@ -403,7 +402,7 @@ export function AboutPage() {
         </div>
       </div>
     </div>
-      <PageClosing />
+      <PageClosing ctaClassName={galleryPageCtaClassName} />
     </>
   );
 }

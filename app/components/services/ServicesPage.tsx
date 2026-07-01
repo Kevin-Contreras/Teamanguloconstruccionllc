@@ -37,11 +37,11 @@ function ServiceTextBlock({
 
   return (
     <div
-      className="absolute z-10 flex flex-col"
+      className="group absolute z-10 flex flex-col"
       style={{ left, top, width: locale === "es" ? width + 60 : width }}
     >
       <span
-        className="leading-none text-[#ff832a]"
+        className="inline-block origin-left leading-none text-[#ff832a] transition-transform duration-300 ease-out group-hover:scale-110"
         style={{ fontSize: figmaFont(55, locale) }}
       >
         {number}
