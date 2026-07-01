@@ -7,8 +7,8 @@ import { useLanguage } from "../../providers/LanguageProvider";
 import { FigmaImage } from "../layout/FigmaImage";
 import {
   SERVICE_SECTION_SLUGS,
-  serviceSectionHref,
 } from "../../constants/serviceSections";
+import { ServiceSectionLink } from "../layout/ServiceSectionLink";
 
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 1253;
@@ -60,14 +60,14 @@ export function ServicesSection() {
         <ul className="mt-10 space-y-6 border-t border-white/20 pt-8">
           {services.map((service) => (
             <li key={service.slug} className="border-b border-white/20 pb-6 last:border-0">
-              <Link href={serviceSectionHref(service.slug)} className="group block">
+              <ServiceSectionLink slug={service.slug} className="group block">
                 <p className="m-0 text-[22px] font-medium transition-colors group-hover:text-[#ff832a] sm:text-[28px]">
                   {service.title}
                 </p>
                 <p className="mt-2 text-[15px] text-white/80 sm:text-[16px]">
                   {service.desc}
                 </p>
-              </Link>
+              </ServiceSectionLink>
             </li>
           ))}
         </ul>
@@ -139,8 +139,8 @@ export function ServicesSection() {
 
               return (
                 <div key={service.title}>
-                  <Link
-                    href={serviceSectionHref(service.slug)}
+                  <ServiceSectionLink
+                    slug={service.slug}
                     className="group absolute z-10 block"
                     style={{
                       left: 870,
@@ -172,7 +172,7 @@ export function ServicesSection() {
                       }}
                       aria-hidden
                     />
-                  </Link>
+                  </ServiceSectionLink>
                   {"lineTop" in service && service.lineTop !== undefined && (
                     <Image
                       src="/figma/imgLine31.svg"

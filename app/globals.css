@@ -105,6 +105,24 @@ html[lang="es"] .locale-nav-link {
   font-size: 14px;
 }
 
+[data-no-animate] {
+  opacity: 1 !important;
+}
+
+/* Keep portaled mobile header pinned above page content and animations */
+header[data-no-animate] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.contact-success-overlay {
+  background-color: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
 /* ── Premium text motion ── */
 @media (prefers-reduced-motion: no-preference) {
   .page-transition {

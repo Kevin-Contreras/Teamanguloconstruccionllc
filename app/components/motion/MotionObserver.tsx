@@ -17,6 +17,7 @@ function prepareTextReveals() {
   const containers = document.querySelectorAll("section, footer, .origin-top-left, [data-animate-section]");
   containers.forEach((container) => {
     if (isExcluded(container)) return;
+    if (container.closest("[data-no-animate]")) return;
 
     const reveals = Array.from(container.querySelectorAll(TEXT_SELECTOR)).filter((el) => {
       if (isExcluded(el)) return false;

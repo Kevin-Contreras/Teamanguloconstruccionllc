@@ -4,13 +4,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
-import { PageClosing } from "../layout/PageClosing";
+import { PageClosing, galleryPageCtaClassName } from "../layout/PageClosing";
 import { CommercialPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
 
 const PAGE_WIDTH = 1920;
-const CTA_TOP = 6235;
-const PAGE_HEIGHT = CTA_TOP;
+const PAGE_HEIGHT = 6150;
 
 const commercialValueLayout = [
   { left: 148, top: 1414.579, iconSrc: "/figma/commercial/icon-minimal-disruption.svg", iconWidth: 114, iconHeight: 114, textGap: 14, width: 410 },
@@ -312,7 +311,7 @@ export function CommercialPage() {
         </div>
       </div>
     </div>
-      <PageClosing />
+      <PageClosing ctaClassName={galleryPageCtaClassName} />
     </>
   );
 }

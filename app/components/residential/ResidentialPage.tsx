@@ -4,13 +4,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
-import { PageClosing } from "../layout/PageClosing";
+import { PageClosing, galleryPageCtaClassName } from "../layout/PageClosing";
 import { ResidentialPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
 
 const PAGE_WIDTH = 1920;
-const CTA_TOP = 6234;
-const PAGE_HEIGHT = CTA_TOP;
+const PAGE_HEIGHT = 6150;
 
 const residentialValueLayout = [
   { left: 138, top: 1414.579, iconSrc: "/figma/residential/grupo-806.svg", iconWidth: 125, iconHeight: 102, iconTopOffset: 5.4, textGap: 13 },
@@ -304,7 +303,7 @@ export function ResidentialPage() {
         </div>
       </div>
     </div>
-      <PageClosing />
+      <PageClosing ctaClassName={galleryPageCtaClassName} />
     </>
   );
 }

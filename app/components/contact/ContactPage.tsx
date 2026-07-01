@@ -204,11 +204,7 @@ export function ContactPage() {
           </form>
 
           {submitted && (
-            <ContactSuccessModal
-              height={FOOTER_TOP}
-              onClose={() => setSubmitted(false)}
-              variant="desktop"
-            />
+            <ContactSuccessModal onClose={() => setSubmitted(false)} variant="desktop" />
           )}
         </div>
       </div>

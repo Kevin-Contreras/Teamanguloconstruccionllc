@@ -8,7 +8,7 @@ import { ContactSuccessModal } from "../contact/ContactSuccessModal";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
-import { PageHero, SiteHeader } from "./SiteLayout";
+import { PageHero } from "./SiteLayout";
 
 export function ContactPageMobile() {
   const { t } = useLanguage();
@@ -22,7 +22,6 @@ export function ContactPageMobile() {
       </div>
 
       <div className="relative z-10">
-        <SiteHeader variant="overlay" activePath="/contact" />
         <section className="px-6 pb-10 pt-32" data-animate-hero>
           <h1 className="m-0 text-[40px] font-bold leading-tight text-white sm:text-[56px]">
             {t.contact.heroLine1}
@@ -154,7 +153,7 @@ export function AboutPageMobile() {
         </div>
       </section>
 
-      <section className="px-6 py-14 text-center">
+      <section className="px-6 pt-14 pb-8 text-center">
         <h2 className="m-0 text-[40px] font-bold text-[#ff832a] sm:text-[56px]">{t.about.storyTitle}</h2>
         <p className="m-0 mt-4 text-[28px] sm:text-[36px]">
           {t.about.storyHeading}{" "}
@@ -200,6 +199,7 @@ export function ServicesPageMobile() {
         {t.servicesPage.itemsMobile.map((service, index) => (
           <article
             key={service.number}
+            id={serviceSlugs[index]}
             data-service-section={serviceSlugs[index]}
             className="mb-14 scroll-mt-28 border-b border-[#eee] pb-14 last:mb-0 last:border-0"
           >
@@ -250,7 +250,7 @@ export function ResidentialPageMobile() {
           {t.residentialPage.introBodyMobile}
         </p>
       </section>
-      <section className="bg-[#fafafa] px-6 py-14">
+      <section className="bg-[#fafafa] px-6 pt-14 pb-8">
         <h2 className="text-center text-[32px] font-bold text-[#ff832a]">
           {t.residentialPage.portfolioTitle}
         </h2>
@@ -283,7 +283,7 @@ export function CommercialPageMobile() {
           <span className="font-bold text-[#ff832a]">{t.commercialPage.introAccentMobile}</span>.
         </h2>
       </section>
-      <section className="bg-[#fafafa] px-6 py-14">
+      <section className="bg-[#fafafa] px-6 pt-14 pb-8">
         <h2 className="text-center text-[32px] font-bold text-[#ff832a]">
           {t.commercialPage.portfolioTitle}
         </h2>

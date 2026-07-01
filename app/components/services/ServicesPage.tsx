@@ -9,6 +9,7 @@ import { ServicesPageMobile } from "../layout/MobilePages";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
+import { scrollToServiceSectionFromHash } from "../../utils/serviceSectionScroll";
 
 const PAGE_WIDTH = 1920;
 const CTA_TOP = 7346;
@@ -37,11 +38,11 @@ function ServiceTextBlock({
 
   return (
     <div
-      className="absolute z-10 flex flex-col"
+      className="group absolute z-10 flex flex-col"
       style={{ left, top, width: locale === "es" ? width + 60 : width }}
     >
       <span
-        className="leading-none text-[#ff832a]"
+        className="inline-block origin-left leading-none text-[#ff832a] transition-transform duration-300 ease-out group-hover:scale-110"
         style={{ fontSize: figmaFont(55, locale) }}
       >
         {number}
@@ -82,23 +83,13 @@ function ServiceTextBlock({
 function ServiceAnchor({ slug, top }: { slug: string; top: number }) {
   return (
     <span
+      id={slug}
       data-service-section={slug}
       className="pointer-events-none absolute block scroll-mt-28"
       style={{ left: 0, top, width: 1, height: 1 }}
       aria-hidden
     />
   );
-}
-
-function scrollToServiceSection() {
-  const slug = window.location.hash.replace(/^#/, "");
-  if (!slug) return;
-
-  requestAnimationFrame(() => {
-    const anchors = document.querySelectorAll<HTMLElement>(`[data-service-section="${slug}"]`);
-    const target = Array.from(anchors).find((el) => el.offsetParent !== null);
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
 }
 
 /** Figma node 1:503 — Services page */
@@ -120,10 +111,12 @@ export function ServicesPage() {
   }, []);
 
   useEffect(() => {
-    scrollToServiceSection();
-    window.addEventListener("hashchange", scrollToServiceSection);
-    return () => window.removeEventListener("hashchange", scrollToServiceSection);
-  }, []);
+    const onHashChange = () => scrollToServiceSectionFromHash(containerRef);
+
+    scrollToServiceSectionFromHash(containerRef);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [scale]);
 
   return (
     <>
@@ -133,6 +126,7 @@ export function ServicesPage() {
       <div className="hidden w-full overflow-hidden bg-white lg:block">
       <div
         ref={containerRef}
+        data-services-scaled-canvas
         className="relative w-full overflow-hidden"
         style={{ height: PAGE_HEIGHT * scale }}
       >

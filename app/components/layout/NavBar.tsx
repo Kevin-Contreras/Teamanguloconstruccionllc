@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { LanguageToggle } from "./LanguageToggle";
 import { useLanguage, useNavLinks } from "../../providers/LanguageProvider";
 
@@ -31,11 +33,18 @@ export function NavBar({
 }) {
   const { t } = useLanguage();
   const navLinks = useNavLinks();
+  const pathname = usePathname();
+  const resolvedActivePath = activePath ?? pathname;
   const [open, setOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const isOverlay = variant === "overlay";
+
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -80,7 +89,7 @@ export function NavBar({
     observer.observe(header);
 
     return () => observer.disconnect();
-  }, []);
+  }, [mounted]);
 
   const closeMenu = () => setOpen(false);
 
@@ -90,7 +99,7 @@ export function NavBar({
       ? navOverlayBg
       : navScrolledBg;
 
-  return (
+  const navUi = (
     <>
       <div
         className={`fixed inset-0 z-40 lg:hidden motion-reduce:transition-none ${
@@ -128,7 +137,7 @@ export function NavBar({
                     href={link.href}
                     className={`flex items-center justify-between py-5 text-[26px] font-medium transition-colors hover:text-[#ff832a] sm:text-[30px] ${
                       link.font === "montserrat" ? "font-['Montserrat']" : ""
-                    } ${activePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
+                    } ${resolvedActivePath === link.href ? "font-bold text-[#ff832a]" : ""}`}
                     onClick={closeMenu}
                     tabIndex={open ? 0 : -1}
                   >
@@ -168,7 +177,7 @@ export function NavBar({
       <header
         ref={headerRef}
         data-no-animate
-        className={`fixed top-0 left-0 right-0 z-50 w-full text-white transition-[background-color,backdrop-filter,border-color] duration-300 motion-reduce:transition-none ${headerBg}`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full text-white lg:hidden transition-[background-color,backdrop-filter,border-color] duration-300 motion-reduce:transition-none ${headerBg}`}
       >
         <div className="w-full px-4 py-4 lg:px-[138px] lg:py-6">
           <div
@@ -198,7 +207,7 @@ export function NavBar({
                   href={link.href}
                   className={`whitespace-nowrap text-[16px] hover:opacity-80 ${
                     link.font === "montserrat" ? "font-['Montserrat']" : ""
-                  } ${activePath === link.href ? "font-bold" : "font-normal"}`}
+                  } ${resolvedActivePath === link.href ? "font-bold" : "font-normal"}`}
                 >
                   {link.label}
                 </Link>
@@ -243,4 +252,8 @@ export function NavBar({
       </header>
     </>
   );
+
+  if (!mounted) return null;
+
+  return createPortal(navUi, document.body);
 }
