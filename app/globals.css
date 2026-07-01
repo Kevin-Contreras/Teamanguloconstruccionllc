@@ -95,3 +95,12 @@ details summary::-webkit-details-marker {
 details[open] .faq-chevron-wrap {
   transform: rotate(180deg);
 }
+
+html[lang="es"] .locale-pill-btn {
+  font-size: 14px;
+  padding-inline: 1.25rem;
+}
+
+html[lang="es"] .locale-nav-link {
+  font-size: 14px;
+}

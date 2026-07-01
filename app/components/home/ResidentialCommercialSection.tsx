@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1975;
@@ -27,6 +28,8 @@ function PillArrow() {
 
 /** Figma node 1:274 — Residential + Commercial */
 export function ResidentialCommercialSection() {
+  const { t } = useLanguage();
+  const rc = t.home.residentialCommercial;
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -47,29 +50,26 @@ export function ResidentialCommercialSection() {
         <div className="relative aspect-[4/3] w-full">
           <Image
             src="/figma/imgContemporaryHouseWithShingleDetailAndBlueSk20260326104821Utc.png"
-            alt="Residential siding project"
+            alt={rc.residentialImageAlt}
             fill
             className="object-cover"
             sizes="100vw"
           />
         </div>
         <div className="px-6 py-10">
-          <p className="m-0 text-[18px] text-black">
-            For <span className="font-bold">homeowners</span>
-          </p>
+          <p className="m-0 text-[18px] text-black">{rc.residentialLabel}</p>
           <Image src="/figma/imgLinea8.svg" alt="" width={64} height={5} className="mt-3" aria-hidden />
           <h2 className="m-0 mt-3 text-[40px] font-bold leading-none text-[#ff832a] sm:text-[52px]">
-            Residential
+            {rc.residentialTitle}
           </h2>
           <p className="mt-4 text-[16px] leading-relaxed text-black sm:text-[18px]">
-            Every residential project we take on is treated with the same standard — thorough
-            preparation, precise installation, and a finished result built to last.
+            {rc.residentialBodyMobile}
           </p>
           <Link
             href="/residential"
             className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
           >
-            SEE RESIDENTIAL PROJECTS
+            {t.common.seeResidentialProjects}
             <PillArrow />
           </Link>
         </div>
@@ -79,29 +79,26 @@ export function ResidentialCommercialSection() {
         <div className="relative aspect-[4/3] w-full">
           <Image
             src="/figma/imgIndustrialFactoryFacadeWithSteelMashes20260325224915Utc.png"
-            alt="Commercial building project"
+            alt={rc.commercialImageAlt}
             fill
             className="object-cover"
             sizes="100vw"
           />
         </div>
         <div className="px-6 py-10">
-          <p className="m-0 text-[18px] text-black">
-            For business <span className="font-bold">owners</span>
-          </p>
+          <p className="m-0 text-[18px] text-black">{rc.commercialLabel}</p>
           <Image src="/figma/imgLinea8.svg" alt="" width={64} height={5} className="mt-3" aria-hidden />
           <h2 className="m-0 mt-3 text-[40px] font-bold leading-none text-[#ff832a] sm:text-[52px]">
-            Commercial
+            {rc.commercialTitle}
           </h2>
           <p className="mt-4 text-[16px] leading-relaxed text-black sm:text-[18px]">
-            Commercial projects demand precision, efficiency, and minimal disruption. We deliver
-            results that meet the highest professional standards.
+            {rc.commercialBodyMobile}
           </p>
           <Link
             href="/commercial"
             className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
           >
-            SEE COMMERCIAL PROJECTS
+            {t.common.seeCommercialProjects}
             <PillArrow />
           </Link>
         </div>
@@ -125,7 +122,7 @@ export function ResidentialCommercialSection() {
             {/* Residential image — node 1:300 @ 901,0 1074×800 */}
             <FigmaImage
               src="/figma/imgContemporaryHouseWithShingleDetailAndBlueSk20260326104821Utc.png"
-              alt="Residential siding project"
+              alt={rc.residentialImageAlt}
               left={901}
               top={0}
               width={1074}
@@ -137,7 +134,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 text-[20px] leading-normal text-black"
               style={{ left: 205, top: 230 }}
             >
-              For <span className="font-bold">homeowners</span>
+              {rc.residentialLabel}
             </p>
 
             {/* Orange line — node 1:276 @ 208,275 */}
@@ -156,7 +153,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 font-bold leading-none text-[#ff832a]"
               style={{ left: 205, top: 282, fontSize: 72 }}
             >
-              Residential
+              {rc.residentialTitle}
             </h2>
 
             {/* Body — nodes 1:279–1:283 */}
@@ -164,13 +161,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 text-[20px] leading-[32px] text-black"
               style={{ left: 205, top: 391, width: 571 }}
             >
-              Every residential project we take on is treated with the same standard{" "}
-              <span className="font-bold">
-                thorough preparation, precise installation, and a finished result built
-                to last. From single-family homes to
-              </span>{" "}
-              multi-unit properties, we deliver exterior solutions that protect and add
-              value to your home for decades.
+              {rc.residentialBodyDesktop}
             </p>
 
             {/* Button — node 1:285 @ 205,583 317×60 */}
@@ -179,14 +170,14 @@ export function ResidentialCommercialSection() {
               className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
               style={{ left: 205, top: 583, width: 317, height: 60 }}
             >
-              SEE RESIDENTIAL PROJECTS
+              {t.common.seeResidentialProjects}
               <PillArrow />
             </Link>
 
             {/* Commercial image — node 1:328 @ 0,981 1077×800 */}
             <FigmaImage
               src="/figma/imgIndustrialFactoryFacadeWithSteelMashes20260325224915Utc.png"
-              alt="Commercial building project"
+              alt={rc.commercialImageAlt}
               left={0}
               top={981}
               width={1077}
@@ -198,7 +189,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 text-[20px] leading-normal text-black"
               style={{ left: 1176, top: 1219 }}
             >
-              For business <span className="font-bold">owners</span>
+              {rc.commercialLabel}
             </p>
 
             {/* Orange line — node 1:303 @ 1179,1264 */}
@@ -218,7 +209,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 font-bold leading-none text-[#ff832a]"
               style={{ left: 1176, top: 1271, fontSize: 72 }}
             >
-              Commercial
+              {rc.commercialTitle}
             </h2>
 
             {/* Body — nodes 1:306–1:310 */}
@@ -226,14 +217,7 @@ export function ResidentialCommercialSection() {
               className="absolute m-0 text-[20px] leading-[32px] text-black"
               style={{ left: 1176, top: 1382, width: 635 }}
             >
-              Commercial projects demand{" "}
-              <span className="font-bold">
-                precision, efficiency, and minimal disruption. We understand the stakes
-                — a well-executed exterior
-              </span>{" "}
-              reflects directly on your business. We work within your timeline, maintain
-              a clean and organized job site, and deliver results that meet the highest
-              professional standards.
+              {rc.commercialBodyDesktop}
             </p>
 
             {/* Button — node 1:312 @ 1176,1572 330×60 */}
@@ -242,7 +226,7 @@ export function ResidentialCommercialSection() {
               className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
               style={{ left: 1176, top: 1572, width: 330, height: 60 }}
             >
-              SEE COMMERCIAL PROJECTS
+              {t.common.seeCommercialProjects}
               <PillArrow />
             </Link>
           </div>

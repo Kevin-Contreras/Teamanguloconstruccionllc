@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NavBar } from "./NavBar";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
+import { useLanguage, useServiceNames } from "../../providers/LanguageProvider";
 
 function CtaArrow() {
   return (
@@ -27,26 +28,28 @@ export function SiteHeader({
 }
 
 export function SiteCta({ id }: { id?: string }) {
+  const { t } = useLanguage();
+
   return (
     <section id={id} className="bg-white px-6 py-14 lg:px-[138px] lg:py-20">
       <div className="mx-auto flex max-w-[1644px] flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <h2 className="m-0 text-[36px] font-bold  text-black sm:text-[48px] lg:text-[38px]">
+          <h2 className="m-0 text-[36px] font-bold text-black sm:text-[48px] lg:text-[38px]">
             <span className="block">
-              Ready to <span className="text-[#ff832a]">transform</span>
+              {t.cta.line1} <span className="text-[#ff832a]">{t.cta.accent}</span>
             </span>
-            <span className="mt-[13px] block">your exterior?</span>
+            <span className="mt-[13px] block">{t.cta.line2}</span>
           </h2>
           <p className="mt-3 max-w-[470px] text-[18px] leading-normal text-[#1c1c1c] lg:text-[15px]">
-            Contact us today and let&apos;s talk about{" "}
-            <span className="font-bold">your project</span>
+            {t.cta.subtext}{" "}
+            <span className="font-bold">{t.cta.subtextBold}</span>
           </p>
         </div>
         <a
           href="mailto:info@teamangulo.com"
-          className="inline-flex h-[60px] shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
+          className="locale-pill-btn inline-flex h-[60px] shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
         >
-          GET IN TOUCH
+          {t.common.getInTouch}
           <CtaArrow />
         </a>
       </div>
@@ -55,13 +58,8 @@ export function SiteCta({ id }: { id?: string }) {
 }
 
 export function SiteFooter() {
-  const services = [
-    "Demolition & Removal",
-    "Structural Repair",
-    "Hardie & Vinyl Siding",
-    "PVC Trim",
-    "Metal Roofing",
-  ];
+  const { t } = useLanguage();
+  const services = useServiceNames();
 
   return (
     <footer className="bg-black px-6 py-12 text-white lg:px-[138px] lg:py-16">
@@ -75,13 +73,12 @@ export function SiteFooter() {
             className="mb-6 h-auto w-[220px] lg:w-[280px]"
           />
           <p className="m-0 max-w-[316px] text-[16px] leading-relaxed lg:text-[18px]">
-            Professional exterior solutions for residential and commercial properties in New
-            Jersey.
+            {t.footer.tagline}
           </p>
         </div>
 
         <div>
-          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">SERVICES</p>
+          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">{t.footer.services}</p>
           <ul className="space-y-2">
             {services.map((title) => (
               <li key={title}>
@@ -94,7 +91,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">CONTACT</p>
+          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">{t.footer.contact}</p>
           <ul className="space-y-3 text-[16px] lg:text-[20px]">
             <li>
               <a href="tel:+10000000000" className="hover:opacity-80">
@@ -106,15 +103,15 @@ export function SiteFooter() {
                 info@teamangulo.com
               </a>
             </li>
-            <li>New Jersey, USA</li>
+            <li>{t.footer.location}</li>
           </ul>
         </div>
 
         <div>
-          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">FOLLOW US</p>
+          <p className="mb-4 text-[18px] font-bold lg:text-[20px]">{t.footer.followUs}</p>
           <Image
             src="/figma/imgGrupo786.svg"
-            alt="Social media"
+            alt={t.footer.socialAlt}
             width={189}
             height={52}
             className="h-auto w-[160px] lg:w-[189px]"
@@ -123,7 +120,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto mt-10 max-w-[1644px] border-t border-white/30 pt-6">
-        <p className="m-0 text-[16px] lg:text-[20px]">© 2025 Team Angulo. All rights reserved.</p>
+        <p className="m-0 text-[16px] lg:text-[20px]">{t.footer.copyright}</p>
       </div>
     </footer>
   );

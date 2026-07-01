@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { FigmaImage } from "../layout/FigmaImage";
+import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
 import { PageClosing } from "../layout/PageClosing";
 import { ContactPageMobile } from "../layout/MobilePages";
 import { ContactSuccessModal } from "./ContactSuccessModal";
+import { useLanguage } from "../../providers/LanguageProvider";
 
 const PAGE_WIDTH = 1920;
 const FOOTER_TOP = 1115;
@@ -30,6 +31,7 @@ function CalendarIcon() {
 
 /** Figma node 1:1507 — Contact page */
 export function ContactPage() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -85,87 +87,14 @@ export function ContactPage() {
           </div>
 
           {/* Nav */}
-          <Image
-            src="/figma/imgTopNavigation.svg"
-            alt=""
-            width={1614}
-            height={79}
-            className="absolute z-20"
-            style={{ left: 141, top: 66, width: 1614, height: 79 }}
-          />
-          <Link href="/" className="absolute z-20" style={{ left: 117, top: 43 }}>
-            <Image
-              src="/figma/imgEditableLogo10.png"
-              alt="Team Angulo"
-              width={306}
-              height={112}
-              className="block"
-              style={{ width: 306, height: 112 }}
-              priority
-            />
-          </Link>
-          <Link
-            href="/services"
-            className="absolute z-20 font-['Montserrat'] text-[16px] font-normal text-white hover:opacity-80"
-            style={{ left: 1015, top: 84 }}
-          >
-            Services
-          </Link>
-          <Link
-            href="/residential"
-            className="absolute z-20 text-[16px] font-normal text-white hover:opacity-80"
-            style={{ left: 1141, top: 85 }}
-          >
-            Residential
-          </Link>
-          <Link
-            href="/commercial"
-            className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
-            style={{ left: 1275, top: 82 }}
-          >
-            Commercial
-          </Link>
-          <Link
-            href="/about"
-            className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
-            style={{ left: 1426, top: 82 }}
-          >
-            About Us
-          </Link>
-          <Link
-            href="/contact"
-            className="absolute z-20 flex items-center justify-center hover:opacity-90"
-            style={{ left: 1539, top: 69, width: 154, height: 48 }}
-          >
-            <Image
-              src="/figma/imgRectangulo5.svg"
-              alt=""
-              width={154}
-              height={48}
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            />
-            <span className="relative z-10 text-[17px] font-bold text-white">Contact</span>
-          </Link>
-          <button
-            type="button"
-            className="absolute z-20 flex cursor-pointer items-center justify-center hover:opacity-90"
-            style={{ left: 1731, top: 69, width: 50, height: 48 }}
-            aria-label="Switch to Spanish"
-          >
-            <Image
-              src="/figma/imgRectangulo18.svg"
-              alt=""
-              width={50}
-              height={48}
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            />
-            <span className="relative z-10 text-[17px] font-bold text-white">ES</span>
-          </button>
+          <FigmaDesktopNav activePath="/contact" />
 
           {/* Hero copy — nodes 1:1578–1:1577 */}
           <div className="absolute z-10" style={{ left: 138, top: 402, width: 560 }}>
-            <h1 className="m-0 text-[90px] font-bold leading-[110px] text-white">Ready to</h1>
-            <h1 className="m-0 text-[90px] font-bold leading-[110px] text-[#ff832a]">Get Started?</h1>
+            <h1 className="m-0 text-[90px] font-bold leading-[110px] text-white">{t.contact.heroLine1}</h1>
+            <h1 className="m-0 text-[90px] font-bold leading-[110px] text-[#ff832a]">
+              {t.contact.heroAccent}
+            </h1>
           </div>
           <div className="absolute z-10" style={{ left: 138, top: 658 }}>
             <Image
@@ -181,8 +110,7 @@ export function ContactPage() {
             className="absolute z-10 m-0 text-[30px] leading-normal text-white"
             style={{ left: 138, top: 715, width: 644 }}
           >
-            Fill out the form and let us guide you through your next exterior project. We&apos;re
-            here to make the process simple and stress-free.
+            {t.contact.heroSubtext}
           </p>
 
           {/* Contact form — nodes 1:1583–1:1618 */}
@@ -194,13 +122,13 @@ export function ContactPage() {
             <div className="flex gap-[36px]">
               <div style={{ width: 353 }}>
                 <label className="mb-2 block text-[20px] text-white" htmlFor="contact-name">
-                  Name:
+                  {t.contact.form.name}
                 </label>
                 <input id="contact-name" name="name" type="text" className={fieldClass} style={{ height: 57 }} />
               </div>
               <div style={{ width: 353 }}>
                 <label className="mb-2 block text-[20px] text-white" htmlFor="contact-phone">
-                  Phone:
+                  {t.contact.form.phone}
                 </label>
                 <input id="contact-phone" name="phone" type="tel" className={fieldClass} style={{ height: 57 }} />
               </div>
@@ -208,7 +136,7 @@ export function ContactPage() {
 
             <div className="mt-[31px]">
               <label className="mb-2 block text-[20px] text-white" htmlFor="contact-email">
-                Email address
+                {t.contact.form.email}
               </label>
               <input id="contact-email" name="email" type="email" className={fieldClass} style={{ height: 57 }} />
             </div>
@@ -216,7 +144,7 @@ export function ContactPage() {
             <div className="mt-[31px] flex gap-[36px]">
               <div style={{ width: 353 }}>
                 <label className="mb-2 block text-[20px] text-white" htmlFor="contact-entry-date">
-                  Entry date
+                  {t.contact.form.entryDate}
                 </label>
                 <div className="relative">
                   <CalendarIcon />
@@ -231,7 +159,7 @@ export function ContactPage() {
               </div>
               <div style={{ width: 353 }}>
                 <label className="mb-2 block text-[20px] text-white" htmlFor="contact-departure-date">
-                  Departure date
+                  {t.contact.form.departureDate}
                 </label>
                 <div className="relative">
                   <CalendarIcon />
@@ -248,7 +176,7 @@ export function ContactPage() {
 
             <div className="mt-[31px]">
               <label className="mb-2 block text-[20px] text-white" htmlFor="contact-message">
-                Message
+                {t.contact.form.message}
               </label>
               <textarea
                 id="contact-message"
@@ -271,7 +199,7 @@ export function ContactPage() {
                 height={56}
                 className="pointer-events-none absolute inset-0 h-full w-full"
               />
-              <span className="relative z-10 text-[22px] text-white">Send</span>
+              <span className="relative z-10 text-[22px] text-white">{t.common.send}</span>
             </button>
           </form>
 

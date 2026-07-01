@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 
 /** Figma node 1:1666 — Thank you modal after form submit */
 export function ContactSuccessModal({
@@ -15,6 +16,8 @@ export function ContactSuccessModal({
   onClose: () => void;
   variant?: "desktop" | "mobile";
 }) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -41,7 +44,7 @@ export function ContactSuccessModal({
             type="button"
             onClick={onClose}
             className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-[28px] text-[#1c1c1c] hover:bg-black/5"
-            aria-label="Close"
+            aria-label={t.common.close}
           >
             ×
           </button>
@@ -54,11 +57,12 @@ export function ContactSuccessModal({
             aria-hidden
           />
           <h2 id="contact-success-title" className="mt-6 text-[36px] font-bold leading-tight text-black sm:text-[48px]">
-            Thank You for <span className="text-[#ff832a]">Contacting Us!</span>
+            {t.contact.successTitle}{" "}
+            <span className="text-[#ff832a]">{t.contact.successAccent}</span>
           </h2>
           <p className="mt-6 text-[18px] leading-relaxed text-black sm:text-[22px]">
-            We received your message and will be in touch shortly{" "}
-            <span className="font-bold">to discuss your project.</span>
+            {t.contact.successBody}{" "}
+            <span className="font-bold">{t.contact.successBodyBold}</span>
           </p>
         </div>
       </div>
@@ -83,7 +87,7 @@ export function ContactSuccessModal({
           type="button"
           onClick={onClose}
           className="absolute right-6 top-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-[28px] leading-none text-[#1c1c1c] hover:bg-black/5"
-          aria-label="Close"
+          aria-label={t.common.close}
         >
           ×
         </button>
@@ -99,13 +103,13 @@ export function ContactSuccessModal({
           id="contact-success-title"
           className="mt-8 m-0 text-[80px] font-bold leading-[90px] text-black"
         >
-          Thank You for
+          {t.contact.successTitle}
           <br />
-          <span className="text-[#ff832a]">Contacting Us!</span>
+          <span className="text-[#ff832a]">{t.contact.successAccent}</span>
         </h2>
         <p className="mt-10 m-0 max-w-[665px] text-[30px] leading-normal text-black">
-          We received your message and will be in touch shortly{" "}
-          <span className="font-bold">to discuss your project.</span>
+          {t.contact.successBody}{" "}
+          <span className="font-bold">{t.contact.successBodyBold}</span>
         </p>
       </div>
     </div>

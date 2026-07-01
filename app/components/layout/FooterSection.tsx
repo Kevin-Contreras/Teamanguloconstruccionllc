@@ -3,18 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage, useServiceNames } from "../../providers/LanguageProvider";
 import { SiteFooter } from "./SiteLayout";
 
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 463;
 
-const services = [
-  { title: "Demolition & Removal", top: 112 },
-  { title: "Structural Repair", top: 152 },
-  { title: "Hardie & Vinyl Siding", top: 192 },
-  { title: "PVC Trim", top: 232 },
-  { title: "Metal Roofing", top: 272 },
-];
+const serviceTops = [112, 152, 192, 232, 272];
 
 const contactItems = [
   {
@@ -36,7 +31,6 @@ const contactItems = [
     textTop: 165,
   },
   {
-    label: "New Jersey, USA",
     href: undefined,
     icon: "/figma/imgGrupo779.svg",
     iconWidth: 15,
@@ -48,6 +42,8 @@ const contactItems = [
 
 /** Figma node 1:443 — Footer */
 export function FooterSection() {
+  const { t } = useLanguage();
+  const services = useServiceNames();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -94,27 +90,27 @@ export function FooterSection() {
               className="absolute m-0 text-[18px] leading-normal text-white"
               style={{ left: 160, top: 205, width: 316 }}
             >
-              Professional exterior solutions for
+              {t.footer.taglineLine1}
               <br />
-              residential and commercial
+              {t.footer.taglineLine2}
               <br />
-              properties in New Jersey.
+              {t.footer.taglineLine3}
             </p>
 
             <p
               className="absolute m-0 text-[20px] font-bold leading-normal text-white"
               style={{ left: 643, top: 73 }}
             >
-              SERVICES
+              {t.footer.services}
             </p>
-            {services.map((service) => (
+            {services.map((title, index) => (
               <Link
-                key={service.title}
+                key={title}
                 href="/services"
                 className="absolute m-0 text-[20px] leading-normal text-white hover:opacity-80"
-                style={{ left: 643, top: service.top }}
+                style={{ left: 643, top: serviceTops[index] }}
               >
-                {service.title}
+                {title}
               </Link>
             ))}
 
@@ -122,10 +118,12 @@ export function FooterSection() {
               className="absolute m-0 text-[20px] font-bold leading-normal text-white"
               style={{ left: 1047, top: 86 }}
             >
-              CONTACT
+              {t.footer.contact}
             </p>
-            {contactItems.map((item) => (
-              <div key={item.label}>
+            {contactItems.map((item) => {
+              const label = item.href ? item.label : t.footer.location;
+              return (
+              <div key={item.href ?? "location"}>
                 <Image
                   src={item.icon}
                   alt=""
@@ -146,28 +144,29 @@ export function FooterSection() {
                     className="absolute m-0 text-[20px] leading-normal text-white hover:opacity-80"
                     style={{ left: 1076, top: item.textTop }}
                   >
-                    {item.label}
+                    {label}
                   </a>
                 ) : (
                   <p
                     className="absolute m-0 text-[20px] leading-normal text-white"
                     style={{ left: 1076, top: item.textTop }}
                   >
-                    {item.label}
+                    {label}
                   </p>
                 )}
               </div>
-            ))}
+            );
+            })}
 
             <p
               className="absolute m-0 text-[20px] font-bold leading-normal text-white"
               style={{ left: 1468, top: 86 }}
             >
-              FOLLOW US
+              {t.footer.followUs}
             </p>
             <Image
               src="/figma/imgGrupo786.svg"
-              alt="Social media"
+              alt={t.footer.socialAlt}
               width={189}
               height={52}
               className="absolute"
@@ -184,7 +183,7 @@ export function FooterSection() {
               className="absolute m-0 text-[20px] leading-normal text-white"
               style={{ left: 138, top: 400 }}
             >
-              © 2025 Team Angulo. All rights reserved.
+              {t.footer.copyright}
             </p>
           </div>
         </div>

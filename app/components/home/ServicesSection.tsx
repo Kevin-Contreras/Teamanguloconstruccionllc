@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { FigmaImage } from "../layout/FigmaImage";
 import {
   SERVICE_SECTION_SLUGS,
@@ -12,62 +13,25 @@ import {
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 1253;
 
-const services = [
-  {
-    title: "Demolition & Removal",
-    slug: SERVICE_SECTION_SLUGS.demolitionRemoval,
-    titleTop: 127.041,
-    desc: "Safe removal of existing exterior materials",
-    descTop: 210.041,
-    arrowTop: 145,
-    lineTop: 288,
-    arrow: "/figma/imgFrame2147239083.svg",
-  },
-  {
-    title: "Structural Repair",
-    slug: SERVICE_SECTION_SLUGS.structuralRepair,
-    titleTop: 336.96,
-    desc: "Damaged framing fixed before anything goes up",
-    descTop: 418.96,
-    arrowTop: 355,
-    lineTop: 501.747,
-    arrow: "/figma/imgFrame2147239084.svg",
-  },
-  {
-    title: "Hardie & Vinyl Siding",
-    slug: SERVICE_SECTION_SLUGS.hardieVinylSiding,
-    titleTop: 550.707,
-    desc: "Specialists in fiber cement & vinyl installation",
-    descTop: 632.707,
-    arrowTop: 551.707,
-    lineTop: 710.666,
-    arrow: "/figma/imgFrame2147239084.svg",
-  },
-  {
-    title: "PVC Trim",
-    slug: SERVICE_SECTION_SLUGS.pvcTrim,
-    titleTop: 759.626,
-    desc: "Clean, polished finish on every detail",
-    descTop: 843.138,
-    arrowTop: 760.626,
-    lineTop: 921,
-    arrow: "/figma/imgFrame2147239084.svg",
-  },
-  {
-    title: "Metal Roofing",
-    slug: SERVICE_SECTION_SLUGS.metalRoofing,
-    titleTop: 984.374,
-    desc: "Standing seam installation for any property",
-    descTop: 1068.894,
-    arrowTop: 971,
-    arrow: "/figma/imgFrame2147239085.svg",
-  },
+const serviceLayout = [
+  { slug: SERVICE_SECTION_SLUGS.demolitionRemoval, titleTop: 127.041, descTop: 210.041, arrowTop: 145, lineTop: 288, arrow: "/figma/imgFrame2147239083.svg" },
+  { slug: SERVICE_SECTION_SLUGS.structuralRepair, titleTop: 336.96, descTop: 418.96, arrowTop: 355, lineTop: 501.747, arrow: "/figma/imgFrame2147239084.svg" },
+  { slug: SERVICE_SECTION_SLUGS.hardieVinylSiding, titleTop: 550.707, descTop: 632.707, arrowTop: 551.707, lineTop: 710.666, arrow: "/figma/imgFrame2147239084.svg" },
+  { slug: SERVICE_SECTION_SLUGS.pvcTrim, titleTop: 759.626, descTop: 843.138, arrowTop: 760.626, lineTop: 921, arrow: "/figma/imgFrame2147239084.svg" },
+  { slug: SERVICE_SECTION_SLUGS.metalRoofing, titleTop: 984.374, descTop: 1068.894, arrowTop: 971, arrow: "/figma/imgFrame2147239085.svg" },
 ];
 
 /** Figma nodes 1:213 + 1:363 — Services */
 export function ServicesSection() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  
+  const services = t.home.services.items.map((item, i) => ({
+    ...serviceLayout[i],
+    title: item.title,
+    desc: item.description,
+  }));
 
   useEffect(() => {
     const updateScale = () => {
@@ -84,19 +48,18 @@ export function ServicesSection() {
     <section id="services" className="relative overflow-hidden bg-black text-white">
       <div className="px-6 py-14 lg:hidden">
         <p className="m-0 text-[36px] font-bold leading-tight sm:text-[48px]">
-          Discover
+          {t.home.services.discover}
           <br />
-          Our <span className="text-[#ff832a]">Exterior</span>
+          {t.home.services.our} <span className="text-[#ff832a]">{t.home.services.exterior}</span>
           <br />
-          <span className="text-[#ff832a]">Solutions</span>
+          <span className="text-[#ff832a]">{t.home.services.solutions}</span>
         </p>
         <p className="mt-6 max-w-[520px] text-[16px] leading-relaxed sm:text-[18px]">
-          From residential homes to commercial properties, we deliver premium exterior
-          remodeling tailored to every need.
+          {t.home.services.description}
         </p>
         <ul className="mt-10 space-y-6 border-t border-white/20 pt-8">
           {services.map((service) => (
-            <li key={service.title} className="border-b border-white/20 pb-6 last:border-0">
+            <li key={service.slug} className="border-b border-white/20 pb-6 last:border-0">
               <Link href={serviceSectionHref(service.slug)} className="group block">
                 <p className="m-0 text-[22px] font-medium transition-colors group-hover:text-[#ff832a] sm:text-[28px]">
                   {service.title}
@@ -112,7 +75,7 @@ export function ServicesSection() {
           href="/services"
           className="mt-8 inline-flex h-[52px] items-center justify-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
         >
-          VIEW ALL SERVICES
+          {t.common.viewAllServices}
         </Link>
       </div>
 
@@ -146,19 +109,19 @@ export function ServicesSection() {
               className="absolute m-0 font-bold leading-none text-white"
               style={{ left: 174, top: 108.684, fontSize: 80 }}
             >
-              Discover
+              {t.home.services.discover}
             </p>
             <p
               className="absolute m-0 font-bold leading-none text-white"
               style={{ left: 174, top: 198.684, fontSize: 80 }}
             >
-              Our <span className="text-[#ff832a]">Exterior</span>
+              {t.home.services.our} <span className="text-[#ff832a]">{t.home.services.exterior}</span>
             </p>
             <p
               className="absolute m-0 font-bold leading-none text-[#ff832a]"
               style={{ left: 174, top: 288.684, fontSize: 80 }}
             >
-              Solutions
+              {t.home.services.solutions}
             </p>
 
             {/* Description — node 1:224 @ 174,447.667 */}
@@ -166,8 +129,7 @@ export function ServicesSection() {
               className="absolute m-0 font-normal leading-normal text-white"
               style={{ left: 174, top: 447.667, width: 531, fontSize: 28 }}
             >
-              From residential homes to commercial properties, we deliver premium
-              exterior remodeling tailored to every need.
+              {t.home.services.description}
             </p>
 
             {/* Service list — nodes 1:225+ */}

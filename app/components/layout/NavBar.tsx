@@ -3,13 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
-export const navLinks = [
-  { href: "/services", label: "Services", font: "montserrat" as const },
-  { href: "/residential", label: "Residential" },
-  { href: "/commercial", label: "Commercial" },
-  { href: "/about", label: "About Us" },
-];
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage, useNavLinks } from "../../providers/LanguageProvider";
 
 function CtaArrow() {
   return (
@@ -34,6 +29,8 @@ export function NavBar({
   variant?: "overlay" | "solid";
   activePath?: string;
 }) {
+  const { t } = useLanguage();
+  const navLinks = useNavLinks();
   const [open, setOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -106,7 +103,7 @@ export function NavBar({
           className={`absolute inset-0 ${navOpenBg} transition-opacity duration-300 motion-reduce:transition-none ${
             open ? "opacity-100" : "opacity-0"
           }`}
-          aria-label="Close menu"
+          aria-label={t.nav.closeMenu}
           tabIndex={open ? 0 : -1}
           onClick={closeMenu}
         />
@@ -157,17 +154,13 @@ export function NavBar({
               onClick={closeMenu}
               tabIndex={open ? 0 : -1}
             >
-              Contact
+              {t.nav.contact}
               <CtaArrow />
             </Link>
-            <button
-              type="button"
+            <LanguageToggle
               className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/25 bg-white/5 text-[16px] font-bold backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10"
-              aria-label="Switch to Spanish"
               tabIndex={open ? 0 : -1}
-            >
-              ES
-            </button>
+            />
           </div>
         </div>
       </div>
@@ -216,22 +209,16 @@ export function NavBar({
                 href="/contact"
                 className="inline-flex h-12 items-center justify-center rounded-[100px] bg-[#f07b05] px-6 text-[16px] font-bold hover:opacity-90"
               >
-                Contact
+                {t.nav.contact}
               </Link>
-              <button
-                type="button"
-                className="flex h-12 w-12 items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90"
-                aria-label="Switch to Spanish"
-              >
-                ES
-              </button>
+              <LanguageToggle className="flex h-12 w-12 items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90" />
             </div>
 
             <button
               type="button"
               className="relative z-10 flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-lg lg:hidden"
               aria-expanded={open}
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
               onClick={() => setOpen((value) => !value)}
             >
               <span

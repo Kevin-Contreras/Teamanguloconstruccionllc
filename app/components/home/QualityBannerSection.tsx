@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1944;
@@ -8,6 +9,7 @@ const SECTION_HEIGHT = 737;
 
 /** Figma node 1:330 — Quality banner */
 export function QualityBannerSection() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -27,13 +29,12 @@ export function QualityBannerSection() {
       <div className="px-6 py-14 lg:hidden">
         <div className="h-1 w-[76px] rounded-full bg-white" aria-hidden />
         <h2 className="m-0 mt-6 text-[32px] font-bold leading-tight sm:text-[40px]">
-          Quality is not a differentiator,
+          {t.home.quality.line1}
           <br />
-          it&apos;s the baseline.
+          {t.home.quality.line2}
         </h2>
         <p className="mt-6 max-w-[640px] text-[18px] font-bold leading-relaxed sm:text-[22px]">
-          Every project we deliver is held to the same standard, from the smallest repair to the
-          largest installation.
+          {t.home.quality.subtext}
         </p>
       </div>
 
@@ -73,8 +74,8 @@ export function QualityBannerSection() {
             className="absolute m-0 font-bold leading-none text-white"
             style={{ left: 174, top: 214.232, fontSize: 72 }}
           >
-            <span className="block">Quality is not a differentiator,</span>
-            <span className="mt-[13px] block">it&apos;s the baseline.</span>
+            <span className="block">{t.home.quality.line1}</span>
+            <span className="mt-[13px] block">{t.home.quality.line2}</span>
           </h2>
 
           {/* Subtext — nodes 1:337–1:339 */}
@@ -82,8 +83,7 @@ export function QualityBannerSection() {
             className="absolute m-0 font-bold leading-[60px] text-white"
             style={{ left: 174, top: 402.232, width: 931, fontSize: 40 }}
           >
-            Every project we deliver is held to the same standard, from the smallest
-            repair to the largest installation
+            {t.home.quality.subtext}
           </p>
         </div>
       </div>

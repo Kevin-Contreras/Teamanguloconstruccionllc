@@ -2,58 +2,30 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 
 const GALLERY_WIDTH = 1644;
 const GALLERY_HEIGHT = 651;
 
-const galleryImages = [
-  { src: "/figma/imgImage.png", alt: "Residential exterior project", left: 0, top: 0, width: 386, height: 291 },
-  {
-    src: "/figma/imgRectangle12347.png",
-    alt: "Siding detail project",
-    left: 398,
-    top: 0,
-    width: 548,
-    height: 651,
-  },
-  {
-    src: "/figma/imgImages1.png",
-    alt: "Commercial storefront project",
-    left: 958,
-    top: 0,
-    width: 684,
-    height: 315,
-  },
-  {
-    src: "/figma/imgImages2.png",
-    alt: "Residential siding project",
-    left: 0,
-    top: 305,
-    width: 386,
-    height: 347,
-  },
-  {
-    src: "/figma/imgImages3.png",
-    alt: "Commercial building project",
-    left: 958,
-    top: 326,
-    width: 308,
-    height: 326,
-  },
-  {
-    src: "/figma/imgImages4.png",
-    alt: "Residential home project",
-    left: 1276,
-    top: 326,
-    width: 368,
-    height: 326,
-  },
+const galleryLayout = [
+  { src: "/figma/imgImage.png", left: 0, top: 0, width: 386, height: 291 },
+  { src: "/figma/imgRectangle12347.png", left: 398, top: 0, width: 548, height: 651 },
+  { src: "/figma/imgImages1.png", left: 958, top: 0, width: 684, height: 315 },
+  { src: "/figma/imgImages2.png", left: 0, top: 305, width: 386, height: 347 },
+  { src: "/figma/imgImages3.png", left: 958, top: 326, width: 308, height: 326 },
+  { src: "/figma/imgImages4.png", left: 1276, top: 326, width: 368, height: 326 },
 ];
 
 /** Figma node 1:192 — Our Work */
 export function OurWorkSection() {
+  const { t } = useLanguage();
   const galleryRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  
+  const galleryImages = galleryLayout.map((img, i) => ({
+    ...img,
+    alt: t.home.ourWork.galleryAlts[i] || "",
+  }));
 
   useEffect(() => {
     const updateScale = () => {
@@ -73,14 +45,13 @@ export function OurWorkSection() {
           <div className="mb-10 flex flex-col items-center text-center lg:mb-12">
             <div className="mb-5 h-[5px] w-16 rounded-full bg-[#f07b05] lg:mb-6" aria-hidden />
             <h2 className="m-0 text-[36px] font-bold leading-none text-[#ff832a] sm:text-[48px] lg:text-[72px]">
-              Our Work
+              {t.home.ourWork.title}
             </h2>
             <p className="m-0 mt-4 max-w-[1059px] text-[20px] leading-snug text-[#1c1c1c] sm:text-[28px] lg:mt-4 lg:text-[50px] lg:leading-tight">
-              Every project is a reflection of our{" "}
-              <span className="font-bold">standards</span>
+              {t.home.ourWork.subtitle}
             </p>
             <p className="m-0 mt-4 max-w-[746px] text-[16px] leading-relaxed text-black sm:text-[18px] lg:mt-4 lg:text-[20px]">
-              A selection of residential and commercial exteriors completed by Team Angulo.
+              {t.home.ourWork.description}
             </p>
           </div>
 

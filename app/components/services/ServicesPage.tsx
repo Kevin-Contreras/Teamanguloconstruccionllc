@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
+import { FigmaDesktopNav } from "../layout/FigmaDesktopNav";
 import { PageClosing } from "../layout/PageClosing";
 import { ServicesPageMobile } from "../layout/MobilePages";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
+import { useLanguage } from "../../providers/LanguageProvider";
+import { figmaFont } from "../../utils/figmaLocale";
 
 const PAGE_WIDTH = 1920;
 const CTA_TOP = 7346;
@@ -31,25 +33,46 @@ function ServiceTextBlock({
   body: string;
   tagline: string;
 }) {
+  const { locale } = useLanguage();
+
   return (
     <div
       className="absolute z-10 flex flex-col"
-      style={{ left, top, width }}
+      style={{ left, top, width: locale === "es" ? width + 60 : width }}
     >
-      <span className="text-[55px] leading-none text-[#ff832a]">{number}</span>
+      <span
+        className="leading-none text-[#ff832a]"
+        style={{ fontSize: figmaFont(55, locale) }}
+      >
+        {number}
+      </span>
       <div
         className="mt-[14px] rounded-full bg-[#ff832a]"
         style={{ width: 64, height: 5 }}
         aria-hidden
       />
-      <h2 className="mt-[6px] m-0 text-[50px] font-normal leading-none text-black">
+      <h2
+        className="mt-[6px] m-0 font-normal leading-tight text-black"
+        style={{ fontSize: figmaFont(50, locale) }}
+      >
         {title}
       </h2>
-      <p className="mt-[10px] m-0 text-[20px] font-bold leading-normal text-black">
+      <p
+        className="mt-[10px] m-0 font-bold leading-normal text-black"
+        style={{ fontSize: figmaFont(20, locale) }}
+      >
         {caption}
       </p>
-      <p className="mt-[20px] m-0 text-[20px] leading-[32px] text-black">{body}</p>
-      <p className="mt-[28px] m-0 text-[20px] font-bold leading-normal text-black">
+      <p
+        className="mt-[20px] m-0 text-black"
+        style={{ fontSize: figmaFont(20, locale), lineHeight: `${figmaFont(32, locale)}px` }}
+      >
+        {body}
+      </p>
+      <p
+        className="mt-[28px] m-0 font-bold leading-normal text-black"
+        style={{ fontSize: figmaFont(20, locale) }}
+      >
         {tagline}
       </p>
     </div>
@@ -80,6 +103,8 @@ function scrollToServiceSection() {
 
 /** Figma node 1:503 — Services page */
 export function ServicesPage() {
+  const { t, locale } = useLanguage();
+  const items = t.servicesPage.items;
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -126,88 +151,14 @@ export function ServicesPage() {
           </div>
 
           {/* Nav */}
-          <Image
-            src="/figma/imgTopNavigation.svg"
-            alt=""
-            width={1614}
-            height={79}
-            className="absolute z-20"
-            style={{ left: 141, top: 65, width: 1614, height: 79 }}
-          />
-          <Link href="/" className="absolute z-20" style={{ left: 117, top: 42 }}>
-            <Image
-              src="/figma/imgEditableLogo10.png"
-              alt="Team Angulo"
-              width={306}
-              height={112}
-              className="block"
-              style={{ width: 306, height: 112 }}
-              priority
-            />
-          </Link>
-          <Link
-            href="/services"
-            className="absolute z-20 font-['Montserrat'] text-[16px] font-normal text-white hover:opacity-80"
-            style={{ left: 1014, top: 83 }}
-          >
-            Services
-          </Link>
-          <Link
-            href="/residential"
-            className="absolute z-20 text-[16px] font-normal text-white hover:opacity-80"
-            style={{ left: 1141, top: 84 }}
-          >
-            Residential
-          </Link>
-          <Link
-            href="/commercial"
-            className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
-            style={{ left: 1275, top: 81 }}
-          >
-            Commercial
-          </Link>
-          <Link
-            href="/about"
-            className="absolute z-20 text-[17px] font-normal text-white hover:opacity-80"
-            style={{ left: 1426, top: 81 }}
-          >
-            About Us
-          </Link>
-          <Link
-            href="/contact"
-            className="absolute z-20 flex items-center justify-center hover:opacity-90"
-            style={{ left: 1539, top: 68, width: 154, height: 48 }}
-          >
-            <Image
-              src="/figma/imgRectangulo5.svg"
-              alt=""
-              width={154}
-              height={48}
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            />
-            <span className="relative z-10 text-[17px] font-bold text-white">Contact</span>
-          </Link>
-          <button
-            type="button"
-            className="absolute z-20 flex cursor-pointer items-center justify-center hover:opacity-90"
-            style={{ left: 1731, top: 68, width: 50, height: 48 }}
-            aria-label="Switch to Spanish"
-          >
-            <Image
-              src="/figma/imgRectangulo18.svg"
-              alt=""
-              width={50}
-              height={48}
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            />
-            <span className="relative z-10 text-[17px] font-bold text-white">ES</span>
-          </button>
+          <FigmaDesktopNav activePath="/services" />
 
           <h1
             className="absolute z-10 m-0 text-[72px] font-bold leading-none text-white"
             style={{ left: 139, top: 331, width: 456 }}
           >
-            Our <span className="text-[#ff832a]">Services</span>
+            {t.servicesPage.heroTitle}{" "}
+            <span className="text-[#ff832a]">{t.servicesPage.heroAccent}</span>
           </h1>
           <div
             className="absolute z-10 rounded-full bg-[#ff832a]"
@@ -218,16 +169,14 @@ export function ServicesPage() {
             className="absolute z-10 m-0 text-[20px] leading-normal text-[#e8e8e8]"
             style={{ left: 138, top: 472, width: 465 }}
           >
-            Every project starts with the right foundation and
-            <br />
-            ends with an exterior built to last.
+            {t.servicesPage.heroSubtitle}
           </p>
 
           {/* ── Service 01 ── */}
           <ServiceAnchor slug={SERVICE_SECTION_SLUGS.demolitionRemoval} top={965} />
           <FigmaImage
             src="/figma/services/services-side-house.png"
-            alt="Demolition project"
+            alt={items[0].imageAlt}
             left={869}
             top={808}
             width={1051}
@@ -238,15 +187,16 @@ export function ServicesPage() {
             left={138}
             top={965}
             width={620}
-            number="01"
+            number={items[0].number}
             title={
               <>
-                Demolition & <span className="font-bold text-[#ff832a]">Removal</span>
+                {items[0].title}{" "}
+                <span className="font-bold text-[#ff832a]">{items[0].titleAccent}</span>
               </>
             }
-            caption="It starts with a clean slate"
-            body="Before anything new goes up, everything old comes down. We safely remove all existing exterior materials, siding, trim, and any damaged components, down to the structure. No shortcuts, no material left behind. Just a clean, solid base ready for what comes next."
-            tagline="This is where every transformation begins."
+            caption={items[0].caption}
+            body={items[0].body}
+            tagline={items[0].tagline}
           />
 
           <FigmaImage
@@ -269,7 +219,7 @@ export function ServicesPage() {
           <ServiceAnchor slug={SERVICE_SECTION_SLUGS.structuralRepair} top={2702} />
           <FigmaImage
             src="/figma/services/services-trim-house.png"
-            alt="Structural repair"
+            alt={items[1].imageAlt}
             left={960}
             top={2677}
             width={822}
@@ -280,22 +230,23 @@ export function ServicesPage() {
             left={138}
             top={2702}
             width={740}
-            number="02"
+            number={items[1].number}
             title={
               <>
-                Structural <span className="font-bold text-[#ff832a]">Repair</span>
+                {items[1].title}{" "}
+                <span className="font-bold text-[#ff832a]">{items[1].titleAccent}</span>
               </>
             }
-            caption="What's underneath matters just as much."
-            body="A great exterior starts with a solid structure. Before any new material goes up, we inspect every wall for damaged framing, rotted sheathing, or compromised components. If we find it, we fix it. No exceptions, no shortcuts."
-            tagline="Built right from the inside out."
+            caption={items[1].caption}
+            body={items[1].body}
+            tagline={items[1].tagline}
           />
 
           {/* ── Service 03 ── */}
           <ServiceAnchor slug={SERVICE_SECTION_SLUGS.hardieVinylSiding} top={3436} />
           <FigmaImage
             src="/figma/services/services-neighborhood.png"
-            alt="Hardie siding project"
+            alt={items[2].imageAlt}
             left={0}
             top={3287}
             width={1056}
@@ -306,15 +257,16 @@ export function ServicesPage() {
             left={1172}
             top={3436}
             width={610}
-            number="03"
+            number={items[2].number}
             title={
               <>
-                Hardie & Vinyl <span className="font-bold text-[#ff832a]">Siding</span>
+                {items[2].title}{" "}
+                <span className="font-bold text-[#ff832a]">{items[2].titleAccent}</span>
               </>
             }
-            caption="The exterior your property deserves."
-            body="James Hardie fiber cement siding is the most durable and low maintenance exterior solution available in the market today. As certified installers, we handle the entire process from start to finish, ensuring a flawless professional finish that protects your property for decades. For those looking for a cost effective option, vinyl siding delivers great curb appeal with minimal upkeep."
-            tagline="Installed to last. Finished to impress."
+            caption={items[2].caption}
+            body={items[2].body}
+            tagline={items[2].tagline}
           />
 
           <FigmaImage
@@ -337,7 +289,7 @@ export function ServicesPage() {
           <ServiceAnchor slug={SERVICE_SECTION_SLUGS.pvcTrim} top={5065} />
           <FigmaImage
             src="/figma/services/services-images7.png"
-            alt="PVC trim detail"
+            alt={items[3].imageAlt}
             left={138}
             top={5038}
             width={822}
@@ -348,22 +300,23 @@ export function ServicesPage() {
             left={1056}
             top={5065}
             width={726}
-            number="04"
+            number={items[3].number}
             title={
               <>
-                PVC <span className="font-bold text-[#ff832a]">Trim</span>
+                {items[3].title}{" "}
+                <span className="font-bold text-[#ff832a]">{items[3].titleAccent}</span>
               </>
             }
-            caption="The details that define the finished look."
-            body="Every window, door, and corner tells a story. Our PVC trim work gives every edge of your property a sharp, clean and polished finish that holds up against moisture, impact and time. It is the detail most people notice without knowing why the exterior looks so complete."
-            tagline="Built right from the inside out."
+            caption={items[3].caption}
+            body={items[3].body}
+            tagline={items[3].tagline}
           />
 
           {/* ── Service 05 ── */}
           <ServiceAnchor slug={SERVICE_SECTION_SLUGS.metalRoofing} top={5776} />
           <FigmaImage
             src="/figma/services/services-demolition.png"
-            alt="Metal roofing"
+            alt={items[4].imageAlt}
             left={869}
             top={5634}
             width={1051}
@@ -374,15 +327,16 @@ export function ServicesPage() {
             left={138}
             top={5776}
             width={620}
-            number="05"
+            number={items[4].number}
             title={
               <>
-                Metal <span className="font-bold text-[#ff832a]">Roofing</span>
+                {items[4].title}{" "}
+                <span className="font-bold text-[#ff832a]">{items[4].titleAccent}</span>
               </>
             }
-            caption="The strongest roof you can put on a property."
-            body="Standing seam metal roofing is one of the most durable and weather resistant options available today. Engineered to withstand extreme conditions, it requires minimal maintenance and outlasts traditional roofing materials by decades. We install every panel with the precision the system demands, ensuring a watertight, structurally sound result from edge to edge."
-            tagline="Built to withstand."
+            caption={items[4].caption}
+            body={items[4].body}
+            tagline={items[4].tagline}
           />
 
           {/* Orange banner */}
@@ -406,11 +360,16 @@ export function ServicesPage() {
             />
             <h2
               className="absolute m-0 font-bold leading-none text-white"
-              style={{ left: 175, top: 206, fontSize: 72, width: 907 }}
+              style={{
+                left: 175,
+                top: 206,
+                width: locale === "es" ? 980 : 907,
+                fontSize: figmaFont(72, locale),
+              }}
             >
-              <span className="block">Everything your exterior</span>
-              <span className="mt-[13px] block">needs, handled from start</span>
-              <span className="mt-[13px] block">to finish</span>
+              <span className="block">{t.servicesPage.bannerLine1}</span>
+              <span className="mt-[13px] block">{t.servicesPage.bannerLine2}</span>
+              <span className="mt-[13px] block">{t.servicesPage.bannerLine3}</span>
             </h2>
           </div>
         </div>

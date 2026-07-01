@@ -6,10 +6,12 @@ import { useState, type FormEvent } from "react";
 import { ContactForm } from "../contact/ContactForm";
 import { ContactSuccessModal } from "../contact/ContactSuccessModal";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
 import { PageHero, SiteHeader } from "./SiteLayout";
 
 export function ContactPageMobile() {
+  const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
 
   return (
@@ -23,13 +25,13 @@ export function ContactPageMobile() {
         <SiteHeader variant="overlay" activePath="/contact" />
         <section className="px-6 pb-10 pt-32">
           <h1 className="m-0 text-[40px] font-bold leading-tight text-white sm:text-[56px]">
-            Ready to
+            {t.contact.heroLine1}
             <br />
-            <span className="text-[#ff832a]">Get Started?</span>
+            <span className="text-[#ff832a]">{t.contact.heroAccent}</span>
           </h1>
           <Image src="/figma/contact/accent-line.svg" alt="" width={76} height={5} className="mt-6" aria-hidden />
           <p className="mt-6 max-w-[640px] text-[18px] leading-normal text-white sm:text-[22px]">
-            Fill out the form and let us guide you through your next exterior project.
+            {t.contact.heroSubtextMobile}
           </p>
         </section>
         <section className="relative px-6 pb-14">
@@ -47,40 +49,62 @@ export function ContactPageMobile() {
   );
 }
 
+const aboutValueIcons = [
+  "/figma/imgGrupo14.svg",
+  "/figma/about/icon-specialty.svg",
+  "/figma/about/icon-process.svg",
+  "/figma/about/icon-integrity.svg",
+  "/figma/about/icon-commitment.svg",
+  "/figma/about/icon-safety.svg",
+];
+
 export function AboutPageMobile() {
-  const values = [
-    { title: "Experience", body: "Over 7 years delivering exterior remodeling for residential and commercial properties." },
-    { title: "Specialty", body: "Certified specialists in James Hardie fiber cement siding and standing seam metal roofing." },
-    { title: "Process", body: "We never install over problems. Every project starts with full demolition and structural repair." },
-    { title: "Integrity", body: "Honest assessments, fair pricing, and no surprises from quote to completion." },
-    { title: "Commitment", body: "Residential or commercial, every project receives the same uncompromising standard." },
-    { title: "Safety", body: "Every job site is managed with strict safety protocols to protect our team and your property." },
-  ];
+  const { t } = useLanguage();
 
   return (
     <div className="bg-white">
       <PageHero
         imageSrc="/figma/about/hero-bg.png"
-        title="Dedicated to Excellence"
-        titleAccent="Since 2018."
+        title={t.about.heroTitle}
+        titleAccent={t.about.heroAccent}
         activePath="/about"
       />
       <section className="px-6 py-14">
-        <p className="text-[32px] font-bold text-[#ff832a] sm:text-[48px]">Our Philosophy</p>
+        <p className="text-[32px] font-bold text-[#ff832a] sm:text-[48px]">{t.about.philosophyTitle}</p>
         <h2 className="mt-4 text-[28px] leading-tight sm:text-[40px]">
-          What Drives Every Decision <span className="font-bold">We Make on the Job</span>
+          {t.about.philosophyHeading}{" "}
+          <span className="font-bold">{t.about.philosophyHeadingBold}</span>
         </h2>
+        <p className="mt-6 text-[16px] leading-relaxed sm:text-[18px]">{t.about.philosophyBodyMobile}</p>
         <div className="relative mt-10 aspect-[4/3] w-full overflow-hidden">
-          <Image src="/figma/about/philosophy-house.png" alt="" fill className="object-cover" sizes="100vw" />
+          <Image
+            src="/figma/about/philosophy-house.png"
+            alt={t.about.philosophyImageAlt}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
         </div>
       </section>
       <section className="bg-[#fafafa] px-6 py-14">
         <h2 className="text-center text-[32px] sm:text-[40px]">
-          The Angulo <span className="font-bold text-[#ff832a]">difference</span>
+          {t.about.differenceTitle}{" "}
+          <span className="font-bold text-[#ff832a]">{t.about.differenceAccent}</span>
         </h2>
+        <p className="mx-auto mt-4 max-w-[640px] text-center text-[16px] leading-relaxed">
+          {t.about.differenceIntro}
+        </p>
         <div className="mx-auto mt-8 grid max-w-[900px] gap-8 sm:grid-cols-2">
-          {values.map((value) => (
+          {t.about.values.map((value, index) => (
             <div key={value.title}>
+              <Image
+                src={aboutValueIcons[index]}
+                alt=""
+                width={60}
+                height={60}
+                className="mb-3"
+                aria-hidden
+              />
               <h3 className="text-[22px] font-bold">{value.title}</h3>
               <p className="mt-2 text-[16px] leading-relaxed">{value.body}</p>
             </div>
@@ -90,17 +114,15 @@ export function AboutPageMobile() {
 
       <section className="px-6 py-14 text-center">
         <h2 className="m-0 text-[24px] leading-snug sm:text-[32px]">
-          We work with homeowners who want an exterior that protects their{" "}
-          <span className="font-bold text-[#ff832a]">property and adds lasting value.</span>
+          {t.about.residentialHeading}{" "}
+          <span className="font-bold text-[#ff832a]">{t.about.residentialAccent}</span>
         </h2>
-        <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">
-          Every detail, handled with care from start to finish
-        </p>
+        <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">{t.about.residentialSubtext}</p>
         <Link
           href="/residential"
           className="mt-8 inline-flex h-14 items-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
         >
-          OUR RESIDENTIAL WORK
+          {t.about.residentialButton}
         </Link>
         <div className="mt-8 grid gap-3">
           {["gallery-residential-1", "gallery-residential-2", "gallery-residential-3"].map((img) => (
@@ -113,18 +135,15 @@ export function AboutPageMobile() {
 
       <section className="bg-[#fafafa] px-6 py-14 text-center">
         <h2 className="m-0 text-[24px] leading-snug sm:text-[32px]">
-          For commercial properties, we deliver{" "}
-          <span className="font-bold text-[#ff832a]">professional exterior solutions</span> that
-          reflect the quality and standards of your business.
+          {t.about.commercialHeading}{" "}
+          <span className="font-bold text-[#ff832a]">{t.about.commercialAccent}</span>
         </h2>
-        <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">
-          On time, within budget, without compromise.
-        </p>
+        <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">{t.about.commercialSubtext}</p>
         <Link
           href="/commercial"
           className="mt-8 inline-flex h-14 items-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
         >
-          OUR COMMERCIAL WORK
+          {t.about.commercialButton}
         </Link>
         <div className="mt-8 grid gap-3">
           {["gallery-commercial-1", "gallery-commercial-2", "gallery-commercial-3"].map((img) => (
@@ -136,79 +155,52 @@ export function AboutPageMobile() {
       </section>
 
       <section className="px-6 py-14 text-center">
-        <h2 className="m-0 text-[40px] font-bold text-[#ff832a] sm:text-[56px]">Our Story</h2>
+        <h2 className="m-0 text-[40px] font-bold text-[#ff832a] sm:text-[56px]">{t.about.storyTitle}</h2>
         <p className="m-0 mt-4 text-[28px] sm:text-[36px]">
-          Where It All <span className="font-bold">Began</span>
+          {t.about.storyHeading}{" "}
+          <span className="font-bold">{t.about.storyHeadingBold}</span>
         </p>
         <p className="mx-auto mt-6 max-w-[640px] text-[16px] leading-relaxed sm:text-[18px]">
-          Team Angulo was founded in 2018 with a clear purpose to deliver exterior remodeling
-          services that homeowners and commercial property owners could truly rely on. What started
-          as a small, dedicated crew has grown into a trusted name in the industry, built entirely
-          on the quality of the work we produce and the relationships we build along the way.
+          {t.about.storyBodyMobile}
         </p>
       </section>
     </div>
   );
 }
 
-const services = [
-  {
-    number: "01",
-    slug: SERVICE_SECTION_SLUGS.demolitionRemoval,
-    title: "Demolition & Removal",
-    caption: "It starts with a clean slate",
-    body: "Before anything new goes up, everything old comes down. We safely remove all existing exterior materials down to the structure.",
-    image: "/figma/services/services-side-house.png",
-  },
-  {
-    number: "02",
-    slug: SERVICE_SECTION_SLUGS.structuralRepair,
-    title: "Structural Repair",
-    caption: "What's underneath matters just as much.",
-    body: "We inspect every wall for damaged framing, rotted sheathing, or compromised components. If we find it, we fix it.",
-    image: "/figma/services/services-trim-house.png",
-  },
-  {
-    number: "03",
-    slug: SERVICE_SECTION_SLUGS.hardieVinylSiding,
-    title: "Hardie & Vinyl Siding",
-    caption: "The exterior your property deserves.",
-    body: "Certified James Hardie installers and vinyl siding options that protect your property for decades.",
-    image: "/figma/services/services-neighborhood.png",
-  },
-  {
-    number: "04",
-    slug: SERVICE_SECTION_SLUGS.pvcTrim,
-    title: "PVC Trim",
-    caption: "The details that define the finished look.",
-    body: "Sharp, clean PVC trim work for every window, door, and corner of your property.",
-    image: "/figma/services/services-images7.png",
-  },
-  {
-    number: "05",
-    slug: SERVICE_SECTION_SLUGS.metalRoofing,
-    title: "Metal Roofing",
-    caption: "The strongest roof you can put on a property.",
-    body: "Standing seam metal roofing installed with the precision the system demands.",
-    image: "/figma/services/services-demolition.png",
-  },
+const serviceSlugs = [
+  SERVICE_SECTION_SLUGS.demolitionRemoval,
+  SERVICE_SECTION_SLUGS.structuralRepair,
+  SERVICE_SECTION_SLUGS.hardieVinylSiding,
+  SERVICE_SECTION_SLUGS.pvcTrim,
+  SERVICE_SECTION_SLUGS.metalRoofing,
+];
+
+const serviceImages = [
+  "/figma/services/services-side-house.png",
+  "/figma/services/services-trim-house.png",
+  "/figma/services/services-neighborhood.png",
+  "/figma/services/services-images7.png",
+  "/figma/services/services-demolition.png",
 ];
 
 export function ServicesPageMobile() {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-white">
       <PageHero
         imageSrc="/figma/services/services-hero-bg.png"
-        title="Our Services"
-        titleAccent="Built to Last."
-        subtitle="Complete exterior solutions from demolition to final installation."
+        title={`${t.servicesPage.heroTitle} ${t.servicesPage.heroAccent}`}
+        titleAccent={t.servicesPage.heroAccentMobile}
+        subtitle={t.servicesPage.heroSubtitleMobile}
         activePath="/services"
       />
       <div className="px-6 py-10">
-        {services.map((service) => (
+        {t.servicesPage.itemsMobile.map((service, index) => (
           <article
             key={service.number}
-            data-service-section={service.slug}
+            data-service-section={serviceSlugs[index]}
             className="mb-14 scroll-mt-28 border-b border-[#eee] pb-14 last:mb-0 last:border-0"
           >
             <span className="text-[40px] font-bold text-[#ff832a]">{service.number}</span>
@@ -217,7 +209,7 @@ export function ServicesPageMobile() {
             <p className="mt-4 text-[16px] leading-relaxed text-[#1c1c1c]">{service.body}</p>
             <div className="relative mt-6 aspect-[16/10] w-full overflow-hidden">
               <ParallaxBannerImage
-                src={service.image}
+                src={serviceImages[index]}
                 className="absolute inset-0"
                 mode="section"
                 speed={0.25}
@@ -239,26 +231,29 @@ const residentialGallery = [
 ];
 
 export function ResidentialPageMobile() {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-white">
       <PageHero
         imageSrc="/figma/residential/hero-bg.png"
-        title="Residential exteriors"
-        titleAccent="built with care."
+        title={t.residentialPage.heroTitle}
+        titleAccent={t.residentialPage.heroAccent}
         activePath="/residential"
       />
       <section className="px-6 py-14">
         <h2 className="text-[28px] leading-tight sm:text-[40px]">
-          Exterior solutions for homeowners who expect{" "}
-          <span className="font-bold text-[#ff832a]">quality and precision</span>.
+          {t.residentialPage.introHeadingMobile}{" "}
+          <span className="font-bold text-[#ff832a]">{t.residentialPage.introAccentMobile}</span>.
         </h2>
         <p className="mt-6 text-[16px] leading-relaxed sm:text-[18px]">
-          Every residential project receives the same attention to detail, from demolition through
-          final installation.
+          {t.residentialPage.introBodyMobile}
         </p>
       </section>
       <section className="bg-[#fafafa] px-6 py-14">
-        <h2 className="text-center text-[32px] font-bold text-[#ff832a]">Our Residential Work</h2>
+        <h2 className="text-center text-[32px] font-bold text-[#ff832a]">
+          {t.residentialPage.portfolioTitle}
+        </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {residentialGallery.map(({ img, aspect }) => (
             <div key={img} className={`relative w-full overflow-hidden ${aspect}`}>
@@ -272,22 +267,26 @@ export function ResidentialPageMobile() {
 }
 
 export function CommercialPageMobile() {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-white">
       <PageHero
         imageSrc="/figma/commercial/hero-bg.png"
-        title="Commercial exteriors"
-        titleAccent="that reflect your business."
+        title={t.commercialPage.heroTitle}
+        titleAccent={t.commercialPage.heroAccent}
         activePath="/commercial"
       />
       <section className="px-6 py-14">
         <h2 className="text-[28px] leading-tight sm:text-[40px]">
-          Professional solutions for commercial properties that demand{" "}
-          <span className="font-bold text-[#ff832a]">precision and efficiency</span>.
+          {t.commercialPage.introHeadingMobile}{" "}
+          <span className="font-bold text-[#ff832a]">{t.commercialPage.introAccentMobile}</span>.
         </h2>
       </section>
       <section className="bg-[#fafafa] px-6 py-14">
-        <h2 className="text-center text-[32px] font-bold text-[#ff832a]">Our Commercial Work</h2>
+        <h2 className="text-center text-[32px] font-bold text-[#ff832a]">
+          {t.commercialPage.portfolioTitle}
+        </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {["gallery-chicago", "gallery-factory", "gallery-fullwidth-2", "gallery-tall-left"].map((img) => (
             <div key={img} className="relative aspect-[4/3] overflow-hidden">

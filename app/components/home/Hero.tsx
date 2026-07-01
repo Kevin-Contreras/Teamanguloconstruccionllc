@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { NavBar } from "../layout/NavBar";
 import { TopNavigation } from "./TopNavigation";
 
@@ -10,6 +11,7 @@ const BANNER_WIDTH = 1920;
 const BANNER_HEIGHT = 1134;
 
 export function Hero() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -46,29 +48,28 @@ export function Hero() {
 
         <div className="relative z-10 px-6 pb-14 pt-28">
             <h1 className="m-0 max-w-[520px] text-[38px] font-bold leading-[1.05] text-white sm:text-[48px]">
-              We Install the Exteriors
+              {t.home.hero.line1}
               <br />
-              That Protect &amp; Define
+              {t.home.hero.line2}
               <br />
-              <span className="text-[#ff832a]">Your Property</span>
+              <span className="text-[#ff832a]">{t.home.hero.accent}</span>
             </h1>
             <div className="mt-6 h-[3px] w-20 rounded-full bg-white/80" aria-hidden />
             <p className="mt-5 max-w-[420px] text-[16px] leading-relaxed text-[#e8e8e8] sm:text-[18px]">
-              Since 2018, Team Angulo has delivered professional exterior solutions for
-              residential and commercial properties.
+              {t.home.hero.subtext}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/about"
                 className="inline-flex h-[52px] items-center justify-center rounded-[100px] border border-white px-8 text-[15px] font-bold text-white hover:bg-white/10"
               >
-                MORE INFO
+                {t.common.moreInfo}
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex h-[52px] items-center justify-center rounded-[100px] bg-[#f07b05] px-8 text-[15px] font-bold text-white hover:opacity-90"
               >
-                GET A QUOTE
+                {t.common.getAQuote}
               </Link>
             </div>
           </div>
@@ -105,11 +106,11 @@ export function Hero() {
               className="absolute font-bold"
               style={{ left: 142, top: 474, width: 814, fontSize: 72, lineHeight: 1.05 }}
             >
-              <span className="text-white">We Install the Exteriors</span>
+              <span className="text-white">{t.home.hero.line1}</span>
               <br />
-              <span className="text-white">That Protect &amp; Define</span>
+              <span className="text-white">{t.home.hero.line2}</span>
               <br />
-              <span className="text-[#ff832a]">Your Property</span>
+              <span className="text-[#ff832a]">{t.home.hero.accent}</span>
             </h1>
 
             <Image
@@ -125,8 +126,7 @@ export function Hero() {
               className="absolute text-[20px] leading-normal text-[#e8e8e8]"
               style={{ left: 142, top: 769, width: 570 }}
             >
-              Since 2018, Team Angulo has delivered professional exterior solutions for
-              residential and commercial properties.
+              {t.home.hero.subtext}
             </p>
 
             <Link
@@ -134,7 +134,7 @@ export function Hero() {
               className="absolute flex items-center justify-center rounded-[100px] border border-white text-[16px] font-bold text-white hover:bg-white/10"
               style={{ left: 138, top: 859, width: 212, height: 60 }}
             >
-              MORE INFO
+              {t.common.moreInfo}
             </Link>
 
             <Link
@@ -142,7 +142,7 @@ export function Hero() {
               className="absolute flex items-center justify-center rounded-[100px] bg-[#f07b05] text-[16px] font-bold text-white hover:opacity-90"
               style={{ left: 364, top: 858, width: 212, height: 60 }}
             >
-              GET A QUOTE
+              {t.common.getAQuote}
             </Link>
           </div>
         </div>

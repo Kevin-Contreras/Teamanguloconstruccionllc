@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { type FormEvent } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
 
 const fieldClass =
   "w-full rounded-[13px] border border-white/80 bg-white/10 px-4 text-[16px] text-white outline-none placeholder:text-white/60 focus:border-[#ff832a]";
@@ -28,6 +29,7 @@ export function ContactForm({
   className?: string;
   dark?: boolean;
 }) {
+  const { t } = useLanguage();
   const labelClass = dark ? "text-white" : "text-[#1c1c1c]";
   const inputClass = dark
     ? fieldClass
@@ -38,13 +40,13 @@ export function ContactForm({
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-name">
-            Name:
+            {t.contact.form.name}
           </label>
           <input id="contact-name" name="name" type="text" required className={inputClass} style={{ height: 57 }} />
         </div>
         <div>
           <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-phone">
-            Phone:
+            {t.contact.form.phone}
           </label>
           <input id="contact-phone" name="phone" type="tel" className={inputClass} style={{ height: 57 }} />
         </div>
@@ -52,7 +54,7 @@ export function ContactForm({
 
       <div className="mt-6">
         <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-email">
-          Email address
+          {t.contact.form.email}
         </label>
         <input id="contact-email" name="email" type="email" required className={inputClass} style={{ height: 57 }} />
       </div>
@@ -60,7 +62,7 @@ export function ContactForm({
       <div className="mt-6 grid gap-6 sm:grid-cols-2">
         <div>
           <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-entry-date">
-            Entry date
+            {t.contact.form.entryDate}
           </label>
           <div className="relative">
             {dark && <CalendarIcon />}
@@ -78,7 +80,7 @@ export function ContactForm({
             className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`}
             htmlFor="contact-departure-date"
           >
-            Departure date
+            {t.contact.form.departureDate}
           </label>
           <div className="relative">
             {dark && <CalendarIcon />}
@@ -95,7 +97,7 @@ export function ContactForm({
 
       <div className="mt-6">
         <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-message">
-          Message
+          {t.contact.form.message}
         </label>
         <textarea
           id="contact-message"
@@ -118,7 +120,7 @@ export function ContactForm({
           height={56}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
-        <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">Send</span>
+        <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">{t.common.send}</span>
       </button>
     </form>
   );

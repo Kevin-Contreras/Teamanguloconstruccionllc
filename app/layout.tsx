@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import { LanguageProvider } from "./providers/LanguageProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,7 +33,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserrat.variable} overflow-x-hidden antialiased`}
     >
-      <body className="min-h-screen overflow-x-hidden">{children}</body>
+      <body className="min-h-screen overflow-x-hidden">
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
