@@ -1,20 +1,22 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "../../providers/LanguageProvider";
+import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1944;
 const SECTION_HEIGHT = 737;
 
 /** Figma node 1:330 — Quality banner */
 export function QualityBannerSection() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const updateScale = () => {
       const width = containerRef.current?.clientWidth ?? SECTION_WIDTH;
-      setScale(Math.min(width / SECTION_WIDTH, 1));
+      setScale(width / SECTION_WIDTH);
     };
 
     updateScale();
@@ -24,9 +26,21 @@ export function QualityBannerSection() {
 
   return (
     <section className="overflow-hidden bg-[#ff832a] text-white">
+      <div className="px-6 py-14 lg:hidden">
+        <div className="h-1 w-[76px] rounded-full bg-white" aria-hidden />
+        <h2 className="m-0 mt-6 text-[32px] font-bold leading-tight sm:text-[40px]">
+          {t.home.quality.line1}
+          <br />
+          {t.home.quality.line2}
+        </h2>
+        <p className="mt-6 max-w-[640px] text-[18px] font-bold leading-relaxed sm:text-[22px]">
+          {t.home.quality.subtext}
+        </p>
+      </div>
+
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1944px] overflow-hidden"
+        className="relative hidden w-full overflow-hidden lg:block"
         style={{ height: SECTION_HEIGHT * scale }}
       >
         <div
@@ -38,14 +52,14 @@ export function QualityBannerSection() {
           }}
         >
           {/* Decorative logo — node 1:352 @ 1117,0 */}
-          <Image
+          <FigmaImage
             src="/figma/logorecuadro.png"
             alt=""
-            width={808}
+            left={1117}
+            top={0}
+            width={827}
             height={737}
-            className="pointer-events-none absolute object-cover opacity-20"
-            style={{ left: 1117, top: 0, width: 827, height: 737 }}
-            aria-hidden
+            className="pointer-events-none opacity-20"
           />
 
           {/* Accent line — node 1:341 @ 174,206 */}
@@ -60,8 +74,8 @@ export function QualityBannerSection() {
             className="absolute m-0 font-bold leading-none text-white"
             style={{ left: 174, top: 214.232, fontSize: 72 }}
           >
-            <span className="block">Quality is not a differentiator,</span>
-            <span className="mt-[13px] block">it&apos;s the baseline.</span>
+            <span className="block">{t.home.quality.line1}</span>
+            <span className="mt-[13px] block">{t.home.quality.line2}</span>
           </h2>
 
           {/* Subtext — nodes 1:337–1:339 */}
@@ -69,8 +83,7 @@ export function QualityBannerSection() {
             className="absolute m-0 font-bold leading-[60px] text-white"
             style={{ left: 174, top: 402.232, width: 931, fontSize: 40 }}
           >
-            Every project we deliver is held to the same standard, from the smallest
-            repair to the largest installation
+            {t.home.quality.subtext}
           </p>
         </div>
       </div>

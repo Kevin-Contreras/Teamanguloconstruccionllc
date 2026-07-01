@@ -1,11 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "../../providers/LanguageProvider";
 import { AboutSection } from "./AboutSection";
 import { Hero } from "./Hero";
 import { OurWorkSection } from "./OurWorkSection";
-import { CTASection } from "./CTASection";
 import { FAQSection } from "./FAQSection";
-import { FooterSection } from "./FooterSection";
+import { PageClosing } from "../layout/PageClosing";
 import { QualityBannerSection } from "./QualityBannerSection";
 import { ResidentialCommercialSection } from "./ResidentialCommercialSection";
 import { ServicesSection } from "./ServicesSection";
@@ -20,7 +22,7 @@ function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-[1920px] px-6 md:px-[138px] ${className}`}>
+    <div className={`w-full px-6 md:px-[138px] ${className}`}>
       {children}
     </div>
   );
@@ -47,36 +49,19 @@ function ArrowIcon({ className = "" }: { className?: string }) {
   );
 }
 
-const values = [
-  {
-    icon: "/figma/imgGrupo14.svg",
-    iconWidth: 60,
-    iconHeight: 59,
-    title: "Quality",
-    description:
-      "Every project is held to the highest standard, from the first inspection to the final installation.",
-  },
-  {
-    icon: "/figma/imgGrupo18.svg",
-    iconWidth: 84,
-    iconHeight: 52,
-    title: "Integrity",
-    description:
-      "We operate with full transparency honest assessments, clear communication, and fair pricing.",
-  },
-  {
-    icon: "/figma/imgGrupo20.svg",
-    iconWidth: 58,
-    iconHeight: 58,
-    title: "Reliability",
-    description: "Committed to every deadline, every project, every client.",
-  },
+const valueIcons = [
+  { icon: "/figma/imgGrupo14.svg", iconWidth: 60, iconHeight: 59 },
+  { icon: "/figma/imgGrupo18.svg", iconWidth: 84, iconHeight: 52 },
+  { icon: "/figma/imgGrupo20.svg", iconWidth: 58, iconHeight: 58 },
 ];
 
 function Values() {
+  const { t } = useLanguage();
+  const values = t.home.values.map((v, i) => ({ ...valueIcons[i], ...v }));
+
   return (
     <section className="bg-white pb-20 lg:pb-28">
-      <div className="mx-auto w-full max-w-[1920px] px-6 lg:px-0">
+      <div className="w-full px-6 lg:px-0">
         <div className="lg:ml-[138px] lg:mr-[155px]">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
             {values.map((value, index) => (
@@ -101,7 +86,7 @@ function Values() {
                       {value.title}
                     </h3>
                     <p className="text-[14px] leading-normal text-[#1c1c1c]">
-                      {value.description}
+                      {value.body}
                     </p>
                   </div>
                 </div>
@@ -115,15 +100,17 @@ function Values() {
 }
 
 function HardieSiding() {
+  const { t } = useLanguage();
+
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white pb-12 pt-16 lg:py-28">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="mb-7 text-[32px] font-bold leading-tight md:text-[42px] lg:text-[50px]">
-              <span style={{ color: ORANGE }}>Hardie Siding</span>
+              <span style={{ color: ORANGE }}>{t.home.hardie.accent}</span>
               <br />
-              <span className="text-[#1c1c1c]">Specialists</span>
+              <span className="text-[#1c1c1c]">{t.home.hardie.title}</span>
             </h2>
             <Image
               src="/figma/about-line2.svg"
@@ -134,24 +121,20 @@ function HardieSiding() {
               style={{ width: 64, height: 5 }}
             />
             <p className="mb-8 max-w-[611px] text-[18px] leading-normal text-[#1c1c1c] lg:text-[20px]">
-              James Hardie fiber cement siding is one of the most durable and low
-              maintenance exterior solutions available in the market today. At Team
-              Angulo, we are certified specialists in its installation from full
-              demolition of existing materials to a flawless, professional finish that
-              protects your property for decades.
+              {t.home.hardie.body}
             </p>
             <Link
               href="/#work"
               className="inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] border-1 border-[#f07b05] px-8 text-[16px] font-bold text-[#f07b05] hover:opacity-90"
             >
-              SEE OUR HARDIE PROJECTS
+              {t.common.seeHardieProjects}
               <ArrowIcon />
             </Link>
           </div>
           <div className="relative aspect-[4/3] w-full overflow-hidden">
             <Image
               src="/figma/imgWhatsAppImage20260508At75616Am2.png"
-              alt="Hardie siding project"
+              alt={t.home.hardie.imageAlt}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -175,8 +158,7 @@ export function HomePage() {
       <ResidentialCommercialSection />
       <QualityBannerSection />
       <FAQSection />
-      <CTASection />
-      <FooterSection />
+      <PageClosing ctaId="contact" />
     </>
   );
 }

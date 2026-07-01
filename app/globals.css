@@ -26,8 +26,30 @@ body {
   margin: 0;
 }
 
+img[data-nimg][src*=".svg"],
+img[data-nimg].object-contain {
+  object-fit: contain !important;
+}
+
+img[data-nimg]:not([src*=".svg"]):not(.object-contain) {
+  object-fit: cover !important;
+}
+
 [class*="font-['Montserrat"] {
   font-family: var(--font-montserrat), Montserrat, sans-serif !important;
+}
+
+/* Orange accent copy — italic; pill CTA/nav buttons stay upright */
+[class~="text-[#ff832a]"],
+[class~="text-[#f07b05]"] {
+  font-style: italic;
+}
+
+a[class*="rounded-[100px]"],
+button[class*="rounded-[100px]"],
+a[class*="rounded-[100px]"] *,
+button[class*="rounded-[100px]"] * {
+  font-style: normal !important;
 }
 
 details summary::-webkit-details-marker {
@@ -72,4 +94,63 @@ details summary::-webkit-details-marker {
 
 details[open] .faq-chevron-wrap {
   transform: rotate(180deg);
+}
+
+html[lang="es"] .locale-pill-btn {
+  font-size: 14px;
+  padding-inline: 1.25rem;
+}
+
+html[lang="es"] .locale-nav-link {
+  font-size: 14px;
+}
+
+/* ── Premium text motion ── */
+@media (prefers-reduced-motion: no-preference) {
+  .page-transition {
+    animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  [data-text-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 0.85rem, 0);
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--reveal-i, 0) * 35ms);
+    will-change: opacity, transform;
+  }
+
+  [data-text-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  [data-animate-hero] [data-text-reveal] {
+    transition-duration: 0.55s;
+    transition-delay: calc(40ms + var(--reveal-i, 0) * 45ms);
+  }
+
+  [data-animate-hero].is-visible [data-text-reveal],
+  [data-animate-hero] [data-text-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-text-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
