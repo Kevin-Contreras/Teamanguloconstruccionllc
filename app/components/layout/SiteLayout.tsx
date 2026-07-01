@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
-import { useLanguage, useServiceNames } from "../../providers/LanguageProvider";
+import { useFooterServices, useLanguage } from "../../providers/LanguageProvider";
+import { ServiceSectionLink } from "./ServiceSectionLink";
 
 function CtaArrow() {
   return (
@@ -64,19 +65,21 @@ export function SiteCta({ id, className }: { id?: string; className?: string }) 
 
 export function SiteFooter() {
   const { t } = useLanguage();
-  const services = useServiceNames();
+  const services = useFooterServices();
 
   return (
     <footer className="bg-black px-6 py-12 text-white lg:px-[138px] lg:py-16">
       <div className="mx-auto grid max-w-[1644px] gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
-          <Image
-            src="/figma/imgEditableLogo01.png"
-            alt="Team Angulo Construction LLC"
-            width={280}
-            height={102}
-            className="mb-6 h-auto w-[220px] lg:w-[280px]"
-          />
+          <Link href="/" className="inline-block">
+            <Image
+              src="/figma/imgEditableLogo01.png"
+              alt="Team Angulo Construction LLC"
+              width={280}
+              height={102}
+              className="mb-6 h-auto w-[220px] lg:w-[280px]"
+            />
+          </Link>
           <p className="m-0 max-w-[316px] text-[16px] leading-relaxed text-[#a8a8a8] lg:text-[18px]">
             {t.footer.tagline}
           </p>
@@ -85,11 +88,14 @@ export function SiteFooter() {
         <div>
           <p className="mb-4 text-[18px] font-bold lg:text-[20px]">{t.footer.services}</p>
           <ul className="space-y-2">
-            {services.map((title) => (
-              <li key={title}>
-                <Link href="/services" className="text-[16px] text-[#a8a8a8] hover:opacity-80 lg:text-[20px]">
-                  {title}
-                </Link>
+            {services.map((service) => (
+              <li key={service.slug}>
+                <ServiceSectionLink
+                  slug={service.slug}
+                  className="text-[16px] text-[#a8a8a8] hover:opacity-80 lg:text-[20px]"
+                >
+                  {service.label}
+                </ServiceSectionLink>
               </li>
             ))}
           </ul>

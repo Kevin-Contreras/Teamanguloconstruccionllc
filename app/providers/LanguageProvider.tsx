@@ -11,6 +11,7 @@ import {
 } from "react";
 import { es } from "../i18n/locales/es";
 import { en } from "../i18n/locales/en";
+import { SERVICE_SECTION_SLUGS } from "../constants/serviceSections";
 import type { Locale, Translations } from "../i18n/types";
 
 const STORAGE_KEY = "team-angulo-locale";
@@ -85,7 +86,17 @@ export function useNavLinks() {
 }
 
 export function useServiceNames() {
+  return useFooterServices().map((service) => service.label);
+}
+
+export function useFooterServices() {
   const { t } = useLanguage();
-  const { serviceNames: s } = t;
-  return [s.demolition, s.structural, s.hardieVinyl, s.pvcTrim, s.metalRoofing];
+  const s = t.serviceNames;
+  return [
+    { label: s.demolition, slug: SERVICE_SECTION_SLUGS.demolitionRemoval },
+    { label: s.structural, slug: SERVICE_SECTION_SLUGS.structuralRepair },
+    { label: s.hardieVinyl, slug: SERVICE_SECTION_SLUGS.hardieVinylSiding },
+    { label: s.pvcTrim, slug: SERVICE_SECTION_SLUGS.pvcTrim },
+    { label: s.metalRoofing, slug: SERVICE_SECTION_SLUGS.metalRoofing },
+  ];
 }

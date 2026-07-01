@@ -199,6 +199,7 @@ export function ServicesPageMobile() {
         {t.servicesPage.itemsMobile.map((service, index) => (
           <article
             key={service.number}
+            id={serviceSlugs[index]}
             data-service-section={serviceSlugs[index]}
             className="mb-14 scroll-mt-28 border-b border-[#eee] pb-14 last:mb-0 last:border-0"
           >

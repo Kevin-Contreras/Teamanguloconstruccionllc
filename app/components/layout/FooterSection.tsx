@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useLanguage, useServiceNames } from "../../providers/LanguageProvider";
+import { useFooterServices, useLanguage } from "../../providers/LanguageProvider";
+import { ServiceSectionLink } from "./ServiceSectionLink";
 import { SiteFooter } from "./SiteLayout";
 
 const SECTION_WIDTH = 1920;
 const SECTION_HEIGHT = 463;
 
-const serviceTops = [112, 152, 192, 232, 272];
+const linkTops = [112, 152, 192, 232, 272];
 
 const contactItems = [
   {
@@ -43,7 +44,7 @@ const contactItems = [
 /** Figma node 1:443 — Footer */
 export function FooterSection() {
   const { t } = useLanguage();
-  const services = useServiceNames();
+  const services = useFooterServices();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -77,14 +78,16 @@ export function FooterSection() {
               transform: `scale(${scale})`,
             }}
           >
-            <Image
-              src="/figma/imgEditableLogo01.png"
-              alt="Team Angulo Construction LLC"
-              width={370}
-              height={135}
-              className="absolute object-contain"
-              style={{ left: 138, top: 47, width: 370, height: 135 }}
-            />
+            <Link href="/" className="absolute" style={{ left: 138, top: 47, width: 370, height: 135 }}>
+              <Image
+                src="/figma/imgEditableLogo01.png"
+                alt="Team Angulo Construction LLC"
+                width={370}
+                height={135}
+                className="object-contain"
+                style={{ width: 370, height: 135 }}
+              />
+            </Link>
 
             <p
               className="absolute m-0 text-[18px] leading-normal text-[#a8a8a8]"
@@ -103,15 +106,15 @@ export function FooterSection() {
             >
               {t.footer.services}
             </p>
-            {services.map((title, index) => (
-              <Link
-                key={title}
-                href="/services"
+            {services.map((service, index) => (
+              <ServiceSectionLink
+                key={service.slug}
+                slug={service.slug}
                 className="absolute m-0 text-[20px] leading-normal text-[#a8a8a8] hover:opacity-80"
-                style={{ left: 643, top: serviceTops[index] }}
+                style={{ left: 643, top: linkTops[index] }}
               >
-                {title}
-              </Link>
+                {service.label}
+              </ServiceSectionLink>
             ))}
 
             <p
