@@ -6,12 +6,14 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   weight: ["400", "700"],
+  style: ["normal", "italic"],
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   weight: ["400"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {

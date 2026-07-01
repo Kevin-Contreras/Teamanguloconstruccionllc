@@ -39,6 +39,19 @@ img[data-nimg]:not([src*=".svg"]):not(.object-contain) {
   font-family: var(--font-montserrat), Montserrat, sans-serif !important;
 }
 
+/* Orange accent copy — italic; pill CTA/nav buttons stay upright */
+[class~="text-[#ff832a]"],
+[class~="text-[#f07b05]"] {
+  font-style: italic;
+}
+
+a[class*="rounded-[100px]"],
+button[class*="rounded-[100px]"],
+a[class*="rounded-[100px]"] *,
+button[class*="rounded-[100px]"] * {
+  font-style: normal !important;
+}
+
 details summary::-webkit-details-marker {
   display: none;
 }

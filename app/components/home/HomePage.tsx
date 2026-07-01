@@ -3,9 +3,8 @@ import Link from "next/link";
 import { AboutSection } from "./AboutSection";
 import { Hero } from "./Hero";
 import { OurWorkSection } from "./OurWorkSection";
-import { CTASection } from "./CTASection";
 import { FAQSection } from "./FAQSection";
-import { FooterSection } from "./FooterSection";
+import { PageClosing } from "../layout/PageClosing";
 import { QualityBannerSection } from "./QualityBannerSection";
 import { ResidentialCommercialSection } from "./ResidentialCommercialSection";
 import { ServicesSection } from "./ServicesSection";
@@ -175,8 +174,7 @@ export function HomePage() {
       <ResidentialCommercialSection />
       <QualityBannerSection />
       <FAQSection />
-      <CTASection />
-      <FooterSection />
+      <PageClosing ctaId="contact" />
     </>
   );
 }

@@ -7,7 +7,7 @@ import { ContactForm } from "../contact/ContactForm";
 import { ContactSuccessModal } from "../contact/ContactSuccessModal";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
-import { PageHero, SiteCta, SiteFooter, SiteHeader } from "./SiteLayout";
+import { PageHero, SiteHeader } from "./SiteLayout";
 
 export function ContactPageMobile() {
   const [submitted, setSubmitted] = useState(false);
@@ -40,7 +40,6 @@ export function ContactPageMobile() {
             }}
           />
         </section>
-        <SiteFooter />
       </div>
 
       {submitted && <ContactSuccessModal onClose={() => setSubmitted(false)} variant="mobile" />}
@@ -148,9 +147,6 @@ export function AboutPageMobile() {
           on the quality of the work we produce and the relationships we build along the way.
         </p>
       </section>
-
-      <SiteCta />
-      <SiteFooter />
     </div>
   );
 }
@@ -231,8 +227,6 @@ export function ServicesPageMobile() {
           </article>
         ))}
       </div>
-      <SiteCta />
-      <SiteFooter />
     </div>
   );
 }
@@ -273,8 +267,6 @@ export function ResidentialPageMobile() {
           ))}
         </div>
       </section>
-      <SiteCta />
-      <SiteFooter />
     </div>
   );
 }
@@ -304,8 +296,6 @@ export function CommercialPageMobile() {
           ))}
         </div>
       </section>
-      <SiteCta />
-      <SiteFooter />
     </div>
   );
 }

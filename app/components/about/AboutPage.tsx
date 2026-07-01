@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
+import { PageClosing } from "../layout/PageClosing";
 import { AboutPageMobile } from "../layout/MobilePages";
 
 const PAGE_WIDTH = 1920;
 const CTA_TOP = 5608;
-const FOOTER_TOP = 5927;
-const PAGE_HEIGHT = FOOTER_TOP + 463;
+const PAGE_HEIGHT = CTA_TOP;
 
 function CtaArrow() {
   return (
@@ -502,165 +502,10 @@ export function AboutPage() {
             style={{ left: 138, top: 5501, width: 1644, height: 5 }}
             aria-hidden
           />
-
-          {/* CTA — node 1:1428 */}
-          <div
-            className="absolute z-10 bg-white"
-            style={{ left: 0, top: CTA_TOP, width: 1920, height: FOOTER_TOP - CTA_TOP }}
-          >
-            <h2
-              className="absolute m-0 font-bold leading-none text-black"
-              style={{ left: 138, top: 0, width: 515, fontSize: 55 }}
-            >
-              <span className="block leading-normal">
-                Ready to <span className="text-[#ff832a]">transform</span>
-              </span>
-              <span className="mt-[13px] block leading-normal">your exterior?</span>
-            </h2>
-            <p
-              className="absolute m-0 text-[20px] leading-normal text-[#1c1c1c]"
-              style={{ left: 138, top: 175, width: 470 }}
-            >
-              Contact us today and let&apos;s talk about{" "}
-              <span className="font-bold">your project</span>
-            </p>
-            <a
-              href="mailto:info@teamangulo.com"
-              className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold text-white hover:opacity-90"
-              style={{ left: 1530, top: 17, width: 252, height: 60 }}
-            >
-              GET IN TOUCH
-              <CtaArrow />
-            </a>
-          </div>
-
-          {/* Footer — node 1:1447 */}
-          <div
-            className="absolute z-10 bg-black"
-            style={{ left: 0, top: FOOTER_TOP, width: 1920, height: 463 }}
-          >
-            <Image
-              src="/figma/imgEditableLogo01.png"
-              alt="Team Angulo Construction LLC"
-              width={370}
-              height={135}
-              className="absolute object-contain"
-              style={{ left: 138, top: 47, width: 370, height: 135 }}
-            />
-            <p
-              className="absolute m-0 text-[20px] leading-normal text-white"
-              style={{ left: 160, top: 205, width: 316 }}
-            >
-              Professional exterior solutions for
-              <br />
-              residential and commercial
-              <br />
-              properties in New Jersey.
-            </p>
-            <p
-              className="absolute m-0 text-[20px] font-bold leading-normal text-white"
-              style={{ left: 643, top: 73 }}
-            >
-              SERVICES
-            </p>
-            {[
-              { title: "Demolition & Removal", top: 112 },
-              { title: "Structural Repair", top: 152 },
-              { title: "Hardie & Vinyl Siding", top: 192 },
-              { title: "PVC Trim", top: 232 },
-              { title: "Metal Roofing", top: 272 },
-            ].map((item) => (
-              <Link
-                key={item.title}
-                href="/services"
-                className="absolute text-[20px] leading-normal text-white hover:opacity-80"
-                style={{ left: 643, top: item.top }}
-              >
-                {item.title}
-              </Link>
-            ))}
-            <p
-              className="absolute m-0 text-[20px] font-bold leading-normal text-white"
-              style={{ left: 1047, top: 86 }}
-            >
-              CONTACT
-            </p>
-            <Image
-              src="/figma/imgGrupo775.svg"
-              alt=""
-              width={17}
-              height={17}
-              className="absolute"
-              style={{ left: 1047, top: 131, width: 17, height: 17 }}
-              aria-hidden
-            />
-            <a
-              href="tel:+10000000000"
-              className="absolute text-[20px] leading-normal text-white hover:opacity-80"
-              style={{ left: 1076, top: 125 }}
-            >
-              (XXX) XXX-XXXX
-            </a>
-            <Image
-              src="/figma/imgGrupo777.svg"
-              alt=""
-              width={18}
-              height={15}
-              className="absolute"
-              style={{ left: 1047, top: 170, width: 18, height: 15 }}
-              aria-hidden
-            />
-            <a
-              href="mailto:info@teamangulo.com"
-              className="absolute text-[20px] leading-normal text-white hover:opacity-80"
-              style={{ left: 1076, top: 165 }}
-            >
-              info@teamangulo.com
-            </a>
-            <Image
-              src="/figma/imgGrupo779.svg"
-              alt=""
-              width={15}
-              height={18}
-              className="absolute"
-              style={{ left: 1047, top: 206, width: 15, height: 18 }}
-              aria-hidden
-            />
-            <p
-              className="absolute m-0 text-[20px] leading-normal text-white"
-              style={{ left: 1076, top: 205 }}
-            >
-              New Jersey, USA
-            </p>
-            <p
-              className="absolute m-0 text-[20px] font-bold leading-normal text-white"
-              style={{ left: 1468, top: 86 }}
-            >
-              FOLLOW US
-            </p>
-            <Image
-              src="/figma/imgGrupo786.svg"
-              alt="Social media"
-              width={189}
-              height={52}
-              className="absolute"
-              style={{ left: 1465, top: 126, width: 189, height: 52 }}
-            />
-            <div
-              className="absolute bg-white/70"
-              style={{ left: 138, top: 370, width: 1644, height: 1 }}
-              aria-hidden
-            />
-            <p
-              className="absolute m-0 text-[20px] leading-normal text-white"
-              style={{ left: 138, top: 400 }}
-            >
-              © 2025 Team Angulo. All rights reserved.
-            </p>
-          </div>
         </div>
       </div>
     </div>
+      <PageClosing />
     </>
   );
 }

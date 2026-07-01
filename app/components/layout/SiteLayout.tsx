@@ -26,24 +26,25 @@ export function SiteHeader({
   return <NavBar variant={variant} activePath={activePath} />;
 }
 
-export function SiteCta() {
+export function SiteCta({ id }: { id?: string }) {
   return (
-    <section className="bg-white px-6 py-14 lg:px-[138px] lg:py-20">
-      <div className="mx-auto flex max-w-[1644px] flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+    <section id={id} className="bg-white px-6 py-14 lg:px-[138px] lg:py-20">
+      <div className="mx-auto flex max-w-[1644px] flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <h2 className="m-0 text-[36px] font-bold leading-tight text-black sm:text-[48px] lg:text-[55px]">
-            Ready to <span className="text-[#ff832a]">transform</span>
-            <br />
-            your exterior?
+          <h2 className="m-0 text-[36px] font-bold  text-black sm:text-[48px] lg:text-[38px]">
+            <span className="block">
+              Ready to <span className="text-[#ff832a]">transform</span>
+            </span>
+            <span className="mt-[13px] block">your exterior?</span>
           </h2>
-          <p className="mt-4 max-w-[470px] text-[18px] leading-normal text-[#1c1c1c] lg:text-[20px]">
+          <p className="mt-3 max-w-[470px] text-[18px] leading-normal text-[#1c1c1c] lg:text-[15px]">
             Contact us today and let&apos;s talk about{" "}
             <span className="font-bold">your project</span>
           </p>
         </div>
         <a
           href="mailto:info@teamangulo.com"
-          className="inline-flex h-[60px] shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90 lg:self-center"
+          className="inline-flex h-[60px] shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
         >
           GET IN TOUCH
           <CtaArrow />

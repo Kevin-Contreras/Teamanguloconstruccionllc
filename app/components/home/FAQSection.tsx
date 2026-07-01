@@ -35,11 +35,11 @@ function FaqDivider() {
 
 export function FAQSection() {
   return (
-    <section id="faq" className="overflow-hidden bg-white pb-14 pt-16 lg:pb-16 lg:pt-20">
+    <section id="faq" className="overflow-hidden bg-white pb-14 pt-16 lg:pb-0 lg:pt-20">
       <div className="mx-auto w-full max-w-[1420px] px-6 lg:px-[138px]">
         <h2 className="m-0 text-center text-[28px] relative top-[40px] font-bold leading-none sm:text-[32px] lg:text-[36px]">
           <span className="text-black">Frequently </span>
-          <span className="italic text-[#ff832a]">Questions</span>
+          <span className="text-[#ff832a]">Questions</span>
         </h2>
 
         <div className="mx-auto mt-12 w-full max-w-[709px] lg:mt-[70px]">
