@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangePillBtn } from "../../utils/buttonClasses";
 import { FigmaImage } from "../layout/FigmaImage";
 import {
   SERVICE_SECTION_SLUGS,
@@ -73,7 +74,7 @@ export function ServicesSection() {
         </ul>
         <Link
           href="/services"
-          className="mt-8 inline-flex h-[52px] items-center justify-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+          className={`${orangePillBtn} mt-8 inline-flex h-[52px] items-center justify-center rounded-[100px] px-8 text-[16px] font-bold`}
         >
           {t.common.viewAllServices}
         </Link>

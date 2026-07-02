@@ -8,8 +8,10 @@ import { ContactSuccessModal } from "../contact/ContactSuccessModal";
 import { useContactSubmit } from "../contact/useContactSubmit";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangePillBtn } from "../../utils/buttonClasses";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
 import { PageHero } from "./SiteLayout";
+import { ServiceStartLink } from "../services/ServiceStartLink";
 
 export function ContactPageMobile() {
   const { t } = useLanguage();
@@ -120,7 +122,7 @@ export function AboutPageMobile() {
         <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">{t.about.residentialSubtext}</p>
         <Link
           href="/residential"
-          className="mt-8 inline-flex h-14 items-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+          className={`${orangePillBtn} mt-8 inline-flex h-14 items-center rounded-[100px] px-8 text-[16px] font-bold`}
         >
           {t.about.residentialButton}
         </Link>
@@ -141,7 +143,7 @@ export function AboutPageMobile() {
         <p className="m-0 mt-4 text-[20px] leading-snug sm:text-[28px]">{t.about.commercialSubtext}</p>
         <Link
           href="/commercial"
-          className="mt-8 inline-flex h-14 items-center rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+          className={`${orangePillBtn} mt-8 inline-flex h-14 items-center rounded-[100px] px-8 text-[16px] font-bold`}
         >
           {t.about.commercialButton}
         </Link>
@@ -208,6 +210,7 @@ export function ServicesPageMobile() {
             <h2 className="mt-2 text-[28px] font-bold sm:text-[36px]">{service.title}</h2>
             <p className="mt-2 text-[18px] font-bold">{service.caption}</p>
             <p className="mt-4 text-[16px] leading-relaxed text-[#1c1c1c]">{service.body}</p>
+            <ServiceStartLink slug={serviceSlugs[index]} />
             <div className="relative mt-6 aspect-[16/10] w-full overflow-hidden">
               <ParallaxBannerImage
                 src={serviceImages[index]}

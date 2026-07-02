@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangePillBtnStatic, langToggleHover } from "../../utils/buttonClasses";
 
 /** Figma node 1:24 — Top Navigation (canvas 1920px) */
 export function TopNavigation() {
@@ -22,19 +23,19 @@ export function TopNavigation() {
 
       <Link href="/" className="absolute z-10" style={{ left: 116, top: 43 }}>
         <Image
-          src="/figma/imgEditableLogo10.png"
-          alt="Team Angulo"
-          width={306}
-          height={112}
-          className="block"
-          style={{ width: 306, height: 112 }}
+          src="/figma/imgEditableLogo01.png"
+          alt="Team Angulo Construction LLC"
+          width={280}
+          height={102}
+          className="block object-contain"
+          style={{ width: 280, height: 102 }}
           priority
         />
       </Link>
 
       <Link
         href="/services"
-        className="absolute font-['Montserrat'] text-[16px] font-normal leading-none text-white hover:opacity-80"
+        className="absolute font-['Montserrat'] text-[16px] font-normal leading-none text-white transition-colors hover:text-[#ff832a]"
         style={{ left: 1013, top: 84 }}
       >
         {t.nav.services}
@@ -42,7 +43,7 @@ export function TopNavigation() {
 
       <Link
         href="/residential"
-        className="absolute text-[16px] font-normal leading-none text-white hover:opacity-80"
+        className="absolute text-[16px] font-normal leading-none text-white transition-colors hover:text-[#ff832a]"
         style={{ left: 1140, top: 85 }}
       >
         {t.nav.residential}
@@ -50,7 +51,7 @@ export function TopNavigation() {
 
       <Link
         href="/commercial"
-        className="absolute text-[17px] font-normal leading-none text-white hover:opacity-80"
+        className="absolute text-[17px] font-normal leading-none text-white transition-colors hover:text-[#ff832a]"
         style={{ left: 1274, top: 82 }}
       >
         {t.nav.commercial}
@@ -58,7 +59,7 @@ export function TopNavigation() {
 
       <Link
         href="/about"
-        className="absolute text-[17px] font-normal leading-none text-white hover:opacity-80"
+        className="absolute text-[17px] font-normal leading-none text-white transition-colors hover:text-[#ff832a]"
         style={{ left: 1425, top: 82 }}
       >
         {t.nav.aboutUs}
@@ -66,24 +67,15 @@ export function TopNavigation() {
 
       <Link
         href="/contact"
-        className="absolute flex items-center justify-center hover:opacity-90"
+        className={`${orangePillBtnStatic} absolute flex items-center justify-center rounded-[100px] text-[17px] font-bold leading-none`}
         style={{ left: 1538, top: 69, width: 154, height: 48 }}
       >
-        <Image
-          src="/figma/imgRectangulo5.svg"
-          alt=""
-          width={154}
-          height={48}
-          className="pointer-events-none absolute inset-0 h-full w-full"
-        />
-        <span className="relative z-10 text-[17px] font-bold leading-none text-white">
-          {t.nav.contact}
-        </span>
+        {t.nav.contact}
       </Link>
 
       <button
         type="button"
-        className="absolute flex cursor-pointer items-center justify-center hover:opacity-90"
+        className={`group absolute flex cursor-pointer items-center justify-center overflow-hidden rounded-[100px] ${langToggleHover}`}
         style={{ left: 1730, top: 69, width: 50, height: 48 }}
         aria-label={locale === "en" ? t.nav.switchToSpanish : t.nav.switchToEnglish}
         onClick={toggleLocale}
@@ -93,9 +85,9 @@ export function TopNavigation() {
           alt=""
           width={50}
           height={48}
-          className="pointer-events-none absolute inset-0 h-full w-full"
+          className="pointer-events-none absolute inset-0 h-full w-full transition-opacity group-hover:opacity-0"
         />
-        <span className="relative z-10 text-[17px] font-bold leading-none text-white">
+        <span className="relative z-10 text-[17px] font-bold leading-none text-white transition-colors group-hover:text-[#ff832a]">
           {locale === "en" ? t.nav.langEs : t.nav.langEn}
         </span>
       </button>

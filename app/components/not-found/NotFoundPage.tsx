@@ -9,6 +9,7 @@ import { PageClosing } from "../layout/PageClosing";
 import { ParallaxBannerImage } from "../layout/ParallaxBannerImage";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
+import { orangePillBtn } from "../../utils/buttonClasses";
 
 const PAGE_WIDTH = 1920;
 const HERO_HEIGHT = 703;
@@ -65,7 +66,7 @@ function NotFoundContent({
       </p>
       <Link
         href="/"
-        className="locale-pill-btn mt-10 inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+        className={`${orangePillBtn} locale-pill-btn mt-10 inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] px-8 text-[16px] font-bold`}
       >
         {t.notFound.backHome}
         <HomeArrow />
@@ -164,7 +165,7 @@ function NotFoundPageDesktop() {
             </p>
             <Link
               href="/"
-              className="locale-pill-btn mt-10 inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] px-8 text-[16px] font-bold text-white hover:opacity-90"
+              className={`${orangePillBtn} locale-pill-btn mt-10 inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] px-8 text-[16px] font-bold`}
             >
               {t.notFound.backHome}
               <HomeArrow />

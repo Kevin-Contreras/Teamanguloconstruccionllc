@@ -55,14 +55,15 @@ export function OurWorkSection() {
             </p>
           </div>
 
-          {/* Portfolio grid — node 1:193 */}
-          <div className="grid grid-cols-2 gap-3 lg:hidden">
+          {/* Portfolio — single column on mobile/tablet */}
+          <div className="flex flex-col gap-4 lg:hidden">
             {galleryImages.map((image) => (
               <div
                 key={image.src}
-                className={`relative overflow-hidden ${image.width > 500 ? "col-span-2 aspect-[16/10]" : "aspect-[4/3]"}`}
+                className="relative w-full overflow-hidden"
+                style={{ aspectRatio: `${image.width} / ${image.height}` }}
               >
-                <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="50vw" />
+                <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="100vw" />
               </div>
             ))}
           </div>

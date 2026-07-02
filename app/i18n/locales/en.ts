@@ -27,6 +27,9 @@ export const en: Translations = {
     ourCommercialWork: "OUR COMMERCIAL WORK",
     send: "Send",
     close: "Close",
+    startToday: "Start Today →",
+    scrollToTop: "Scroll to top",
+    chatWhatsApp: "Chat on WhatsApp",
   },
   cta: {
     line1: "Ready to",
@@ -169,12 +172,32 @@ export const en: Translations = {
     faq: {
       headingBefore: "Frequently ",
       headingAccent: "Questions",
-      questions: [
-        "Do you work on both residential and commercial properties?",
-        "Do I need to vacate my property during the work?",
-        "How long does a typical project take?",
-        "Do you offer warranties on your work?",
-        "What is the first step to get started?",
+      items: [
+        {
+          question: "Do you work on both residential and commercial properties?",
+          answer:
+            "Yes. We handle exterior remodeling projects for single-family homes, multi-unit buildings, and commercial properties of all sizes.",
+        },
+        {
+          question: "Do I need to vacate my property during the work?",
+          answer:
+            "Not necessarily. We plan every project to minimize disruption and communicate the schedule in advance so you know exactly what to expect at every stage.",
+        },
+        {
+          question: "How long does a typical project take?",
+          answer:
+            "Most residential projects take between 3 and 10 days depending on the size of the property and the extent of structural repairs needed. Commercial projects are assessed individually.",
+        },
+        {
+          question: "Do you offer warranties on your work?",
+          answer:
+            "Yes. All our installations come with a workmanship warranty. Material warranties vary depending on the manufacturer and product selected.",
+        },
+        {
+          question: "What is the first step to get started?",
+          answer:
+            "Contact us to schedule a free on-site estimate. We visit the property, assess the current condition, and provide a detailed quote with no obligation.",
+        },
       ],
     },
   },
@@ -416,8 +439,8 @@ export const en: Translations = {
       name: "Name:",
       phone: "Phone:",
       email: "Email address",
-      entryDate: "Entry date",
-      departureDate: "Departure date",
+      service: "Service",
+      servicePlaceholder: "Select a service",
       message: "Message",
       submitError: "We couldn't send your message. Please try again.",
       recaptchaNotice:
@@ -428,6 +451,10 @@ export const en: Translations = {
     successAccent: "Contacting Us!",
     successBody: "We received your message and will be in touch shortly",
     successBodyBold: "to discuss your project.",
+    areaNoticeTitle: "Service Area",
+    areaNoticeBody:
+      "We currently provide our services only in the areas surrounding New Jersey, United States.",
+    areaNoticeAccept: "I Understand",
   },
   metadata: {
     title: "Team Angulo Construction LLC",

@@ -6,7 +6,8 @@ import { FigmaHeroImage, FigmaImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ServicesPageMobile } from "../layout/MobilePages";
-import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
+import { ServiceStartLink } from "./ServiceStartLink";
+import { SERVICE_SECTION_SLUGS, type ServiceSectionSlug } from "../../constants/serviceSections";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
 import { scrollToServiceSectionFromHash } from "../../utils/serviceSectionScroll";
@@ -24,6 +25,7 @@ function ServiceTextBlock({
   caption,
   body,
   tagline,
+  slug,
 }: {
   left: number;
   top: number;
@@ -33,6 +35,7 @@ function ServiceTextBlock({
   caption: string;
   body: string;
   tagline: string;
+  slug: ServiceSectionSlug;
 }) {
   const { locale } = useLanguage();
 
@@ -76,6 +79,7 @@ function ServiceTextBlock({
       >
         {tagline}
       </p>
+      <ServiceStartLink slug={slug} className="mt-[20px]" />
     </div>
   );
 }
@@ -191,6 +195,7 @@ export function ServicesPage() {
             caption={items[0].caption}
             body={items[0].body}
             tagline={items[0].tagline}
+            slug={SERVICE_SECTION_SLUGS.demolitionRemoval}
           />
 
           <FigmaImage
@@ -234,6 +239,7 @@ export function ServicesPage() {
             caption={items[1].caption}
             body={items[1].body}
             tagline={items[1].tagline}
+            slug={SERVICE_SECTION_SLUGS.structuralRepair}
           />
 
           {/* ── Service 03 ── */}
@@ -261,6 +267,7 @@ export function ServicesPage() {
             caption={items[2].caption}
             body={items[2].body}
             tagline={items[2].tagline}
+            slug={SERVICE_SECTION_SLUGS.hardieVinylSiding}
           />
 
           <FigmaImage
@@ -304,6 +311,7 @@ export function ServicesPage() {
             caption={items[3].caption}
             body={items[3].body}
             tagline={items[3].tagline}
+            slug={SERVICE_SECTION_SLUGS.pvcTrim}
           />
 
           {/* ── Service 05 ── */}
@@ -331,6 +339,7 @@ export function ServicesPage() {
             caption={items[4].caption}
             body={items[4].body}
             tagline={items[4].tagline}
+            slug={SERVICE_SECTION_SLUGS.metalRoofing}
           />
 
           {/* Orange banner */}

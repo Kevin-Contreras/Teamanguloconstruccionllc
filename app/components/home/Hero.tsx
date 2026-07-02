@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangePillBtn } from "../../utils/buttonClasses";
 import { TopNavigation } from "../layout/TopNavigation";
 
 const BANNER_WIDTH = 1920;
@@ -64,7 +65,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex h-[52px] items-center justify-center rounded-[100px] bg-[#f07b05] px-8 text-[15px] font-bold text-white hover:opacity-90"
+                className={`${orangePillBtn} inline-flex h-[52px] items-center justify-center rounded-[100px] px-8 text-[15px] font-bold`}
               >
                 {t.common.getAQuote}
               </Link>
@@ -137,7 +138,7 @@ export function Hero() {
 
             <Link
               href="/contact"
-              className="absolute flex items-center justify-center rounded-[100px] bg-[#f07b05] text-[16px] font-bold text-white hover:opacity-90"
+              className={`${orangePillBtn} absolute flex items-center justify-center rounded-[100px] text-[16px] font-bold`}
               style={{ left: 364, top: 858, width: 212, height: 60 }}
             >
               {t.common.getAQuote}

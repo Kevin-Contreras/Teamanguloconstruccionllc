@@ -8,8 +8,7 @@ type ContactPayload = {
   name: string;
   phone: string;
   email: string;
-  entryDate: string;
-  departureDate: string;
+  service: string;
   message: string;
   captchaToken: string;
 };
@@ -53,8 +52,7 @@ export function useContactSubmit(onSuccess: () => void) {
           name: String(formData.get("name") ?? "").trim(),
           phone: String(formData.get("phone") ?? "").trim(),
           email: String(formData.get("email") ?? "").trim(),
-          entryDate: String(formData.get("entryDate") ?? "").trim(),
-          departureDate: String(formData.get("departureDate") ?? "").trim(),
+          service: String(formData.get("service") ?? "").trim(),
           message: String(formData.get("message") ?? "").trim(),
           captchaToken,
         };

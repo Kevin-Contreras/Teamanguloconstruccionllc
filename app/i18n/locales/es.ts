@@ -27,6 +27,9 @@ export const es: Translations = {
     ourCommercialWork: "TRABAJO COMERCIAL",
     send: "Enviar",
     close: "Cerrar",
+    startToday: "Comenzar Hoy →",
+    scrollToTop: "Volver arriba",
+    chatWhatsApp: "Chatear por WhatsApp",
   },
   cta: {
     line1: "¿Listo para",
@@ -169,12 +172,32 @@ export const es: Translations = {
     faq: {
       headingBefore: "Preguntas ",
       headingAccent: "Frecuentes",
-      questions: [
-        "¿Trabajan en residencial y comercial?",
-        "¿Debo desocupar durante el trabajo?",
-        "¿Cuánto toma un proyecto típico?",
-        "¿Ofrecen garantías en su trabajo?",
-        "¿Cuál es el primer paso?",
+      items: [
+        {
+          question: "¿Trabajan en propiedades residenciales y comerciales?",
+          answer:
+            "Sí. Manejamos proyectos de remodelación exterior para casas unifamiliares, edificios multi-unidad y propiedades comerciales de todos los tamaños.",
+        },
+        {
+          question: "¿Necesito desocupar mi propiedad durante el trabajo?",
+          answer:
+            "No necesariamente. Planificamos cada proyecto para minimizar interrupciones y comunicamos el cronograma con anticipación para que sepa exactamente qué esperar en cada etapa.",
+        },
+        {
+          question: "¿Cuánto tiempo toma un proyecto típico?",
+          answer:
+            "La mayoría de proyectos residenciales toman entre 3 y 10 días según el tamaño de la propiedad y las reparaciones estructurales necesarias. Los proyectos comerciales se evalúan individualmente.",
+        },
+        {
+          question: "¿Ofrecen garantía en su trabajo?",
+          answer:
+            "Sí. Todas nuestras instalaciones incluyen garantía de mano de obra. Las garantías de materiales varían según el fabricante y el producto seleccionado.",
+        },
+        {
+          question: "¿Cuál es el primer paso para comenzar?",
+          answer:
+            "Contáctanos para programar una visita de estimado sin costo. Visitamos la propiedad, evaluamos el estado actual y proporcionamos una cotización detallada sin compromiso.",
+        },
       ],
     },
   },
@@ -417,8 +440,8 @@ export const es: Translations = {
       name: "Nombre:",
       phone: "Teléfono:",
       email: "Correo electrónico",
-      entryDate: "Fecha de entrada",
-      departureDate: "Fecha de salida",
+      service: "Servicio",
+      servicePlaceholder: "Seleccione un servicio",
       message: "Mensaje",
       submitError: "No pudimos enviar su mensaje. Inténtelo de nuevo.",
       recaptchaNotice:
@@ -429,6 +452,10 @@ export const es: Translations = {
     successAccent: "Contactarnos!",
     successBody: "Recibimos su mensaje y nos pondremos en contacto pronto",
     successBodyBold: "para hablar de su proyecto.",
+    areaNoticeTitle: "Área de servicio",
+    areaNoticeBody:
+      "Actualmente brindamos nuestros servicios únicamente en los alrededores de New Jersey, Estados Unidos.",
+    areaNoticeAccept: "Entendido",
   },
   metadata: {
     title: "Team Angulo Construction LLC",

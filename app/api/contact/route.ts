@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isServiceSectionSlug } from "../../utils/contactService";
 import { verifyRecaptchaToken } from "../../lib/recaptcha";
 import { sendContactEmail } from "../../lib/sendContactEmail";
 
@@ -6,8 +7,7 @@ type ContactRequestBody = {
   name?: string;
   phone?: string;
   email?: string;
-  entryDate?: string;
-  departureDate?: string;
+  service?: string;
   message?: string;
   captchaToken?: string;
 };
@@ -30,14 +30,17 @@ export async function POST(request: Request) {
   const message = body.message?.trim() ?? "";
   const captchaToken = body.captchaToken?.trim() ?? "";
   const phone = body.phone?.trim() ?? "";
-  const entryDate = body.entryDate?.trim() ?? "";
-  const departureDate = body.departureDate?.trim() ?? "";
+  const service = body.service?.trim() ?? "";
 
-  if (!name || !email || !message || !captchaToken) {
+  if (!name || !email || !message || !service || !captchaToken) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
   }
 
   if (!isValidEmail(email)) {
+    return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
+  }
+
+  if (!isServiceSectionSlug(service)) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
   }
 
@@ -50,8 +53,7 @@ export async function POST(request: Request) {
     name,
     phone,
     email,
-    entryDate,
-    departureDate,
+    service,
     message,
   });
 

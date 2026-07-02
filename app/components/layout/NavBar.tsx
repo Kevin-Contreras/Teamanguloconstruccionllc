@@ -7,6 +7,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LanguageToggle } from "./LanguageToggle";
 import { useLanguage, useNavLinks } from "../../providers/LanguageProvider";
+import { orangePillBtn, langToggleHover } from "../../utils/buttonClasses";
 
 function CtaArrow() {
   return (
@@ -159,7 +160,7 @@ export function NavBar({
           >
             <Link
               href="/contact"
-              className="inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] bg-[#f07b05] text-[16px] font-bold shadow-lg shadow-[#f07b05]/25 transition-transform hover:scale-[1.02] hover:opacity-90 active:scale-[0.98]"
+              className={`${orangePillBtn} inline-flex h-14 w-full max-w-[320px] items-center justify-center gap-2 rounded-[100px] text-[16px] font-bold shadow-lg shadow-[#f07b05]/25 transition-transform hover:scale-[1.02] active:scale-[0.98]`}
               onClick={closeMenu}
               tabIndex={open ? 0 : -1}
             >
@@ -167,7 +168,7 @@ export function NavBar({
               <CtaArrow />
             </Link>
             <LanguageToggle
-              className="inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/25 bg-white/5 text-[16px] font-bold backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-white/10"
+              className={`inline-flex h-12 w-full max-w-[320px] items-center justify-center rounded-[100px] border border-white/25 bg-white/5 text-[16px] font-bold backdrop-blur-sm ${langToggleHover}`}
               tabIndex={open ? 0 : -1}
             />
           </div>
@@ -191,8 +192,8 @@ export function NavBar({
           >
             <Link href="/" className="relative z-10 shrink-0" onClick={closeMenu}>
               <Image
-                src="/figma/imgEditableLogo10.png"
-                alt="Team Angulo"
+                src="/figma/imgEditableLogo01.png"
+                alt="Team Angulo Construction LLC"
                 width={180}
                 height={66}
                 className={logoClassName}
@@ -205,7 +206,7 @@ export function NavBar({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`whitespace-nowrap text-[16px] hover:opacity-80 ${
+                  className={`whitespace-nowrap text-[16px] transition-colors hover:text-[#ff832a] ${
                     link.font === "montserrat" ? "font-['Montserrat']" : ""
                   } ${resolvedActivePath === link.href ? "font-bold" : "font-normal"}`}
                 >
@@ -217,11 +218,11 @@ export function NavBar({
             <div className="hidden items-center gap-3 lg:flex">
               <Link
                 href="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-[100px] bg-[#f07b05] px-6 text-[16px] font-bold hover:opacity-90"
+                className={`${orangePillBtn} inline-flex h-12 items-center justify-center rounded-[100px] px-6 text-[16px] font-bold`}
               >
                 {t.nav.contact}
               </Link>
-              <LanguageToggle className="flex h-12 w-12 items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold hover:opacity-90" />
+              <LanguageToggle className={`flex h-12 w-12 items-center justify-center rounded-[100px] border border-white/30 text-[16px] font-bold ${langToggleHover}`} />
             </div>
 
             <button
