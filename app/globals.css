@@ -123,6 +123,10 @@ header[data-no-animate] {
   backdrop-filter: blur(6px);
 }
 
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
 /* ── Premium text motion ── */
 @media (prefers-reduced-motion: no-preference) {
   .page-transition {

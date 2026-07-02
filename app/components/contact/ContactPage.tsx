@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FigmaImage } from "../layout/FigmaImage";
 import { TopNavigation } from "../layout/TopNavigation";
 import { PageClosing } from "../layout/PageClosing";
 import { ContactPageMobile } from "../layout/MobilePages";
+import { ContactFormFeedback } from "./ContactFormFeedback";
 import { ContactSuccessModal } from "./ContactSuccessModal";
+import { useContactSubmit } from "./useContactSubmit";
 import { useLanguage } from "../../providers/LanguageProvider";
 
 const PAGE_WIDTH = 1920;
@@ -35,6 +37,7 @@ export function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const { submit, isSubmitting, error } = useContactSubmit(() => setSubmitted(true));
 
   useEffect(() => {
     const updateScale = () => {
@@ -46,11 +49,6 @@ export function ContactPage() {
     window.addEventListener("resize", updateScale);
     return () => window.removeEventListener("resize", updateScale);
   }, []);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
 
   return (
     <>
@@ -117,7 +115,7 @@ export function ContactPage() {
           <form
             className="absolute z-10"
             style={{ left: 1020, top: 377, width: 742 }}
-            onSubmit={handleSubmit}
+            onSubmit={submit}
           >
             <div className="flex gap-[36px]">
               <div style={{ width: 353 }}>
@@ -189,7 +187,8 @@ export function ContactPage() {
 
             <button
               type="submit"
-              className="relative mt-[20px] inline-flex items-center justify-center hover:opacity-90"
+              disabled={isSubmitting}
+              className="relative mt-[20px] inline-flex items-center justify-center hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
               style={{ width: 206, height: 56 }}
             >
               <Image
@@ -199,8 +198,12 @@ export function ContactPage() {
                 height={56}
                 className="pointer-events-none absolute inset-0 h-full w-full"
               />
-              <span className="relative z-10 text-[22px] text-white">{t.common.send}</span>
+              <span className="relative z-10 text-[22px] text-white">
+                {isSubmitting ? t.contact.form.sending : t.common.send}
+              </span>
             </button>
+
+            <ContactFormFeedback error={error} className="mt-4 max-w-[742px]" />
           </form>
 
           {submitted && (

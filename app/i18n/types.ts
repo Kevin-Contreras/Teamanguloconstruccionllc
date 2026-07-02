@@ -229,6 +229,9 @@ export type Translations = {
       entryDate: string;
       departureDate: string;
       message: string;
+      submitError: string;
+      recaptchaNotice: string;
+      sending: string;
     };
     successTitle: string;
     successAccent: string;

@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { ContactForm } from "../contact/ContactForm";
 import { ContactSuccessModal } from "../contact/ContactSuccessModal";
+import { useContactSubmit } from "../contact/useContactSubmit";
 import { SERVICE_SECTION_SLUGS } from "../../constants/serviceSections";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
@@ -13,6 +14,7 @@ import { PageHero } from "./SiteLayout";
 export function ContactPageMobile() {
   const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
+  const { submit, isSubmitting, error } = useContactSubmit(() => setSubmitted(true));
 
   return (
     <div className="relative bg-[#1a2b3c]">
@@ -35,10 +37,9 @@ export function ContactPageMobile() {
         </section>
         <section className="relative px-6 pb-14">
           <ContactForm
-            onSubmit={(event: FormEvent<HTMLFormElement>) => {
-              event.preventDefault();
-              setSubmitted(true);
-            }}
+            onSubmit={submit}
+            isSubmitting={isSubmitting}
+            error={error}
           />
         </section>
       </div>
