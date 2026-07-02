@@ -55,6 +55,9 @@ export type Translations = {
     ourCommercialWork: string;
     send: string;
     close: string;
+    startToday: string;
+    scrollToTop: string;
+    chatWhatsApp: string;
   };
   cta: {
     line1: string;
@@ -139,7 +142,7 @@ export type Translations = {
     faq: {
       headingBefore: string;
       headingAccent: string;
-      questions: string[];
+      items: { question: string; answer: string }[];
     };
   };
   about: {
@@ -226,8 +229,8 @@ export type Translations = {
       name: string;
       phone: string;
       email: string;
-      entryDate: string;
-      departureDate: string;
+      service: string;
+      servicePlaceholder: string;
       message: string;
       submitError: string;
       recaptchaNotice: string;
@@ -237,6 +240,9 @@ export type Translations = {
     successAccent: string;
     successBody: string;
     successBodyBold: string;
+    areaNoticeTitle: string;
+    areaNoticeBody: string;
+    areaNoticeAccept: string;
   };
   metadata: {
     title: string;

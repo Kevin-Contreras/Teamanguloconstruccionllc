@@ -48,18 +48,38 @@ img[data-nimg]:not([src*=".svg"]):not(.object-contain) {
 a[class*="rounded-[100px]"],
 button[class*="rounded-[100px]"],
 a[class*="rounded-[100px]"] *,
-button[class*="rounded-[100px]"] * {
+button[class*="rounded-[100px]"] *,
+.btn-orange-pill,
+.btn-orange-pill *,
+.btn-orange-outline,
+.btn-orange-outline * {
   font-style: normal !important;
+}
+
+@layer components {
+  .btn-orange-pill {
+    border-radius: 9999px;
+  }
+
+  .btn-orange-outline {
+    border-radius: 9999px;
+  }
 }
 
 details summary::-webkit-details-marker {
   display: none;
 }
 
+.faq-details[open] .faq-question {
+  color: #1c1c1c;
+  font-weight: 600;
+}
+
 .faq-summary {
   display: grid;
-  grid-template-columns: 12px 1fr 12px;
+  grid-template-columns: 12px 1fr auto;
   align-items: center;
+  gap: 16px;
   min-height: 80px;
   padding: 12px 0;
   cursor: pointer;
@@ -67,33 +87,67 @@ details summary::-webkit-details-marker {
 }
 
 .faq-spacer {
-  grid-column: 1;
   width: 12px;
 }
 
 .faq-question {
-  grid-column: 2;
   text-align: center;
   font-size: 18px;
   font-weight: 400;
-  line-height: normal;
+  line-height: 1.45;
   color: #5b5647;
+  transition: color 0.2s ease;
 }
 
-.faq-chevron-wrap {
-  grid-column: 3;
-  justify-self: end;
+.faq-summary:hover .faq-question {
+  color: #1c1c1c;
+}
+
+.faq-toggle {
   display: inline-flex;
-  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 12px;
-  height: 6px;
-  transition: transform 0.2s ease;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(255, 131, 42, 0.12);
+  color: #ff832a;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
-details[open] .faq-chevron-wrap {
+.faq-details[open] .faq-toggle {
   transform: rotate(180deg);
+  background: #ff832a;
+  color: #ffffff;
+}
+
+.faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s ease;
+}
+
+.faq-details[open] .faq-answer-wrap {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
+.faq-answer {
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1c1c1c;
+  background: #fafafa;
+  border-left: 3px solid #ff832a;
+  border-radius: 0 12px 12px 0;
 }
 
 html[lang="es"] .locale-pill-btn {

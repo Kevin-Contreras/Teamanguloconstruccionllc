@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ParallaxBannerImage } from "./ParallaxBannerImage";
 import { useFooterServices, useLanguage } from "../../providers/LanguageProvider";
+import { orangePillBtn } from "../../utils/buttonClasses";
 import { ServiceSectionLink } from "./ServiceSectionLink";
 
 function CtaArrow() {
@@ -53,7 +54,7 @@ export function SiteCta({ id, className }: { id?: string; className?: string }) 
         </div>
         <a
           href="mailto:info@teamangulo.com"
-          className="locale-pill-btn inline-flex h-[45px] px-15 shrink-0 items-center justify-center gap-2 self-start rounded-[100px] bg-[#f07b05] px-8 text-[12px] font-bold text-white hover:opacity-90 lg:mt-[17px]"
+          className={`${orangePillBtn} locale-pill-btn inline-flex h-[45px] px-15 shrink-0 items-center justify-center gap-2 self-start rounded-[100px] px-8 text-[12px] font-bold lg:mt-[17px]`}
         >
           {t.common.getInTouch}
           <CtaArrow />

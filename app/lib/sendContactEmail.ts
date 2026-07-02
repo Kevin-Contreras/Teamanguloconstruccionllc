@@ -2,8 +2,7 @@ export type ContactEmailPayload = {
   name: string;
   phone: string;
   email: string;
-  entryDate: string;
-  departureDate: string;
+  service: string;
   message: string;
 };
 
@@ -32,17 +31,11 @@ function getLogoUrl() {
   return `${getSiteUrl()}/figma/imgEditableLogo01.png`;
 }
 
-function formatDate(value: string) {
-  if (!value) return "";
-
-  const date = new Date(`${value}T12:00:00`);
-  if (Number.isNaN(date.getTime())) return value;
-
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
+function formatServiceLabel(slug: string) {
+  return slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 }
 
 function fieldRow(label: string, value: string, href?: string) {
@@ -115,8 +108,7 @@ function buildHtml(payload: ContactEmailPayload) {
                   ${fieldRow("Name", payload.name)}
                   ${fieldRow("Phone", payload.phone, payload.phone ? `tel:${payload.phone.replace(/\s/g, "")}` : undefined)}
                   ${fieldRow("Email", payload.email, payload.email ? `mailto:${payload.email}` : undefined)}
-                  ${fieldRow("Entry date", formatDate(payload.entryDate))}
-                  ${fieldRow("Departure date", formatDate(payload.departureDate))}
+                  ${fieldRow("Service", formatServiceLabel(payload.service))}
                 </table>
 
                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-top:24px;font-family:Arial,Helvetica,sans-serif;">
@@ -177,8 +169,7 @@ function buildText(payload: ContactEmailPayload) {
     `Name: ${payload.name}`,
     `Phone: ${payload.phone || "—"}`,
     `Email: ${payload.email}`,
-    `Entry date: ${payload.entryDate || "—"}`,
-    `Departure date: ${payload.departureDate || "—"}`,
+    `Service: ${formatServiceLabel(payload.service)}`,
     "",
     "Message:",
     payload.message,

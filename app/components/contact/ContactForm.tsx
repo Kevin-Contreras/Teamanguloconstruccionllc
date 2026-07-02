@@ -1,48 +1,48 @@
 "use client";
 
-import Image from "next/image";
-import { type FormEvent } from "react";
-import { useLanguage } from "../../providers/LanguageProvider";
+import { useSearchParams } from "next/navigation";
+import { type CSSProperties, type FormEvent } from "react";
+import { useFooterServices, useLanguage } from "../../providers/LanguageProvider";
+import { parseContactServiceParam } from "../../utils/contactService";
+import { orangePillBtn } from "../../utils/buttonClasses";
 import { ContactFormFeedback } from "./ContactFormFeedback";
 
 const fieldClass =
   "w-full rounded-[13px] border border-white/80 bg-white/10 px-4 text-[16px] text-white outline-none placeholder:text-white/60 focus:border-[#ff832a]";
 
-function CalendarIcon() {
-  return (
-    <Image
-      src="/figma/contact/icon-calendar.svg"
-      alt=""
-      width={26}
-      height={25}
-      className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 opacity-60"
-      aria-hidden
-    />
-  );
-}
-
 export function ContactForm({
   onSubmit,
   className = "",
+  style,
   dark = true,
   isSubmitting = false,
   error = null,
+  submitClassName = "",
+  submitStyle,
 }: {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void | Promise<void>;
   className?: string;
+  style?: CSSProperties;
   dark?: boolean;
   isSubmitting?: boolean;
   error?: string | null;
+  submitClassName?: string;
+  submitStyle?: CSSProperties;
 }) {
   const { t } = useLanguage();
+  const services = useFooterServices();
+  const searchParams = useSearchParams();
+  const selectedService = parseContactServiceParam(searchParams.get("service"));
+
   const labelClass = dark ? "text-white" : "text-[#1c1c1c]";
   const inputClass = dark
     ? fieldClass
     : "w-full rounded-[13px] border border-[#1c1c1c]/30 bg-white px-4 text-[16px] text-[#1c1c1c] outline-none focus:border-[#ff832a]";
+  const selectClass = `${inputClass} ${dark ? "[color-scheme:dark]" : "[color-scheme:light]"}`;
 
   return (
-    <form className={className} onSubmit={onSubmit}>
-      <div className="grid gap-6 sm:grid-cols-2">
+    <form className={className} style={style} onSubmit={onSubmit}>
+      <div className="grid gap-6 sm:grid-cols-2 lg:gap-[36px]">
         <div>
           <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-name">
             {t.contact.form.name}
@@ -57,50 +57,38 @@ export function ContactForm({
         </div>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 lg:mt-[31px]">
         <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-email">
           {t.contact.form.email}
         </label>
         <input id="contact-email" name="email" type="email" required className={inputClass} style={{ height: 57 }} />
       </div>
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-2">
-        <div>
-          <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-entry-date">
-            {t.contact.form.entryDate}
-          </label>
-          <div className="relative">
-            {dark && <CalendarIcon />}
-            <input
-              id="contact-entry-date"
-              name="entryDate"
-              type="date"
-              className={`${inputClass} ${dark ? "pl-12 [color-scheme:dark]" : "[color-scheme:light]"}`}
-              style={{ height: 57 }}
-            />
-          </div>
-        </div>
-        <div>
-          <label
-            className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`}
-            htmlFor="contact-departure-date"
-          >
-            {t.contact.form.departureDate}
-          </label>
-          <div className="relative">
-            {dark && <CalendarIcon />}
-            <input
-              id="contact-departure-date"
-              name="departureDate"
-              type="date"
-              className={`${inputClass} ${dark ? "pl-12 [color-scheme:dark]" : "[color-scheme:light]"}`}
-              style={{ height: 57 }}
-            />
-          </div>
-        </div>
+      <div className="mt-6 lg:mt-[31px]">
+        <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-service">
+          {t.contact.form.service}
+        </label>
+        <select
+          id="contact-service"
+          name="service"
+          required
+          defaultValue={selectedService}
+          key={selectedService}
+          className={selectClass}
+          style={{ height: 57 }}
+        >
+          <option value="" disabled>
+            {t.contact.form.servicePlaceholder}
+          </option>
+          {services.map((service) => (
+            <option key={service.slug} value={service.slug}>
+              {service.label}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 lg:mt-[31px]">
         <label className={`mb-2 block text-[16px] sm:text-[20px] ${labelClass}`} htmlFor="contact-message">
           {t.contact.form.message}
         </label>
@@ -117,18 +105,13 @@ export function ContactForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="relative mt-8 inline-flex h-14 min-w-[206px] items-center justify-center hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        style={submitStyle}
+        className={
+          submitClassName ||
+          `${orangePillBtn} mt-8 inline-flex h-14 min-w-[206px] items-center justify-center rounded-[100px] px-8 text-[18px] font-medium disabled:cursor-not-allowed disabled:opacity-60 sm:text-[22px]`
+        }
       >
-        <Image
-          src="/figma/contact/btn-send.svg"
-          alt=""
-          width={206}
-          height={56}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        />
-        <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">
-          {isSubmitting ? t.contact.form.sending : t.common.send}
-        </span>
+        {isSubmitting ? t.contact.form.sending : t.common.send}
       </button>
 
       <ContactFormFeedback error={error} className="mt-4" />

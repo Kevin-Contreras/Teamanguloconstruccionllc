@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangeOutlineBtn } from "../../utils/buttonClasses";
 import { AboutSection } from "./AboutSection";
 import { Hero } from "./Hero";
 import { OurWorkSection } from "./OurWorkSection";
@@ -125,7 +126,7 @@ function HardieSiding() {
             </p>
             <Link
               href="/#work"
-              className="inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] border-1 border-[#f07b05] px-8 text-[16px] font-bold text-[#f07b05] hover:opacity-90"
+              className={`${orangeOutlineBtn} inline-flex h-[60px] items-center justify-center gap-2 rounded-[100px] px-8 text-[16px] font-bold`}
             >
               {t.common.seeHardieProjects}
               <ArrowIcon />

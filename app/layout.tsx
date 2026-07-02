@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import { FloatingActions } from "./components/layout/FloatingActions";
 import { MobileSiteNav } from "./components/layout/MobileSiteNav";
 import { MotionObserver } from "./components/motion/MotionObserver";
 import { LanguageProvider } from "./providers/LanguageProvider";
@@ -40,6 +41,7 @@ export default function RootLayout({
           <MotionObserver />
           <MobileSiteNav />
           {children}
+          <FloatingActions />
         </LanguageProvider>
       </body>
     </html>

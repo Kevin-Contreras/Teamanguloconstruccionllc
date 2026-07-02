@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangeOutlineBtn } from "../../utils/buttonClasses";
 import { FigmaImage } from "../layout/FigmaImage";
 
 const SECTION_WIDTH = 1975;
@@ -20,7 +21,7 @@ function PillArrow() {
     >
       <path
         d="M10.786 8.20002H0V6.37502H10.786L5.825 1.27502L7.087 1.95503e-05L14.174 7.28502L7.087 14.571L5.825 13.3L10.786 8.20002Z"
-        fill="#F07B05"
+        fill="currentColor"
       />
     </svg>
   );
@@ -67,7 +68,7 @@ export function ResidentialCommercialSection() {
           </p>
           <Link
             href="/residential"
-            className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
+            className={`${orangeOutlineBtn} mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] px-6 text-[15px] font-bold sm:px-8 sm:text-[16px]`}
           >
             {t.common.seeResidentialProjects}
             <PillArrow />
@@ -96,7 +97,7 @@ export function ResidentialCommercialSection() {
           </p>
           <Link
             href="/commercial"
-            className="mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-6 text-[15px] font-bold text-[#f07b05] hover:opacity-90 sm:px-8 sm:text-[16px]"
+            className={`${orangeOutlineBtn} mt-6 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] px-6 text-[15px] font-bold sm:px-8 sm:text-[16px]`}
           >
             {t.common.seeCommercialProjects}
             <PillArrow />
@@ -167,7 +168,7 @@ export function ResidentialCommercialSection() {
             {/* Button — node 1:285 @ 205,583 317×60 */}
             <Link
               href="/residential"
-              className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
+              className={`${orangeOutlineBtn} absolute inline-flex items-center justify-center gap-2 rounded-[100px] text-[16px] font-bold`}
               style={{ left: 205, top: 583, width: 317, height: 60 }}
             >
               {t.common.seeResidentialProjects}
@@ -223,7 +224,7 @@ export function ResidentialCommercialSection() {
             {/* Button — node 1:312 @ 1176,1572 330×60 */}
             <Link
               href="/commercial"
-              className="absolute inline-flex items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] text-[16px] font-bold text-[#f07b05] hover:opacity-90"
+              className={`${orangeOutlineBtn} absolute inline-flex items-center justify-center gap-2 rounded-[100px] text-[16px] font-bold`}
               style={{ left: 1176, top: 1572, width: 330, height: 60 }}
             >
               {t.common.seeCommercialProjects}

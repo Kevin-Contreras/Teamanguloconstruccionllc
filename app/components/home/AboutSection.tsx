@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { orangeOutlineBtn } from "../../utils/buttonClasses";
 
 const SECTION_WIDTH = 1627;
 const SECTION_HEIGHT = 472;
@@ -69,7 +70,7 @@ export function AboutSection() {
           </div>
           <Link
             href="/about"
-            className="mt-8 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] border-2 border-[#f07b05] px-8 text-[16px] font-bold text-[#f07b05] hover:opacity-90"
+            className={`${orangeOutlineBtn} mt-8 inline-flex h-[52px] items-center justify-center gap-2 rounded-[100px] px-8 text-[16px] font-bold`}
           >
             {t.common.whoWeAre}
             <Image src="/figma/about-arrow.svg" alt="" width={14} height={15} />
@@ -168,26 +169,11 @@ export function AboutSection() {
           {/* WHO WE ARE — node 1:93 @ 1407,412 */}
           <Link
             href="/about"
-            className="absolute flex items-center justify-center gap-2 hover:opacity-90"
+            className={`${orangeOutlineBtn} absolute inline-flex items-center justify-center gap-2 rounded-[100px] px-8 text-[16px] font-bold`}
             style={{ left: 1407, top: 412, width: 212, height: 60 }}
           >
-            <Image
-              src="/figma/about-who-btn.svg"
-              alt=""
-              width={212}
-              height={60}
-              className="pointer-events-none absolute inset-0 h-full w-full"
-            />
-            <span className="relative z-10 text-[16px] font-bold leading-none text-[#f07b05]">
-              {t.common.whoWeAre}
-            </span>
-            <Image
-              src="/figma/about-arrow.svg"
-              alt=""
-              width={14}
-              height={15}
-              className="relative z-10"
-            />
+            {t.common.whoWeAre}
+            <Image src="/figma/about-arrow.svg" alt="" width={14} height={15} />
           </Link>
           </div>
         </div>

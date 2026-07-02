@@ -9,6 +9,7 @@ import { PageClosing, galleryPageCtaClassName } from "../layout/PageClosing";
 import { AboutPageMobile } from "../layout/MobilePages";
 import { useLanguage } from "../../providers/LanguageProvider";
 import { figmaFont } from "../../utils/figmaLocale";
+import { orangePillBtn } from "../../utils/buttonClasses";
 
 const PAGE_WIDTH = 1920;
 const PAGE_HEIGHT = 5526;
@@ -53,7 +54,7 @@ function WorkButton({ href, label, top }: { href: string; label: string; top: nu
   return (
     <Link
       href={href}
-      className="absolute z-10 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[100px] bg-[#f07b05] px-5 text-[16px] font-bold text-white hover:opacity-90"
+      className={`${orangePillBtn} absolute z-10 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[100px] px-5 text-[16px] font-bold`}
       style={{ left: 823, top, minWidth: 274, height: 60 }}
     >
       {label}
