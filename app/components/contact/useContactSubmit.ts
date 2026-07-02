@@ -16,6 +16,8 @@ type ContactPayload = {
 
 function getErrorMessage(code: string, fallback: string) {
   const messages: Record<string, string> = {
+    email_not_configured: fallback,
+    email_send_failed: fallback,
     missing_secret: fallback,
     captcha_failed: fallback,
     captcha_low_score: fallback,
