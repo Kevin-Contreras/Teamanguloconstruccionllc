@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyRecaptchaToken } from "../../lib/recaptcha";
+import { sendContactEmail } from "../../lib/sendContactEmail";
 
 type ContactRequestBody = {
   name?: string;
@@ -28,6 +29,9 @@ export async function POST(request: Request) {
   const email = body.email?.trim() ?? "";
   const message = body.message?.trim() ?? "";
   const captchaToken = body.captchaToken?.trim() ?? "";
+  const phone = body.phone?.trim() ?? "";
+  const entryDate = body.entryDate?.trim() ?? "";
+  const departureDate = body.departureDate?.trim() ?? "";
 
   if (!name || !email || !message || !captchaToken) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
@@ -42,6 +46,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: captcha.reason }, { status: 403 });
   }
 
-  // Submission verified — plug in email/CRM integration here when ready.
+  const emailResult = await sendContactEmail({
+    name,
+    phone,
+    email,
+    entryDate,
+    departureDate,
+    message,
+  });
+
+  if (!emailResult.ok) {
+    return NextResponse.json({ error: emailResult.reason }, { status: 500 });
+  }
+
   return NextResponse.json({ ok: true });
 }
