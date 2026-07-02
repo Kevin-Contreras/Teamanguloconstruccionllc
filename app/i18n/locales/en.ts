@@ -419,6 +419,10 @@ export const en: Translations = {
       entryDate: "Entry date",
       departureDate: "Departure date",
       message: "Message",
+      submitError: "We couldn't send your message. Please try again.",
+      recaptchaNotice:
+        "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.",
+      sending: "Sending...",
     },
     successTitle: "Thank You for",
     successAccent: "Contacting Us!",

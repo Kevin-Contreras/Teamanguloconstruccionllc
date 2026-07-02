@@ -420,6 +420,10 @@ export const es: Translations = {
       entryDate: "Fecha de entrada",
       departureDate: "Fecha de salida",
       message: "Mensaje",
+      submitError: "No pudimos enviar su mensaje. Inténtelo de nuevo.",
+      recaptchaNotice:
+        "Este sitio está protegido por reCAPTCHA y aplican la Política de Privacidad y los Términos de Servicio de Google.",
+      sending: "Enviando...",
     },
     successTitle: "Gracias por",
     successAccent: "Contactarnos!",

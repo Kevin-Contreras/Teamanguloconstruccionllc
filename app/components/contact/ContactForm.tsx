@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { type FormEvent } from "react";
 import { useLanguage } from "../../providers/LanguageProvider";
+import { ContactFormFeedback } from "./ContactFormFeedback";
 
 const fieldClass =
   "w-full rounded-[13px] border border-white/80 bg-white/10 px-4 text-[16px] text-white outline-none placeholder:text-white/60 focus:border-[#ff832a]";
@@ -24,10 +25,14 @@ export function ContactForm({
   onSubmit,
   className = "",
   dark = true,
+  isSubmitting = false,
+  error = null,
 }: {
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void | Promise<void>;
   className?: string;
   dark?: boolean;
+  isSubmitting?: boolean;
+  error?: string | null;
 }) {
   const { t } = useLanguage();
   const labelClass = dark ? "text-white" : "text-[#1c1c1c]";
@@ -111,7 +116,8 @@ export function ContactForm({
 
       <button
         type="submit"
-        className="relative mt-8 inline-flex h-14 min-w-[206px] items-center justify-center hover:opacity-90"
+        disabled={isSubmitting}
+        className="relative mt-8 inline-flex h-14 min-w-[206px] items-center justify-center hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Image
           src="/figma/contact/btn-send.svg"
@@ -120,8 +126,12 @@ export function ContactForm({
           height={56}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
-        <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">{t.common.send}</span>
+        <span className="relative z-10 text-[18px] font-medium text-white sm:text-[22px]">
+          {isSubmitting ? t.contact.form.sending : t.common.send}
+        </span>
       </button>
+
+      <ContactFormFeedback error={error} className="mt-4" />
     </form>
   );
 }
